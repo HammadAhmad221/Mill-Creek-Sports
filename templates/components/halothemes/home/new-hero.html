@@ -68,7 +68,7 @@
 <div class="enddddd">a {{log carousel.slides}}</div>
 {{~inject 'cs' carousel.slides}}
 <script>
-  let context = JSON.parse({{jsContext}});
+  let context = JSON.parse(jsContext);
   console.log('carousel.slides ===>', context);
 
   const cs = context.cs;
@@ -82,9 +82,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     margin-top: 20px;
-
     gap: 10px;
   }
   .hero-section .left-container .text-below-home-hero-mobile .title {
