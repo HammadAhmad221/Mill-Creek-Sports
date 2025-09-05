@@ -1,0 +1,607 @@
+<section class="container best-sellers">
+    <h2 class="heading">Pro-Guide Best Sellers</h2>
+    <img class="icon-loading" src="{{cdn 'img/loading.svg'}}" alt="Icon Loading">
+</section>
+
+<style>
+    .container.best-sellers {
+        padding: 40px 20px;
+        background: #F1F1F1;
+    }
+
+    .best-sellers .heading {
+        color: #231F20;
+        text-align: center;
+        font-family: Vox;
+        font-size: 27px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 35px;
+        margin: 0;
+    }
+
+    .best-sellers .slick-list.draggable {
+        margin-top: 30px;
+    }
+
+    .best-sellers .slick-track {
+        display: flex;
+        gap: 20px;
+    }
+
+    .best-seller-product.slick-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .best-sellers .best-seller-product .product-card-body {
+        width: 100%;
+        text-decoration: none;
+    }
+
+    .best-sellers .best-seller-product .product-details {
+        margin-top: 15px;
+    }
+
+    .best-sellers .best-seller-product .product-details .brand-name {
+        color: #231F20;
+        font-family: 'helvetic-regular';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 25px;
+        letter-spacing: 0.4px;
+        margin: 0;
+    }
+
+    .best-sellers .best-seller-product .product-details .sku {
+        overflow: hidden;
+        color: #231F20;
+        text-overflow: ellipsis;
+        font-family: 'helvetic-regular';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: 0.4px;
+        margin: 5px 0 0 0;
+    }
+
+    .best-sellers .best-seller-product .product-details .price {
+        color: #231F20;
+        font-family: 'helvetic-regular';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 25px; /* 138.889% */
+        letter-spacing: 0.4px;
+        margin: 10px 0 0 0;
+    }
+
+    .best-sellers .best-seller-product .call-to-action.add-to-cart {
+        display: flex;
+        height: 50px;
+        padding: 0px 15px;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        align-self: stretch;
+        border-radius: 5px;
+        border: 2px solid #CE0E2D;
+        background: #FFF;
+        text-decoration: none;
+    }
+
+    .best-sellers .best-seller-product .call-to-action.add-to-cart .text {
+        color: #CE0E2D;
+        font-family: 'helvetic-regular';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 25px; /* 138.889% */
+        letter-spacing: 0.4px;
+        text-align: center;
+    }
+
+
+    .best-sellers .best-seller-product-image {
+        width: 100%;
+        height: 170px;
+        object-fit: contain;
+    }
+
+    .best-sellers .icon-loading {
+        width: 300px;
+    }
+
+    .best-sellers .slick-next::before, .best-sellers .slick-prev::before {
+        content: '';
+        background-image: none;
+        background-position: 0%;
+        background-repeat: unset;
+        background-size: 0;
+        display: none;
+        height: 0;
+        width: 0;
+        opacity: 0;
+        font-family: 'slick';
+        font-size: 0px;
+        line-height: 0;
+        opacity: 0;
+        color: red;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .best-sellers .slick-next:hover:not(.slick-disabled), .best-sellers .slick-next:focus:not(.slick-disabled), .best-sellers .slick-prev:hover:not(.slick-disabled), .best-sellers .slick-prev:focus:not(.slick-disabled) {
+        border: none;
+        background-color: transparent;
+    }
+
+    .best-sellers .slick-next {
+        right: 0;
+    }
+
+    .best-sellers .slick-prev {
+        left: 0;
+    }
+
+    .best-sellers .slick-arrow {
+        background-color: transparent;
+        border: none;
+        width: 24px;
+        height: 24px;
+        padding: 4.8px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .star-rating {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+  
+    .star {
+      position: relative;
+      width: 16px;
+      height: 17px;
+    }
+  
+    .star svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .star .back-star {
+      fill: #ccc; /* Gray background star */
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  
+    .star .front-star-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+    }
+  
+    .review-count {
+      font-size: 14px;
+      color: #555;
+      margin-left: 8px;
+    }
+
+    @media (min-width: 993px) {
+        .container.best-sellers {
+            padding: 80px 65px;
+        }
+        .best-sellers .slick-list.draggable {
+            margin-top: 40px;
+        }
+        .best-sellers .heading {
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 45px; /* 112.5% */
+        }
+        .best-sellers .best-seller-product-image {
+            height: 220px;
+            object-fit: unset;
+        }
+        .best-sellers .best-seller-product .product-details .brand-name {
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.4px;
+        }
+        .best-sellers .best-seller-product .product-details .sku {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.4px;
+        }
+        .best-sellers .best-seller-product .product-details .price {
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 25px; /* 125% */
+            letter-spacing: 0.4px;
+        }
+        .best-sellers .slick-arrow {
+            width: 45px;
+            height: 45px;
+            padding: 11px 10px 10px 11px;
+            border-radius: 10px;
+            border: 1px solid rgba(120, 120, 120, 0.40);
+            background: #FFF;
+        }
+        .best-sellers .slick-arrow:hover {
+            border-radius: 10px !important;
+            border: 1px solid rgba(120, 120, 120, 0.40) !important;
+            background: #FFF !important;
+        }
+        .best-sellers .slick-arrow svg {
+            width: 24px;
+            height: 24px;
+            aspect-ratio: 1 / 1;
+        }
+        .best-sellers .slick-next {
+            right: 10px;
+        }
+        .best-sellers .slick-prev {
+            left: 20px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .best-sellers .best-seller-product-image {
+            height: 300px;
+            object-fit: unset;
+        }
+    }
+</style>
+  
+
+<style>
+    .rating-container {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .star {
+            position: relative;
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+        }
+        
+        .star svg {
+            width: 100%;
+            height: 100%;
+            fill: #fff;
+            stroke: #ce0e2d;
+            stroke-width: 2.5px;
+        }
+        
+        .star .filled {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .star .filled svg {
+            fill: #CE0E2D;
+            width: 12px;
+            height: 12px;
+        }
+        
+        /* Larger screens (992px and above) */
+        @media (min-width: 992px) {
+            .star {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .star .filled svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        .rating-text {
+            color: #787878;
+            font-family: 'helvetic-regular';
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: 0.4px;
+            margin-left: 4px;
+        }
+</style>
+
+<script>
+    async function ApiFetch(method, url, data, graphToken) {
+        try {
+            const response = await fetch(url, {
+                method: method,
+                credentials: 'same-origin',
+                headers: {
+                "Content-Type": 'application/json',
+                "Authorization": `Bearer ${graphToken}`
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await response.json()
+            return [result, 0]
+        } catch (error) {
+            console.log(error)
+            return [0, error]
+        }
+    }
+
+    function initializeBestSellersSlider () {
+        console.log('best-sellers:', document.querySelector('.best-sellers'));
+        $('.best-sellers').slick({
+            arrows: true,
+            dots: false,
+            autoPlay: false,
+            mobileFirst: true,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,
+            pauseOnHover: true,
+            slide: '[data-best-seller-slide]',
+            nextArrow: '<button type="button" class="slick-next slick-arrow-custom"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none"><path d="M15.6114 9.88843L16.1613 9.33854L16.7112 9.88843L16.1613 10.4383L15.6114 9.88843ZM3.94477 10.6662C3.73849 10.6662 3.54066 10.5843 3.3948 10.4384C3.24894 10.2925 3.16699 10.0947 3.16699 9.88843C3.16699 9.68215 3.24894 9.48432 3.3948 9.33846C3.54066 9.1926 3.73849 9.11065 3.94477 9.11065V10.6662ZM11.4947 4.67188L16.1613 9.33854L15.0615 10.4383L10.3949 5.77165L11.4947 4.67188ZM16.1613 10.4383L11.4947 15.105L10.3949 14.0052L15.0615 9.33854L16.1613 10.4383ZM15.6114 10.6662H3.94477V9.11065H15.6114V10.6662Z" fill="#787878"/></svg></button>',
+            prevArrow: '<button type="button" class="slick-prev slick-arrow-custom"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none"><path d="M3.38856 9.88843L2.83867 9.33854L2.28879 9.88843L2.83867 10.4383L3.38856 9.88843ZM15.0552 10.6662C15.2615 10.6662 15.4593 10.5843 15.6052 10.4384C15.7511 10.2925 15.833 10.0947 15.833 9.88843C15.833 9.68215 15.7511 9.48432 15.6052 9.33846C15.4593 9.1926 15.2615 9.11065 15.0552 9.11065V10.6662ZM7.50534 4.67188L2.83867 9.33854L3.93845 10.4383L8.60512 5.77165L7.50534 4.67188ZM2.83867 10.4383L7.50534 15.105L8.60512 14.0052L3.93845 9.33854L2.83867 10.4383ZM3.38856 10.6662H15.0552V9.11065H3.38856V10.6662Z" fill="#787878"/></svg></button>',
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4
+                    }
+                }
+            ]
+        })
+    }
+
+        function createStarRating(rating, reviewCount = null) {
+            // Create the main container
+            const container = document.createElement('div');
+            container.className = 'rating-container';
+            
+            // Create stars container
+            const starsContainer = document.createElement('div');
+            starsContainer.className = 'stars';
+            
+            // Create 5 stars
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Star SVG
+                const starSVG = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                `;
+                
+                star.innerHTML = starSVG;
+                
+                // Calculate fill percentage for this star
+                let fillPercentage = 0;
+                
+                if (rating >= i) {
+                    // Full star
+                    fillPercentage = 100;
+                } else if (rating > i - 1) {
+                    // Partial star - calculate the remaining portion
+                    fillPercentage = (rating - (i - 1)) * 100;
+                }
+                
+                // Ensure percentage is between 0 and 100
+                fillPercentage = Math.max(0, Math.min(100, fillPercentage));
+                
+                // Debug output for testing
+                if (rating === 0.1 || rating === 0.9) {
+                    console.log(`Star ${i}, Rating: ${rating}, Fill: ${fillPercentage}%`);
+                }
+                
+                // Add filled portion if needed
+                if (fillPercentage > 0) {
+                    const filledStar = document.createElement('div');
+                    filledStar.className = 'filled';
+                    filledStar.style.width = `${fillPercentage}%`;
+                    filledStar.innerHTML = starSVG;
+                    star.appendChild(filledStar);
+                }
+                
+                starsContainer.appendChild(star);
+            }
+            
+            container.appendChild(starsContainer);
+            
+            // Add review count if provided
+            if (reviewCount !== null) {
+                const reviewText = document.createElement('span');
+                reviewText.className = 'rating-text';
+                reviewText.textContent = `${reviewCount} review${reviewCount !== 1 ? 's' : ''}`;
+                container.appendChild(reviewText);
+            }
+            
+            return container;
+        }
+    
+        function equalizeSlickSlideHeights(sliderSelector) {
+            let maxHeight = 0;
+            // Reset heights
+            $(`${sliderSelector} .slick-slide`).css('height', 'auto');
+
+            // Find tallest height
+            $(`${sliderSelector} .slick-slide`).each(function () {
+                const thisHeight = $(this).outerHeight();
+                if (thisHeight > maxHeight) {
+                    maxHeight = thisHeight;
+                }
+            });
+
+            // Set all slides to tallest height
+            $(`${sliderSelector} .slick-slide`).css('height', `${maxHeight}px`);
+    }
+
+    function renderBestSellers (products) {
+        const bestSellersContainer = document.querySelector('.best-sellers');
+
+        products?.map(product => {
+            const productNode = product.node;
+            const productContainer = document.createElement('div');
+            productContainer.setAttribute('data-best-seller-slide', '')
+            productContainer.classList.add('best-seller-product');
+            
+            const productCardBody = document.createElement('a');
+            productCardBody.href = productNode?.path;
+            productCardBody.classList.add('product-card-body');
+
+            const productImage = document.createElement('img');
+            productImage.src = productNode?.defaultImage?.url;
+            productImage.alt = productNode?.name;
+            productImage.classList.add('best-seller-product-image');
+            productCardBody.appendChild(productImage);
+
+            const productDetails = document.createElement('div');
+            productDetails.classList.add('product-details');
+
+            const productBrand = document.createElement('h3');
+            productBrand.textContent = productNode?.brand?.name;
+            productBrand.classList.add('brand-name');
+            productDetails.appendChild(productBrand);
+
+            const productSku = document.createElement('p');
+            productSku.textContent = productNode?.sku;
+            productSku.classList.add('sku');
+            productDetails.appendChild(productSku);
+
+            const totalRating = productNode?.reviews?.edges?.reduce((acc, review) => acc + review?.node?.rating, 0);
+            const averageRating = totalRating / productNode?.reviews?.edges?.length;
+
+            const productRating = createStarRating(averageRating, productNode?.reviews?.edges?.length)
+            productDetails.appendChild(productRating);
+
+            const productPrice = document.createElement('p');
+            productPrice.textContent = `$${productNode?.prices?.price?.value?.toFixed(2)}`;
+            productPrice.classList.add('price');
+            productDetails.appendChild(productPrice);
+
+            productCardBody.appendChild(productDetails);
+            productContainer.appendChild(productCardBody);
+
+            const productAddToCartButton = document.createElement('a');
+            productAddToCartButton.href = productNode?.addToCartUrl;
+            productAddToCartButton.classList.add('call-to-action');
+            productAddToCartButton.classList.add('add-to-cart');
+            const addToCartText = document.createElement('span');
+            addToCartText.textContent = 'Add to Cart';
+            addToCartText.classList.add('text');
+            productAddToCartButton.appendChild(addToCartText);
+            productContainer.appendChild(productAddToCartButton);
+
+            bestSellersContainer.appendChild(productContainer);
+
+        })
+    }
+
+    async function getBestSellers() {
+        const query = {
+            query: `{
+                    site {
+                        route(path: "/best-sellers/") {
+                            node {
+                                __typename
+                                id
+                                # A different response is returned based on which type of object was matched
+                                ... on Category {
+                                name
+                                description
+                                    products {
+                                        edges {
+                                            node {
+                                                entityId,
+                                                brand {
+                                                    name
+                                                },
+                                                sku,
+                                                path,
+                                                defaultImage {
+                                                    url(width: 400, height: 400)
+                                                },
+                                                reviews {
+                                                    edges {
+                                                        node {
+                                                        rating
+                                                        }
+                                                    }
+                                                },
+                                                prices {
+                                                    price {
+                                                        value
+                                                    }
+                                                },
+                                                addToCartUrl
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                
+            }`
+        };
+        
+        const context = JSON.parse({{jsContext}});
+        console.log('context:', context);
+        const graphToken = context?.token;
+
+        const [result, error] = await ApiFetch("POST", "/graphql", query, graphToken);
+
+        if (result) {
+            console.log('result:', result);
+            renderBestSellers(result?.data?.site?.route?.node?.products?.edges);
+            setTimeout(() => {
+                initializeBestSellersSlider();
+                $('.best-sellers').on('setPosition', function () {
+                    equalizeSlickSlideHeights('.best-sellers');
+                });
+                const loadingIcon = document.querySelector('.best-sellers .icon-loading');
+                loadingIcon.style.display = 'none';
+            }, 100)
+        } else {
+            console.log('Error fetching the best seller products:', error)
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        getBestSellers();
+    });
+</script>

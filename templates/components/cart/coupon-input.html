@@ -1,0 +1,36 @@
+<div class="cart-total-value">
+    <button class="coupon-code-add d-none" >
+        {{lang 'cart.coupons.add_coupon'}}
+
+    </button>
+    <button class="coupon-code-cancel" style="display: none;">{{lang 'cart.coupons.cancel'}}</button>
+</div>
+
+<div class="cart-form coupon-code" >
+    <form class="form form--hiddenLabels coupon-form" method="post" action="{{urls.cart}}">
+        <label class="form-label" for="couponcode">{{lang 'cart.coupons.coupon_code'}}</label>
+        <input class="form-input placeholder-add" data-error="{{lang 'cart.coupons.empty_error'}}"  id="couponcode" type="text" name="couponcode" value="" placeholder="Enter promocode">
+        <input class="button button--tertiary button--small cart-apply-button" type="submit" value="{{lang 'cart.coupons.button'}}">
+        <input type="hidden" name="action" value="applycoupon">
+    </form>
+</div>
+
+
+<style>
+    .cart-apply-button {
+        font-size: 16px;
+        font-weight: 700;
+        font-family: 'helvetic-regular';
+        color: #EF3826;
+        background-color: #FFFFFF;
+        border: 2px solid #EF3826;
+        padding: 14px 33px 14px 16px;
+    }
+    .placeholder-add {
+        color: #545D6B !important;
+        font-family: 'helvetic-regular';
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+</style>

@@ -1,0 +1,391 @@
+<section class="hero-section container">
+  <div class="left-container">
+    <div class="hs-lc-img-wrapper">
+      <div class="img">
+        {{> components/common/responsive-img image=carousel.slides.[0].stencil_image
+        class="heroCarousel-image" fallback_size='1280w' lazyload='disabled' }}
+        <!-- <img
+          src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home-3x.png?t=1756962655"
+          alt=""
+          class="hero-section-img"
+        /> -->
+      </div>
+    </div>
+
+    <div class="text-below-home-hero-mobile">
+      <span class="title">Congratulations Ichiro Suzuki </span>
+      <span class="description"
+        >National Baseball Hall of Fame Class of 2025. Purchase "HOF '25"
+        Memorabilia Today!</span
+      >
+      <a href="" class="shop-now-btn">
+        <span class="shop-now-btn--text">Shop Now</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="right-container">
+    <div class="upper">
+      <div class="img">
+        <img
+          src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home3-3x.png?t=1756967690"
+          alt=""
+          class="hero-section-img"
+        />
+      </div>
+      <div class="content">
+        <div class="heading">
+          <span>Father’s Day Gifting</span>
+        </div>
+        <a href="" class="shop-now-btn">
+          <span class="shop-now-btn--text">Shop Now</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="lower">
+      <div class="img">
+        <img
+          src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home2-3x.png?t=1756967686"
+          alt=""
+          class="hero-section-img"
+        />
+      </div>
+      <div class="content">
+        <div class="heading">
+          <span
+            >Mill Creek Sports at The 45th National Sports Collectors
+            Convention!</span
+          >
+        </div>
+        <a href="" class="shop-now-btn">
+          <span class="shop-now-btn--text">Shop Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="enddddd">a {{log carousel.slides}}</div>
+{{~inject 'cs' carousel.slides}}
+<script>
+  let context = JSON.parse({{jsContext}});
+  console.log('carousel.slides ===>', context);
+
+  const cs = context.cs;
+
+  console.log('carousel.slides ===>', cs);
+</script>
+<style>
+  /* ------------------------ LEFT SIDE ------------------------ */
+  .hero-section .left-container .text-below-home-hero-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+
+    gap: 10px;
+  }
+  .hero-section .left-container .text-below-home-hero-mobile .title {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    color: var(--Dark-Overlay, #0a0a1e);
+    text-align: center;
+    font-family: "Noto Sans";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 30px */
+    letter-spacing: -0.6px;
+  }
+  .hero-section .left-container .text-below-home-hero-mobile .description {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    padding: 0 20px;
+
+    color: var(--Dark-Overlay, #0a0a1e);
+    text-align: center;
+    font-family: "Noto Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.32px;
+  }
+  .hero-section .left-container .text-below-home-hero-mobile .shop-now-btn {
+    display: flex;
+    width: 100%;
+    padding: 13px 28px 14px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 10px;
+    background: var(--Mill-Creek-Blue, #21205f);
+
+    max-width: 374px;
+  }
+  .hero-section
+    .left-container
+    .text-below-home-hero-mobile
+    .shop-now-btn--text {
+    color: var(--White, #fff);
+    text-align: center;
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.28px;
+    text-transform: uppercase;
+  }
+
+  /*------------------------ RIGHT SIDE ------------------------ */
+
+  /* hero section right side 2 boxes top margin*/
+  .hero-section .right-container .upper,
+  .hero-section .right-container .lower {
+    margin-top: 20px;
+  }
+
+  /* hero section pictures radius */
+  .hero-section .right-container .upper .img .hero-section-img,
+  .hero-section .right-container .lower .img .hero-section-img,
+  .hero-section .left-container .img .hero-section-img {
+    border-radius: 10px;
+  }
+
+  .hero-section .left-container .img::before {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+
+    content: " ";
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    border-radius: 10px;
+  }
+
+  /* right side pics  */
+  .hero-section .right-container .upper .img::after,
+  .hero-section .right-container .lower .img::after {
+    content: " ";
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    border-radius: 10px;
+
+    background: rgba(0, 0, 0, 0.9);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+  }
+
+  .hero-section .right-container .upper,
+  .hero-section .right-container .lower {
+    position: relative;
+  }
+
+  /* hero section right side 2 boxes content on picture*/
+  .hero-section .right-container .upper .content,
+  .hero-section .right-container .lower .content {
+    display: flex;
+    flex-direction: row;
+
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+  }
+  .right-container .lower .content {
+    align-items: flex-end;
+  }
+  /* hero section right side 2 boxes heading*/
+  .hero-section .right-container .upper .heading,
+  .hero-section .right-container .lower .heading {
+    color: var(--White, #fff);
+    font-family: "Noto Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 22px */
+    letter-spacing: -0.4px;
+    text-transform: capitalize;
+  }
+  .hero-section.right-container .lower .heading {
+    width: 50%;
+  }
+  /* hero section right side 2 boxes btn*/
+  .hero-section .right-container .upper .shop-now-btn,
+  .hero-section .right-container .lower .shop-now-btn {
+    display: inline-flex;
+    padding: 13px 28px 14px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 10px;
+    background: var(--Tan-Page-Bkg, #fbfbfb);
+    text-decoration: none;
+  }
+
+  /* hero section right side 2 boxes btn-text*/
+  .hero-section .right-container .upper .shop-now-btn--text,
+  .hero-section .right-container .lower .shop-now-btn--text {
+    color: var(--Mill-Creek-Blue, #21205f);
+    text-align: center;
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.28px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+</style>
+
+<style>
+  .enddddd {
+    margin: 60px;
+  }
+  @media (min-width: 992px) {
+    .hero-section {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    /* ------------------------ LEFT SIDE ------------------------ */
+
+    .hero-section .left-container {
+      flex: 0 0 64%;
+      position: relative;
+    }
+    .hero-section .right-container {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 36%;
+      gap: 11px;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile {
+      position: absolute;
+      bottom: 5%;
+      /* left: 38px; */
+      left: 26px;
+      align-items: flex-start;
+
+      max-width: 40%;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .title {
+      color: var(--White, #fff);
+      font-family: "Noto Sans";
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 100%; /* 46px */
+      letter-spacing: -0.92px;
+
+      text-align: unset;
+      padding: 0;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .description {
+      color: var(--White, #fff);
+      font-family: "Noto Sans";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.32px;
+
+      padding: 0;
+      text-align: unset;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .shop-now-btn {
+      border-radius: 10px;
+      background: var(--Tan-Page-Bkg, #fbfbfb);
+
+      display: inline-flex;
+      padding: 13px 28px 14px 30px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: auto;
+      text-decoration: none;
+    }
+    .hero-section
+      .left-container
+      .text-below-home-hero-mobile
+      .shop-now-btn--text {
+      color: var(--Mill-Creek-Blue, #21205f);
+      text-align: center;
+      font-family: "Noto Sans";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.28px;
+      text-transform: uppercase;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile {
+      gap: 14px;
+    }
+
+    /* ------------------------ RIGHT SIDE ------------------------ */
+
+    .hero-section .right-container .upper,
+    .hero-section .right-container .lower {
+      margin-top: 0px;
+    }
+
+    .right-container .lower .heading {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 992px) {
+    .hero-section .left-container {
+      position: relative;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile {
+      z-index: 999;
+    }
+  }
+  /* ------------------------ RIGHT SIDE UPPER/LOWER HEADING SIZE------------------------ */
+
+  @media (min-width: 570px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 24px;
+    }
+  }
+
+  @media (min-width: 500px) and (max-width: 570px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 22px;
+    }
+  }
+
+  @media (min-width: 420px) and (max-width: 500px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 370px) and (max-width: 420px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 370px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 14px;
+    }
+  }
+</style>

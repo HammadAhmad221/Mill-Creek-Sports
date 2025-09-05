@@ -1,0 +1,367 @@
+{{#if enable}}
+	<div id="haloRecommendedBlock" class="haloRecommendedBlock{{#if theme_settings.halo_homepage_layout_4}} haloProductBlockFull{{/if}}" data-list-id="{{list_id}}">
+		<div class="container complete-set-container {{#if theme_settings.halo_homepage_layout_4}} container-custom{{/if}}">
+			<div class="row">
+				<h2 class="page-heading-cart halo-heading">
+					<!-- {{title_recommended}} -->
+					 Complete your set
+					<!-- {{#if show_view_all}}
+						<a class="btnViewAll" href="{{view_all_link}}">{{lang 'common.view_all'}}</a>
+					{{/if}} -->
+				</h2>
+				<section id="self-related-products"></section>
+				{{#if type '==' 'new'}}
+			        {{#if products.new}}
+			            {{> components/products/new-3 products=products.new columns=theme_settings.homepage_new_products_column_count productsnew=products.new show_dots_bar="true" id="NewProductsCarousel"}}
+			        {{/if}}
+			    {{else}}
+			        {{#if type '==' 'featured'}}
+			            {{#if products.featured}}
+			                {{> components/products/featured-2 products=products.featured columns=theme_settings.homepage_featured_products_column_count productsnew=products.new show_dots_bar="true" id="FeaturedProductsCarousel"}}
+			            {{/if}}
+			        {{/if}}        
+			    {{/if}}
+			    {{#if theme_settings.halo_homepage_layout_4}}
+					<div class="progress" role="progressbar" aria-label="Progress Bar" aria-valuemin="0" aria-valuemax="100" data-bars>
+			            <div class="bar-thumb"></div>
+			        </div>
+		        {{/if}}
+			</div>
+		</div>
+	</div>
+{{/if}}
+
+
+<style>
+	@media (min-width: 1280px) {
+	.complete-set-container{
+		padding: 5px 30px 0 30px;
+	}
+}
+	.page-heading-cart{
+	text-align: left;
+    font-family: "vox";
+    font-size: 20px;
+    font-weight: 400;
+	line-height: 25px;
+	color: #231F20;
+	margin-bottom: 2px !important;
+	margin-top: 3%;
+	}
+
+    .card {
+        background-color: #FFFFFF;
+        width: 95%;
+
+    }
+
+    .card-body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+       
+
+    }
+ @media (max-width:1365px) {
+    .card-body {
+        padding: 20px 10px !important;
+    }
+        }
+    .card-add-to-cart-btn {
+        font-family: 'helvetic-regular';
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #000000;
+        background-color: #FFFFFF;
+        border-radius: 3px;
+        border: 1px solid #231F20;
+        padding: 8px 10px 8px 10px;
+        line-height: 11.25px;
+        letter-spacing: 0.39px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+    }
+
+    .card-add-to-cart-btn :hover{
+        transform: translate(1px, 1px);
+          border-right: 3px solid #000;
+          border-bottom: 3px solid #000;
+    }
+    .card-add-to-cart-btn:active{
+          transform: translate(2px, 2px);
+          border-right: 2px solid #000;
+          border-bottom: 2px solid #000;
+    }
+    .self-card-text {
+        font-family: 'helvetic-regular';
+        font-size: 10.5px !important;
+        font-weight: 400 !important;
+        color: #231F20 !important;
+        letter-spacing: 0.45px;
+        line-height: 15px !important;
+        text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        max-width: 100%;
+    }
+
+    .self-card-title>a {
+        font-family: 'helvetic-regular';
+        font-size: 9px;
+        font-weight: 400;
+        color: #787878;
+        letter-spacing: 0.15px;
+        line-height: 11.25px;
+       
+
+    }
+    .self-card-title{
+          white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        max-width: 100%;
+    }
+
+    .self-card-price {
+        font-family: 'helvetic-regular';
+        font-size: 10.5px !important;
+        font-weight: 700 !important;
+        color: #000000;
+        line-height: 15px !important;
+    }
+    .self-card-figure__link{
+        min-height: 140px;
+        align-content: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .slick-slide img {
+        max-height: 80%;
+        max-width: 68%;
+    }
+    @media (max-width:1290px)and (max-width:1025) {
+        .card{
+            padding: 0 8px !important;
+        }
+        
+    }
+
+</style>
+{{~inject "card" card}}
+{{~inject "settings" settings}}
+<script>    
+    function relatedProductCarosal(){
+        const elments = document.querySelectorAll('.card')
+
+        $('#self-related-products').not('#TopSellerCarousel').slick({
+          dots: true,
+          infinite: false,
+          speed: 300,
+          slidesToShow: elments?.length > 3 ? 4:elments?.length,
+          slidesToScroll: elments?.length > 3 ? 4:1,
+          responsive: [
+            {
+              breakpoint: 1290,
+              settings: {
+                slidesToShow: elments?.length > 2 ? 3:elments?.length,
+                slidesToScroll: elments?.length > 2 ? 3:1,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: elments?.length > 1 ? 3:elments?.length,
+                slidesToScroll: elments?.length > 1 ? 3:1
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: elments?.length > 1 ? 2:elments?.length,
+                slidesToScroll: elments?.length > 1 ? 2:1
+              }
+            }
+          ]
+        });
+        
+        const btn = document.querySelector('.slick-next.slick-arrow')
+        btn.click()
+    }
+    
+    function generateSrcSet(baseUrl) {
+        const widths = [80, 160, 320, 640, 960, 1280, 1920];
+        return widths.map(w => `${baseUrl.replace(/\/\d+w\//, `/${w}w/`)} ${w}w`).join(', ');
+    }
+
+    function generateStarRating() {
+        const svg = `<svg width="20" height="20" viewBox="0 0 20 20" fill="#ECEEF5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.52447 1.46353C9.67415 1.00287 10.3259 1.00287 10.4755 1.46353L12.1329 6.56434C12.1998 6.77035
+                12.3918 6.90983 12.6084 6.90983H17.9717C18.4561 6.90983 18.6575 7.52964 18.2656 7.81434L13.9266
+                10.9668C13.7514 11.0941 13.678 11.3198 13.745 11.5258L15.4023 16.6266C15.552 17.0873 15.0248 17.4704
+                14.6329 17.1857L10.2939 14.0332C10.1186 13.9059 9.88135 13.9059 9.70611 14.0332L5.3671 17.1857C4.97524
+                17.4704 4.448 17.0873 4.59768 16.6266L6.25503 11.5258C6.32197 11.3198 6.24864 11.0941 6.07339 10.9668L1.73438
+                7.81434C1.34253 7.52964 1.54392 6.90983 2.02828 6.90983H7.39159C7.6082 6.90983 7.80018 6.77035 7.86712
+                6.56434L9.52447 1.46353Z"></path>
+        </svg>`;
+        return Array(5).fill(svg).join('');
+    }
+
+    async function ApiFetch(method, url, data) {
+        try {
+            const response = await fetch(url, {
+                method: method,
+                credentials: 'same-origin',
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Authorization": `Bearer ${context.token}`
+                },
+                body: JSON.stringify(data)
+            })
+            const result = await response.json()
+            return [result, 0]
+        } catch (er) {
+            console.log(er)
+            return [0, er]
+        }
+    }
+    
+     async function appendRelatedProduct(mainProducts, carouselContainer){
+        const cartProductIds = context.cart.items.map(item => item.product_id.toString());
+        for (let j = 0; j < mainProducts.length; j++) {
+            const node = mainProducts[j].node;
+            if (cartProductIds.includes(node.entityId.toString())) {
+                continue; 
+            }
+            const price = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: node.prices.price.currencyCode
+            }).format(node.prices.price.value);
+            
+            const firstImage = node.images.edges[0]?.node;
+            const imageUrl = firstImage?.url || '';
+            const imageAlt = firstImage?.altText || node.name;
+
+            const productWrapper = document.createElement('div');
+            productWrapper.classList.add('complete-set-container')
+            // productWrapper.style.cssText = 'flex: 1 1 0%; width: 25%';
+
+            const productElement = document.createElement('article');
+            productElement.className = 'card-figure';
+            productElement.className = 'card';
+            productElement.style.cssText = `display: flex;
+                                            flex-direction: column;
+                                            justify-content: space-evenly;
+                                            margin: 15px;
+                                            padding-bottom: 10px;
+                                            padding: 2px 15px 10px 15px;
+            `
+            productElement.setAttribute('aria-label', node.name);
+            productElement.innerHTML = `
+                <a href="${node.path}" class="card-figure__link self-card-figure__link" tabindex="0">
+                    <img loading="lazy" src="${imageUrl}" srcset="${generateSrcSet(imageUrl)}" class=" card-img card-img-container" alt="${imageAlt}">
+                </a>
+                <div data-test-id="product-set-widget-brand" class="card-text self-card-text">
+                    ${node.sku}
+                </div>
+                <div data-test-id="product-set-widget-name" class="card-title self-card-title card-ellipsis">
+                    <a href="${node.path}" class="card-title self-card-title card-ellipsis" tabindex="0">${node.name}</a>
+                </div>
+                <div data-test-id="product-set-widget-price" class="price price--withoutTax self-card-price">
+                    ${price}
+                </div>
+                <div class="">
+                        <a href="${node.addToCartUrl}" 
+                      class="button button--small card-figcaption-button card-add-to-cart-btn" data-fbq-attached="true" tabindex="0">
+                        Add to Cart
+                    </a>
+                </div>
+            `;
+
+            carouselContainer.appendChild(productElement);
+
+        }
+    }
+ 
+    async function getProductsDetails() {
+        const graphqlQuery = {
+            query: `
+            query productsBYId{
+                site {
+                    products (entityIds:[117, 249, 244, 114, 238, 170, 164, 160, 210, 168, 158, 132, 112, 241, 206, 155, 250, 246, 245, 242], first: 20) {
+                        pageInfo {
+                            startCursor
+                            endCursor
+                        }
+                        edges {
+                            cursor
+                            node {
+                                entityId
+                                name
+                                description
+                                addToCartUrl
+                                path
+                                sku
+                                prices {
+                                    price {
+                                        currencyCode
+                                        value
+                                    }
+                                }
+                                images {
+                                    edges {
+                                        node {
+                                            url(width: 500, height: 500)
+                                            altText
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        `
+        }
+    await fetchRelatedProducts(graphqlQuery)
+    }
+    
+    
+    async function fetchRelatedProducts(graphqlQuery){
+            try {
+                const [result, error] = await ApiFetch('POST', "/graphql", graphqlQuery);
+                console.log(result, 'result')
+
+                const carouselContainer = document.getElementById('self-related-products')            
+                carouselContainer.innerHTML = '';
+            
+                const mainProducts = result.data.site.products.edges;
+                await appendRelatedProduct(mainProducts, carouselContainer)
+            
+                // Add to DOM if not already present
+                if (!carouselContainer) {
+                    document.body.appendChild(carouselContainer);
+                }
+               
+                relatedProductCarosal()
+        
+            } catch (err) {
+                console.error('Error processing related products:', err);
+            }
+    }
+    
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        getProductsDetails(); 
+    })
+</script>

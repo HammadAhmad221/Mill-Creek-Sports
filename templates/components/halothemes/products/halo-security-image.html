@@ -1,0 +1,222 @@
+
+
+
+<!-- {{#or (if theme_settings.halo_securityImage) (if theme_settings.halo-cart-secure-image)}}
+
+
+
+
+    <div class="halo_securityImage">
+
+        {{#if security_des}}
+            <p class="halo_securityDes">{{security_des}}</p>
+
+        {{/if}}
+        <ul>
+            {{#if security_image_1}}
+                <li>
+                    <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{security_image_1}}" alt="Security Image 1">
+                </li>
+            {{/if}}
+            {{#if security_image_2}}
+                <li>
+                    <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{security_image_2}}" alt="Security Image 2">
+                </li>
+            {{/if}}
+            {{#if security_image_3}}
+                <li>
+                    <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{security_image_3}}" alt="Security Image 3">
+                </li>
+            {{/if}}
+            {{#if security_image_4}}
+                <li>
+                    <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{security_image_4}}" alt="Security Image 4">
+                </li>
+            {{/if}}
+            {{#if security_image_5}}
+                <li>
+                    <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{security_image_5}}" alt="Security Image 5">
+                </li>
+            {{/if}}
+            {{#if security_image_6}}
+                <li>
+                    <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{security_image_6}}" alt="Security Image 6">
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+{{/or}} -->
+
+
+
+
+
+
+<style>
+
+      .custom-info-row {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        padding: 7px 2px 19px 0px;
+        width: 86%;
+    }
+
+    .custom-info-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 180px;
+    }
+
+    .custom-info-icon {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 10px;
+    }
+
+    .custom-info-text {
+        font-size: 12px;
+        font-weight: 700;
+        font-family: Helvetica;
+    }
+
+    .custom-support-box {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f5f5;
+        padding: 10px 5px 10px 8px;
+        border-radius: 3px;
+        min-width: 250px;
+    }
+
+    .custom-support-content {
+        text-align: left;
+    }
+
+    .custom-support-title {
+        font-size: 12px;
+        font-weight: 400;
+        font-family: 'vox';
+        margin-bottom: 5px;
+        line-height: 25px;
+    }
+
+    .custom-support-phone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #EC3B26;
+        gap: 4px;
+    }
+
+    .custom-support-icon {
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+    }
+
+     @media (max-width: 1360px){
+        .custom-info-text{
+            font-size: 11px;
+        }
+    }
+    
+       @media (max-width: 1325px){
+        .custom-info-text{
+            font-size: 10px;
+        }
+    }
+
+      @media (max-width: 1290px){
+        .custom-info-text{
+            font-size: 9px;
+        }
+    }
+
+    @media (max-width: 1150px){
+        .custom-info-text{
+            font-size: 8px;
+        }
+    }
+
+
+     @media (max-width: 1110px){
+        .custom-info-text{
+            font-size: 7px;
+        }
+    }
+
+    @media (max-width: 1080px){
+        .custom-info-text{
+            font-size: 6px;
+        }
+    }
+
+    @media (max-width: 1040px){
+        .custom-info-text{
+            font-size: 9px;
+        }
+    }
+    
+@media (max-width:431px) {
+    .custom-info-row{
+        flex-wrap: wrap !important;
+        justify-content: center;
+        align-items: normal;
+        width: 100%;
+        gap: 20px;
+        padding: 20px 2px 19px 0px;
+        border-top: 1px solid #C5C5C5;
+    }
+    .custom-info-item{
+        width: 90px;
+    }
+    
+   
+    
+    .custom-support-title {
+    width: 48%;
+    font-size: 15px;
+    }
+    .custom-support-content{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+     .custom-info-icon {
+        width: 24px;
+        height: 24px;
+     }
+     .custom-support-phone{
+        font-size: 15px;
+     }
+    
+    
+}
+@media (max-width:320px) {
+     .custom-support-title {
+    font-size: 12px;
+    }
+    .custom-support-phone{
+        font-size: 12px;
+    }
+    .custom-info-row{
+        padding: 20px 2px 19px 0px;
+        gap: 17px;
+    }
+    
+}
+
+  
+
+</style>

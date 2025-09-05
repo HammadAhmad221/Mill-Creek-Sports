@@ -1,0 +1,99 @@
+---
+gql: "query {
+  site {
+    content {
+      blog {
+        name
+        description
+        path
+        posts {
+          edges {
+            node {
+              entityId
+              name
+              tags
+              htmlBody
+              plainTextSummary
+              author
+              path
+              publishedDate {
+                utc
+              }
+              thumbnailImage {
+                url (width: 1920, height: 1080)
+                urlOriginal
+                altText
+                isDefault
+              }
+              seo {
+                pageTitle
+                metaKeywords
+                metaDescription
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}"
+---
+
+{{inject "videos" gql}}
+
+{{#partial "page"}}
+    <div class="container--medium">
+        <div class="breadcrumb-wrapper">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        </div>
+        <div class="page page-normal">
+            <div class="page-header">
+                <h1 class="page-heading">{{ page.title }}</h1>
+            </div>
+            <main class="page-content halo-lookbook-content">
+                {{{page.content}}}
+                <!--<div class="halo-lookbook-share">-->
+                <!--    {{>components/common/share url=url}}-->
+                <!--</div>  -->
+                
+                {{#if page.title '===' "Videos"}}
+                   <ul class="productGrid">
+                        {{#each gql.data.site.content.blog.posts.edges}}
+                            {{#with node}}
+                                {{#contains tags "video"}}
+                                    <li class="product">
+                                        <div class="card">
+                                            <div class="card-figure">
+                                                <a href="{{path}}" class="card-figure__link">
+                                                    <div class="card-img-container">
+                                                        {{> components/common/responsive-img
+                                                            image=thumbnailImage.urlOriginal
+                                                            class="card-image blog-image-ratio-wide"
+                                                            fallback_size=theme_settings.recent_blog_size
+                                                            lazyload=theme_settings.lazyload_mode
+                                                            default_image=theme_settings.default_image_product
+                                                        }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <h3 class="card-title">
+                                                    <a href="{{path}}">{{name}}</a>
+                                                </h3>
+                                            <div class="card-body">
+                                                
+                                                <a class="button button--primary" href="{{path}}">{{lang 'blog.read_more'}}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/contains}}
+                            {{/with}}
+                        {{/each}}
+                    </ul>
+                {{/if}}
+                
+                {{{region name="page_builder_content"}}}
+            </main>
+        </div>
+    </div>
+{{/partial}}
+{{> layout/base}}

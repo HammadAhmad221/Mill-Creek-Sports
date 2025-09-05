@@ -1,0 +1,489 @@
+<table class="cart" data-cart-quantity="{{cart.quantity}}">
+    <!-- <thead class="cart-header">
+        <tr>
+            <th class="cart-header-item cart-header-items" colspan="2">{{lang 'cart.checkout.item'}}</th>
+            <th class="cart-header-item cart-header-price">{{lang 'cart.checkout.price'}}</th>
+            <th class="cart-header-item cart-header-quantity">{{lang 'cart.checkout.quantity'}}</th>
+            <th class="cart-header-item cart-header-total">{{lang 'cart.checkout.total'}}</th>
+            <th class="cart-header-item cart-header-remove">{{lang 'cart.checkout.remove'}}</th>
+        </tr>
+    </thead> -->
+    <tbody class="cart-list">
+        {{#each cart.items}}
+        <tr class="cart-item self-cart-item " data-item-row>
+            <td class="cart-item-block cart-item-figure">
+                {{#if type '==' 'GiftCertificate'}}
+                <img class="cart-item-fixed-image" src="{{cdn ../theme_settings.default_image_gift_certificate}}"
+                    alt="{{lang 'cart.gift_certificates.gift_certificate'}}"
+                    title="{{lang 'cart.gift_certificates.gift_certificate'}}">
+                {{else}}
+                {{> components/common/responsive-img
+                image=image
+                class="cart-item-image"
+                fallback_size=../theme_settings.productthumb_size
+                lazyload=../theme_settings.lazyload_mode
+                default_image=../theme_settings.default_image_product
+                }}
+                {{/if}}
+            </td>
+
+
+
+            <td class="cart-item-block cart-item-title ">
+                {{#if brand.name}}
+                <p class="cart-item-brand">{{brand.name}}</p>
+                {{/if}}
+                <h2 class="cart-item-name">
+                    <a class="cart-item-name__label self-product-title" href="{{url}}">{{name}}</a>
+                </h2>
+                {{#if release_date}}
+                <p>({{release_date}})</p>
+                {{/if}}
+
+
+                {{#if options}}
+                <dl class="definitionList">
+                    {{#each options}}
+                    <dt class="definitionList-key">{{name}}:</dt>
+                    <dd class="definitionList-value">
+                        {{#if is_file}}
+                        <a href="/viewfile.php?attributeId={{id}}&cartitem={{../id}}">{{value}}</a>
+                        {{else}}
+                        {{{ sanitize value}}}
+                        {{/if}}
+                    </dd>
+                    {{/each}}
+                </dl>
+
+                <a class="cart-changeOption-btn" href="#" data-item-edit="{{id}}" data-product-id="{{product_id}}"
+                    aria-label="{{lang 'products.change_product_options' name=name}}">
+                    <svg class="icon">
+                        <use xlink:href="#icon-edit-cart"></use>
+                    </svg>
+                    <span>{{lang 'common.change'}}</span>
+                </a>
+                {{/if}}
+
+                {{#if type '==' 'GiftCertificate'}}
+                <a class="cart-changeOption-btn" href="{{edit_url}}"
+                    aria-label="{{lang 'cart.gift_certificates.change_gift_certificate' certificate_name=name}}">
+                    <svg class="icon">
+                        <use xlink:href="#icon-edit-cart"></use>
+                    </svg>
+                    <span>{{lang 'common.change'}}</span>
+                </a>
+                {{/if}}
+                {{> components/cart/item-giftwrap this}}
+                {{#if event_date}}
+                <dl class="cart-item-options">
+                    <dt class="cart-item-option-title">
+                        {{event_date.name}}
+                    </dt>
+
+                    <dd class="cart-item-option-description">
+                        {{event_date.date}}
+                    </dd>
+                </dl>
+                {{/if}}
+
+                <!-- price -->
+                <!-- <span class="cart-item-label">{{lang 'cart.checkout.price'}}</span> -->
+                {{#or ../customer (unless ../settings.hide_price_from_guests)}}
+                <span
+                    class="cart-item-value self-current-price  {{#if price_discounted}}price--discounted{{/if}}">{{price.formatted}}</span>
+                {{#if price_discounted}}
+                <span class="cart-item-value self-current-price">{{price_discounted.formatted}}</span>
+                {{/if}}
+                {{else}}
+                {{> components/common/login-for-pricing}}
+                {{/or}}
+
+
+                <div class="self-justify">
+                    <div class="self-custom-increment-box" data-quantity-change>
+                        <button class="self-custom-increment-button" data-cart-update data-cart-itemid="{{id}}" 
+                            data-action="dec">
+                            &minus;
+                            <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
+                        </button>
+                        <input class="self-custom-increment-input " id="qty-{{id}}" name="qty-{{id}}" type="tel"
+                            value="{{quantity}}" data-quantity-min="{{min_purchase_quantity}}"
+                            data-quantity-max="{{max_purchase_quantity}}"
+                            data-quantity-min-error="{{lang 'products.quantity_min' quantity=min_purchase_quantity}}"
+                            data-quantity-max-error="{{lang 'products.quantity_max' quantity=max_purchase_quantity}}"
+                            min="1" pattern="[0-9]*" data-cart-itemid="{{id}}" data-action="manualQtyChange"
+                            aria-label="{{name}}" aria-live="polite" {{#unless can_modify}} disabled{{/unless}}>
+
+                        <button class="self-custom-increment-button" data-cart-update data-cart-itemid="{{id}}"
+                            data-action="inc">
+                            &#43;
+                            <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>
+                        </button>
+                    </div>
+
+
+                    <div class="alertBox productAttributes-message" style="display:none">
+                        <div class="alertBox-column alertBox-icon">
+                            <icon glyph="ic-success" class="icon" aria-hidden="true"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z">
+                                    </path>
+                                </svg></icon>
+                        </div>
+                        <p class="alertBox-column alertBox-message"></p>
+                    </div>
+
+
+                    {{#if can_modify}}
+                    <button class="cart-remove self-delete-btn" data-cart-itemid="{{id}}"
+                    data-confirm-delete="{{lang 'cart.confirm_delete'}}"
+                    aria-label="{{lang 'cart.remove_item' name=name}}">
+                      <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/dlt-cart.svg" alt="" height="18.25px" width="18.25px">
+                        <!-- <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2">
+                            <path
+                                d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14zM10 11v6M14 11v6" />
+                        </svg> -->
+                    </button>
+                    {{/if}}
+                </div>
+                 <!-- <span class="self-stock-status">Only <span style="font-weight: 700;">XX</span> left in the stock</span> -->
+                <!-- X button -->
+                <!-- {{#or can_modify (if type '==' 'GiftCertificate')}} -->
+
+               
+                <!-- <button class="cart-remove icon" data-cart-itemid="{{id}}"
+                    data-confirm-delete="{{lang 'cart.confirm_delete'}}"
+                    aria-label="{{lang 'cart.remove_item' name=name}}">
+                    <svg>
+                        <use xlink:href="#icon-close"></use>
+                    </svg>
+                </button> -->
+                <!-- {{/or}} -->
+
+            </td>
+            <!-- <td class="cart-item-block cart-item-info cart-item-price"> -->
+                <!-- <span class="cart-item-label">{{lang 'cart.checkout.price'}}</span>
+                    {{#or ../customer (unless ../settings.hide_price_from_guests)}}
+                        <span class="cart-item-value {{#if price_discounted}}price--discounted{{/if}}">{{price.formatted}}</span>
+                        {{#if price_discounted}}
+                            <span class="cart-item-value">{{price_discounted.formatted}}</span>
+                        {{/if}}
+                    {{else}}
+                        {{> components/common/login-for-pricing}}
+                    {{/or}} -->
+            <!-- </td> -->
+
+            <!-- <td class="cart-item-block cart-item-info cart-item-quantity"> -->
+
+
+
+            <!-- </td> -->
+             
+
+            <td class="cart-item-block cart-item-info cart-item-total" style="align-content: baseline;">
+                <!-- <span class="cart-item-label">{{lang 'cart.checkout.total'}}</span> -->
+                {{#or ../customer (unless ../settings.hide_price_from_guests)}}
+                <strong
+                    class="cart-item-value  self-side-price {{#if total_discounted}}price--discounted{{/if}}">{{total.formatted}}</strong>
+                {{#if total_discounted}}
+                <strong class="cart-item-value self-side-price">{{total_discounted.formatted}}</strong>
+                {{/if}}
+                {{else}}
+                {{> components/common/login-for-pricing}}
+                {{/or}}
+            </td>
+
+            <!-- <td class="cart-item-block cart-item-info cart-item-remove">
+
+            </td> -->
+
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="custom-rating-cart-section for-phone" style="border-top:1px solid rgba(197, 197, 197, 1) ; padding-top: 3%;">
+
+    <div class="custom-rating-cart flex-column">
+        <div class="stars">
+            <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/rating-stars.svg" alt="">
+        </div>
+        <span class="custom-rating">Rated 4.88 out of 5</span>
+    </div>
+
+
+    <div class="customer-rating-cart flex-column">
+        <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Frame%2048096879.svg" alt="" width="90px"
+            height="16px" style="text-align: center;">
+        <span class="custom-rating">24k+ happy customers</span>
+    </div>
+
+</div>
+
+
+
+<div class="custom-info-row for-desktop">
+    
+    <div class="custom-info-item">
+        <img class="custom-info-icon" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_51%20%282%29.svg"></img>
+        <div class="custom-info-text">Innovating Power for<br>45 Years.</div>
+    </div>
+
+    <div class="custom-info-item">
+        <img class="custom-info-icon" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_51%20%281%29.svg"></img>
+        <div class="custom-info-text">Dreamed & Designed<br>in the States</div>
+    </div>
+
+    <div class="custom-info-item">
+        <img class="custom-info-icon" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_51%20%283%29.svg"></img>
+        <div class="custom-info-text">Expert Customer<br>Support</div>
+    </div>
+
+    <div class="custom-support-box">
+        <div class="custom-support-content">
+            <div class="custom-support-title">Need a Helping Hand? We are Here for You</div>
+            <div class="custom-support-phone">
+                <img class="custom-support-icon"src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/fi-15762208.png?t=1749822613" 
+                    alt="Phone icon" ></img>
+              
+
+
+                 <a href="tel:+18008273232" style="cursor: pointer; text-decoration: none; color: #EF3826;">1-800-827-3232</a>
+                  <div class="image-with-dot">
+                    <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/phone-image.png?t=1751557481" alt="" height="20px" width="20px" style="border-radius: 50%;">
+                    <!-- Red dot indicator -->
+                    <div class="green-dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<style>
+
+
+ .self-justify {
+        display: flex;
+        align-items: center;
+         width: 100%;
+         gap: 1.5rem;
+
+    }
+   
+    .self-product-title {
+        display: ruby-text;
+        color: #231F20;
+        font-weight: 700;
+        font-family: Helvetica;
+        padding-bottom: 4%;
+    }
+
+    .self-current-price {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        color: #231F20;
+        font-weight: 400;
+        font-family: Helvetica;
+        font-size: 16px;
+        margin-bottom: 8%;
+
+
+    }
+
+
+
+    .self-delete-btn {
+        background-color: #fce8e6;
+        border-radius: 5.75px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    
+
+.self-stock-status{
+    color: #EF3826;
+    margin-top: 10%;
+    font-size: 14px;
+    font-family:Helvetica ;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: baseline;
+    gap: 1px;
+
+}
+ .self-side-price{
+    font-size: 18px;
+    color: #231F20;
+    font-weight: 400;
+    font-family: Helvetica;
+ } 
+
+
+
+    .self-stock-status::before {
+        content: "●";
+        margin-right: 4px;
+        font-size: 12px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+        .self-product-card {
+            grid-template-columns: 80px 1fr;
+            grid-template-areas:
+                "image title"
+                "image current-price"
+                "image controls"
+                "stock price";
+            gap: 8px 12px;
+            padding: 16px;
+        }
+
+        .self-total-price {
+            text-align: left;
+        }
+    }
+
+    @media (max-width:427px) {
+         .self-current-price{
+            font-size: 14px !important;
+         }
+         .self-side-price{
+            font-size: 16px;
+         }
+         .self-custom-increment-box{
+            padding: 3px 0px !important;
+            gap: 12px;
+         }
+         .self-justify{
+            gap: 1rem !important;
+         }
+         .self-delete-btn{
+            height: 28px;
+            width: 28px ;
+         }
+         .self-stock-status{
+            font-size: 11px ;
+         }
+        
+
+    }
+
+
+   
+
+
+</style>
+
+
+<style>
+    .self-custom-increment-box {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f1f2;
+        border-radius: 4.29px;
+        padding: 5px 2px;
+        gap: 10px;
+
+        @media (max-width: 1200px) {
+            flex: 0.45;
+        }
+    }
+
+    .self-custom-increment-button {
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: 400;
+        color: #000;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .self-custom-increment-input {
+        width: 20px;
+        text-align: center;
+        font-size: 13.71px;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+        outline: none;
+        appearance: none;
+        -moz-appearance: textfield;
+    }
+
+    .self-custom-increment-input::-webkit-outer-spin-button,
+    .self-custom-increment-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .selfresponsive-flex {
+        width: fit-content;
+
+        @media (max-width: 1200px) {
+            flex: 1.35;
+        }
+    }
+
+    .self-cart-item{
+        display: flex;
+        justify-content: flex-start;
+        
+    }
+
+    @media (min-width:450px) {
+        .for-phone{
+            display: none !important;
+        } 
+    }
+
+    .image-with-dot {
+    position: relative;
+    display: inline-block;
+}
+
+.green-dot{
+     position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background-color: #0CA63D; /* Red color */
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+/* Red dot indicator */
+.red-dot {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background-color: red; /* Red color */
+    border: 1px solid white;
+    border-radius: 50%;
+}
+    
+</style>
+

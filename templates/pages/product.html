@@ -1,0 +1,62 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{inject 'product' product}}
+{{inject 'productId' product.id}}
+{{inject 'shortDescription' product.meta_description}}
+
+{{#partial "page"}}
+
+
+{{#each product.shipping_messages}}
+{{> components/common/alert/alert-info message}}
+{{/each}}
+
+     <nav aria-label="Breadcrumb">
+    <ol class="breadcrumbs self-replacement" style="display: flex; justify-content: center; background-color: #EC3B26;">
+        {{#unless theme_settings.hide_breadcrumbs }}
+        <div style="display: flex; justify-content: center;">
+            <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Good.svg" alt="" style="padding-right: 0.3rem;">
+        </div>
+         <span id="self-warrenty-tag" class="breadcrumb">
+                {{#if (toLowerCase product.url) 'agm'}}
+                    24 Months Free Replacement
+                {{else}}
+                    36 Months Free Replacement
+                {{/if}}
+            </span>
+            {{#each breadcrumbs}}
+                <!-- Your existing breadcrumb items -->
+            {{/each}}
+        {{/unless}}
+    </ol>
+</nav>
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+<div >
+        
+        {{> components/products/product-view}}
+
+        {{{region name="product_below_content"}}}
+
+        {{> components/halothemes/products/halo-product-view-service}}
+
+    </div>
+
+    {{> components/products/schema}}
+{{/partial}}
+{{> layout/base}}

@@ -1,0 +1,278 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+cart: true
+---
+{{#partial "page"}}
+<div class="banners" data-banner-location="top" style="background-color: #EC3B26;">
+    <div class="banner" data-event-type="promotion" data-entity-id="4" data-name="POWERUP" data-position="top" data-banner-id="POWERUP">
+        <div data-event-type="promotion-click">
+            <p style="text-align: center;"><span class="nav-code" >Use code "POWERUP" at checkout for 10% off of your first order!</span></p>
+        </div>
+    </div>
+</div>
+<div class="page">
+    <main class="page-content page-content--cart" data-cart>
+        <div class="container--cart">
+            {{~inject 'cart' cart}}
+            <script>
+                var context = JSON.parse({{jsContext}})
+                console.log(context, 'context')
+                </script>
+            {{#if cart.items.length}}
+                <div class="loadingOverlay"></div>
+                <div class="cartContent">
+                    
+                    <div class="cartContent--left">
+                        {{> components/cart/page-title}}
+
+                        {{#and (if theme_settings.halo_CalculateFreeShipping) (if cart.items.length)}}
+                            <div class="halo-free-shipping-message animated-loading"></div>
+                        {{/and}}
+
+                        <div data-cart-status>
+                            {{> components/cart/status-messages}}
+                        </div>
+
+                        {{#and (if theme_settings.enbale_cart_notification) (if cart.items.length)}}
+                            {{> components/halothemes/cart/halo-cart-notification}}
+                        {{/and}}
+                        
+                        <div data-cart-content class="cart-content-padding-right">
+                            {{> components/cart/content}}
+                            
+                        </div>
+
+                        
+                        {{> components/halothemes/products/halo-product-recommended-block 
+                         enable=theme_settings.haloRecommendedBlock_cart 
+                         title_recommended=theme_settings.haloRecommendedBlock_cart_title 
+                         list_id=theme_settings.list_productRecommended_cart type=theme_settings.haloRecommendedBlock_cart_type
+                    }}
+
+                    <div class="custom-info-row for-phone">
+    
+    <div class="custom-info-item">
+        <img class="custom-info-icon" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_51%20%282%29.svg"></img>
+        <div class="custom-info-text">Innovating Power for 45 Years.</div>
+    </div>
+
+    <div class="custom-info-item">
+        <img class="custom-info-icon" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_51%20%281%29.svg"></img>
+        <div class="custom-info-text">Dreamed & Designed in the States</div>
+    </div>
+
+    <div class="custom-info-item">
+        <img class="custom-info-icon" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_51%20%283%29.svg"></img>
+        <div class="custom-info-text">Expert Customer Support</div>
+    </div>
+
+    <div class="custom-support-box">
+        <div class="custom-support-content">
+            <div class="custom-support-title">Need a Helping Hand? We are Here for You</div>
+            <div class="custom-support-phone">
+                <img class="custom-support-icon"src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/fi-15762208.png?t=1749822613" 
+                    alt="Phone icon" ></img>
+
+                 <a href="tel:+18008273232" style="cursor: pointer; text-decoration: none; color: #EF3826;">1-800-827-3232</a>
+                <div class="image-with-dot">
+                    <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/frame-30.jpg?t=1750249694" alt="" height="20px" width="20px" style="border-radius: 50%;">
+                    <!-- Red dot indicator -->
+                    <div class="green-dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    
+   
+                        
+                        {{#if theme_settings.halo-cart-secure-image}}
+                            {{> components/halothemes/products/halo-security-image 
+                                security_des=theme_settings.halo-cart-secure-image-label
+                                security_image_1=theme_settings.haloCart_securityImage_1
+                                security_image_2=theme_settings.haloCart_securityImage_2
+                                security_image_3=theme_settings.haloCart_securityImage_3
+                                security_image_4=theme_settings.haloCart_securityImage_4
+                                security_image_5=theme_settings.haloCart_securityImage_5
+                                security_image_6=theme_settings.haloCart_securityImage_6
+                            }}
+                        {{/if}}
+       
+
+                        
+                    </div>
+
+                    <div class="cartContent--right">
+                        <div data-cart-totals class="cart-content-padding-right">
+                            {{> components/cart/totals}}
+                        </div>
+
+                        {{{region name="cart_below_totals"}}}
+
+                        {{#if cart.show_primary_checkout_button}}
+                            <div class="cart-actions cart-content-padding-right">
+                                <a class="button button--primary secure-checkout-btn" href="{{urls.checkout.single_address}}" 
+                                title="{{lang 'cart.checkout.title'}}">
+                                <!-- {{lang 'cart.checkout.button'}} -->
+                                <img  src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/secure-checkout.svg" alt="">
+                                 Secure Checkout
+                            </a>
+                                {{#if cart.show_multiple_address_shipping}}
+                                    <a class="checkoutMultiple" href="{{urls.checkout.multiple_address}}">
+                                        {{lang 'cart.preview.checkout_multiple'}}
+                                    </a>
+                                {{/if}}
+                            </div>
+                            <div class="self-cards-container cart-content-padding-right">
+                                <div class="self-cards">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%281%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%282%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%283%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%284%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%285%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%286%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%287%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%288%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%289%29.svg" alt="">
+                                    <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Cards%20%2810%29.svg" alt="">
+                                </div>
+                            </div>
+
+
+
+
+
+                        {{else}}
+                            <div class="cart-actions cart-content-padding-right">
+                                <a class="button" href="{{urls.home}}" title="{{lang 'cart.continue_shopping'}}">{{lang 'cart.continue_shopping'}}</a>
+                            </div>
+                        {{/if}}
+
+                        {{#if cart.additional_checkout_buttons}}
+                            <div data-cart-additional-checkout-buttons class="cart-additionalCheckoutButtons cart-content-padding-right">
+                                {{> components/cart/additional-checkout-buttons}}
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            {{else}}
+                <h3 tabindex="0">{{lang 'cart.checkout.empty_cart'}}</h3>
+            {{/if}}
+        </div>
+        
+        <!-- {{{region name="cart_below_recommended_block"}}} -->
+    </main>
+</div>
+{{/partial}}
+{{> layout/base}}
+
+
+
+
+
+
+
+<style>
+    .footer{
+        display: none;
+    }
+    .nav-code{
+        font-size: 14px;
+        font-family: 'helvetic-regular';
+        font-weight: 700;
+        line-height: 21.5px;
+        text-align: center;
+    }
+  .page-heading{
+    text-align: left;
+    margin-top: 5%;
+    margin-left: -5%;
+    font-family: "vox";
+    margin-bottom: 0%;
+    font-size: 32px;
+    font-weight: 500;
+  }
+  @media (max-width:431px) {
+      .page-heading{
+    text-align:center;
+    width: 100%;
+    font-size: 25px;
+    margin-left: 0px;
+  }
+}
+  .cartContent--right{
+        background-color: #F2F2F2;
+        border-left: 1px solid #CCCCCC;
+  }
+
+  .body{
+    margin-bottom: 0%;
+  }
+  @media (max-width:431px) {
+     .cartContent--right{ 
+    height: 36rem;
+     background-color:#FFFFFF;
+     border-left: none;
+     border-top: 1px solid #CCCCCC;
+    
+  }
+   .nav-code{
+        font-size: 12px;
+        }
+}
+  .secure-checkout-btn{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background-color: #EF3826;
+    color: #FFFFFF;
+    font-family: 'helvetic-regular';
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    padding: 18px 18px 18px 18px !important;
+    box-shadow: none !important;
+    border: none;
+    border-radius: 5px;
+  }
+  
+.self-cards-container{
+    margin-top: 7%;
+}
+.self-cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 13px;
+}
+
+.image-with-dot {
+    position: relative;
+    display: inline-block;
+}
+
+/* Red dot indicator */
+.red-dot {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444; /* Red color */
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+</style>

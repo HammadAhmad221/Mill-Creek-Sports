@@ -1,0 +1,165 @@
+<nav class="pagination self-pagination" aria-label="pagination" data-products="{{number_products}}" data-total="{{total}}">
+    {{#and (if total) (if page_type '==' 'category')}}
+        {{#if start}}
+            {{#if end}}
+                {{#if end '<' total}}
+                  <div class="pagination-info">Show <span class="start">{{start}}</span> to <span class="end">{{end}}</span> of <span class="total">{{total}}</span> total</div>
+                {{else}}
+                  <div class="pagination-info">Show <span class="start">{{start}}</span> to <span class="end">{{total}}</span> of <span class="total">{{total}}</span> total</div>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    {{/and}}
+
+
+    <ul class="self-pagination-list pagination-list{{#unless hide_pagination}} u-hidden{{/unless}}">
+            <li class="pagination-item pagination-item--previous">
+                <a class="pagination-link"
+                   href="{{previous}}"
+                   {{#unless reload}}data-faceted-search-facet{{/unless}}
+                   aria-label="{{lang 'common.previous'}}"
+                >
+                    <i class="icon" aria-hidden="true">
+                        <svg>
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-left"></use>
+                        </svg>
+                    </i>
+                    {{lang 'common.previous'}}
+                </a>
+            </li>
+        {{#each links}}
+            <li class="pagination-item {{#if this.number '==' ../current}}pagination-item--current{{/if}}">
+                <a class="pagination-link"
+                   href="{{this.url}}"
+                   {{#unless reload}}data-faceted-search-facet{{/unless}}
+                   {{#if this.number '==' ../current}}
+                   aria-current="page"
+                   data-pagination-current-page-link
+                   {{/if}}
+                   aria-label="{{lang 'common.paginator.page_of' current=this.number total=../links.length}}"
+                >
+                    {{this.number}}
+                </a>
+            </li>
+        {{/each}}
+
+        {{#if next}}
+            <li class="pagination-item pagination-item--next">
+                <a class="pagination-link"
+                   href="{{next}}"
+                   {{#unless reload}}data-faceted-search-facet{{/unless}}
+                   aria-label="{{lang 'common.next'}}"
+                >
+                    {{lang 'common.next'}}
+                    <i class="icon" aria-hidden="true">
+                        <svg>
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-right"></use>
+                        </svg>
+                    </i>
+                </a>
+            </li>
+        {{/if}}
+    </ul>
+</nav>
+
+
+<style>
+    .pagination-list{
+    margin-top: 0px; 
+    margin-bottom: 0rem;
+    text-align: right;
+    padding-top: 0px;
+    border-top: none;
+    }
+    .self-pagination{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .pagination-info{
+        width: 38%;
+    }
+    .pagination-list{
+        width: 62%;
+        display: flex;
+    }
+    .pagination-list li{
+        margin-left: 0.1rem;
+    }
+.pagination-item:first-child[aria-disabled="true"] {
+    opacity: 0.3;
+    pointer-events: none; 
+    cursor: default;
+}
+
+@media (max-width:451px) {
+    .self-pagination{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 3rem;
+
+    }
+    .pagination-list{
+        width: 100%;
+        display: flex;
+          padding-top: 30px;
+       border-top: 1px solid #E6E6E6;
+       justify-content: center;
+    }
+    .pagination-info {
+    width: 100%;
+    text-align: center;
+}
+.justify-center{
+    display: flex ;
+    justify-content: center !important;
+}
+    
+}
+@media (max-width:450px) {
+    .pagination-item .pagination-link{
+        height: 38px;
+        width: 37px;
+        line-height: 100%;
+    }
+    .pagination-item.pagination-item--previous .pagination-link, .pagination-item.pagination-item--next .pagination-link {
+        padding: 6px;
+    }
+    
+}
+</style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const currentPageItem = document.querySelector('.pagination-item--current');
+    const prevItem = document.querySelector('.pagination-item--previous');
+
+    if (currentPageItem && prevItem) {
+        const currentPage = parseInt(currentPageItem.textContent.trim(), 10);
+
+        if (currentPage === 1) {
+            prevItem.style.opacity = '0.4';
+            prevItem.style.pointerEvents = 'auto';
+            prevItem.style.cursor = 'pointer';     
+        } 
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const paginationNav = document.querySelector('.pagination');
+    if (paginationNav) {
+        const productsCount = parseInt(paginationNav.getAttribute('data-total'));
+        
+        if (productsCount <= 8 || productsCount <= 16) {
+            const paginationList = paginationNav.querySelector('.pagination-list');
+            if (paginationList) {
+                paginationList.classList.add('d-none');
+            }
+        }
+    }
+});
+</script>

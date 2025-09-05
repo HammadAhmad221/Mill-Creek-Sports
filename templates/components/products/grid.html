@@ -1,0 +1,416 @@
+<ul class="{{#if theme_settings.product_list_display_mode '===' 'grid'}}productGrid{{else}}productList{{/if}}"
+    data-column="{{theme_settings.product_grid_view_column}}">
+    {{#each products}}
+    <li class="product">
+        {{>components/products/card
+        settings=../settings
+        show_compare=../show_compare
+        show_rating=../settings.show_product_rating
+        theme_settings=../theme_settings
+        customer=../customer
+        event=../event
+        position=(add @index 1)
+        productsnew=../productsnew
+        }}
+    </li>
+    {{#if @index "==" 7}}
+    <li class="product self-product-img">
+        <div class="banner-img-container row-r">
+            <div class="self-img-banner-content">
+                <div class="self-banner-heading text-s">Unmatched Performance</div>
+                <div class="self-banner-text text-s">Long-Lasting Power</div>
+            </div>
+            <div class="custom-img-container">
+                <img src="https://cdn11.bigcommerce.com/s-psfxurelmu/images/stencil/original/image-manager/image-81.png?t=1752218393"
+                    alt="Promotional Banner" class="banner-image">
+            </div>
+        </div>
+    </li>
+    {{/if}}
+
+
+    {{#if @index "==" 15}}
+    <li class="product self-product-img">
+        <div class="banner-img-container">
+            <div class="self-img-banner-content-2">
+                <div class="self-banner-heading">Long-Lasting Power</div>
+                <div class="self-banner-text"> Unmatched Performance</div>
+            </div>
+            <div class="custom-img-container-2">
+
+                <img src="https://cdn11.bigcommerce.com/s-psfxurelmu/images/stencil/original/image-manager/image-82.png?t=1752218408"
+                    alt="Promotional Banner" class="banner-image-2">
+            </div>
+
+        </div>
+    </li>
+    {{/if}}
+    {{/each}}
+</ul>
+
+<style>
+    .self-product-img {
+        width: 100% !important;
+        height: 500px;
+        padding: 20px 15px !important;
+    }
+
+    .banner-img-container {
+        width: 100%;
+        height: 480px;
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+        background: linear-gradient(to right, #000000 50%, #000000 90%, #ffffff 100%);
+    }
+
+    .banner-image {
+        width: 100%;
+        height: 480px;
+        display: inline-block;
+        border-radius: 10px 0px 0px 10px;
+        background: rgba(255, 255, 255, 0.1);
+        object-fit: cover;
+
+    }
+
+    .self-img-banner-content {
+        width: 42%;
+        height: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: #000000;
+        border-radius: 0px 10px 10px 1px;
+    }
+
+    .custom-img-container {
+        width: 59%;
+        height: 480px;
+        display: block;
+        border-radius: 10px
+    }
+
+    .self-banner-heading {
+        font-size: 40px;
+        font-family: 'vox';
+        font-weight: 500;
+        color: #FFFFFF;
+        line-height: 55px;
+        width: 100%;
+        text-align: start;
+        padding-left: 2rem;
+        justify-content: center;
+
+    }
+
+
+    .self-banner-text {
+        font-size: 20px;
+        font-family: 'vox';
+        font-weight: 500;
+        color: #FFFFFF;
+        line-height: normal;
+        width: 100%;
+        text-align: start;
+        padding-left: 2rem;
+        padding-top: 0.5rem;
+
+
+    }
+
+    .row-r {
+        flex-direction: row-reverse;
+    }
+
+
+    .self-img-banner-content-2 {
+        width: 41%;
+        height: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: #000000;
+        border-radius: 10px 0px 0px 10px;
+    }
+
+    .text-s {
+        text-align: start !important;
+    }
+
+    .banner-image-2 {
+        width: 100%;
+        height: 480px;
+        display: inline-block;
+        border-radius: 0px 10px 10px 0px;
+        background: rgba(255, 255, 255, 0.1);
+        object-fit: cover;
+
+
+    }
+
+
+    .custom-img-container {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .custom-img-container::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .custom-img-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to right,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.2) 25%,
+                rgba(0, 0, 0, 0.6) 70%,
+                rgba(0, 0, 0, 0.9) 100%);
+
+        z-index: 1;
+    }
+
+    .custom-img-banner-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .self-img-banner-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow:
+            -30px 0 30px -10px rgba(0, 0, 0, 0.1),
+            -60px 0 30px -10px rgba(0, 0, 0, 0.3),
+            -90px 0 40px -10px rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        overflow: visible;
+    }
+
+    .self-img-banner-content {
+        position: relative;
+        z-index: 2;
+    }
+
+
+
+
+    .custom-img-container-2 {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .custom-img-container-2::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .custom-img-container-2::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to left,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.2) 25%,
+                rgba(0, 0, 0, 0.6) 70%,
+                rgba(0, 0, 0, 0.9) 100%);
+
+        z-index: 1;
+    }
+
+    .custom-img-banner-content-2 {
+        position: relative;
+        z-index: 2;
+    }
+
+    .self-img-banner-content-2::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow:
+            30px 0 30px -10px rgba(0, 0, 0, 0.1),
+            60px 0 30px -10px rgba(0, 0, 0, 0.3),
+            90px 0 40px -10px rgba(0, 0, 0, 0.5);
+
+        z-index: 1;
+        overflow: visible;
+    }
+
+    .self-img-banner-content-2 {
+        position: relative;
+        z-index: 2;
+    }
+
+
+
+
+
+    @media (max-width:769px) {
+        .banner-img-container {
+            flex-direction: column-reverse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .custom-img-container {
+            width: 100%;
+            height: 316px;
+            overflow: visible;
+        }
+
+        .self-img-banner-content {
+            width: 100%;
+            box-shadow: none;
+            background: none;
+        }
+
+        .self-banner-text {
+            display: none;
+        }
+
+        .self-banner-heading {
+            text-align: center !important;
+            z-index: 1;
+        }
+
+        .self-img-banner-content::before {
+            box-shadow: none;
+            background: linear-gradient(to right,
+                    rgba(0, 0, 0, 0.1) 0%,
+                    rgba(0, 0, 0, 0.2) 25%,
+                    rgba(0, 0, 0, 0.6) 70%,
+                    rgba(0, 0, 0, 0.9) 100%);
+
+            z-index: 1;
+        }
+
+    }
+
+    @media (max-width:769px) {
+        .card {
+            margin-bottom: 1px;
+        }
+
+        .banner-img-container {
+            flex-direction: column-reverse;
+            border-radius: 10px;
+        }
+
+        .custom-img-container-2 {
+            width: 100%;
+            height: 316px;
+            overflow: visible;
+        }
+
+        .self-img-banner-content-2 {
+            width: 100%;
+            box-shadow: none;
+            background: none;
+        }
+
+        .self-banner-text {
+            display: none;
+        }
+
+        .self-banner-heading {
+            text-align: center !important;
+            z-index: 1;
+        }
+
+        .self-img-banner-content-2::before {
+            box-shadow: none;
+            z-index: 1;
+        }
+
+        .custom-img-container-2::before {
+
+            bottom: -170px;
+
+        }
+    }
+
+    @media (max-width:450px) {
+        .self-desktop-view {
+            display: none !important;
+        }
+
+        .custom-img-container {
+            height: 401px;
+        }
+
+        .banner-image {
+            position: absolute;
+            scale: 1.5;
+            height: 238px;
+            top: 33%;
+            left: 24%;
+        }
+
+        .self-banner-heading {
+            padding-bottom: 2rem;
+            padding-left: 0rem;
+        }
+
+        .banner-img-container {
+            height: 370px;
+        }
+
+        .self-product-img {
+            height: 390px;
+        }
+    }
+
+    @media (min-width:451px) {
+
+        .self-phone-view {
+            display: none !important;
+        }
+    }
+</style>
+
+<script>
+    
+document.addEventListener('DOMContentLoaded', function() {
+    const paginationNav = document.querySelectorAll('.pagination');
+    if (paginationNav.length > 1) {
+        const productsCount = paginationNav[1].querySelectorAll('.pagination-item')
+        if (productsCount.length < 2) {
+            const paginationList = paginationNav[1].querySelectorAll('.pagination-list');
+            if (paginationList.length) {
+                paginationList[0].classList.add('d-none');
+            }
+        }
+    }
+});
+</script>

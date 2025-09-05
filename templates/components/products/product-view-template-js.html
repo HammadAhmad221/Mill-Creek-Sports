@@ -1,0 +1,555 @@
+<script>
+    var context = JSON.parse({{ jsContext }})
+    var customFields = context.product.custom_fields
+    var productPrice = context.product.price.without_tax.value
+    var layoutNumber = 0
+
+    function generalContent() {
+        var Button = document.querySelector(".help-battery-btn")
+        Button.classList.add("d-none")
+        const removeCyle = document.querySelector(".cycle-value");
+        if (removeCyle) removeCyle.classList.add("d-none");
+        const removeCycleText = document.querySelector(".cycle-text");
+        if (removeCycleText) removeCycleText.classList.add("d-none");
+        var Button = document.querySelector(".help-battery-btn")
+        Button.classList.add("d-none")
+        const badge1 = document.querySelector(".feature-badge-1");
+        const badge2 = document.querySelector(".feature-badge-2");
+        const badge3 = document.querySelector(".feature-badge-3");
+
+        if (badge1) badge1.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_31%20%281%29.svg" alt=""> 45 years of Experience';
+        if (badge2) badge2.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_31%20%282%29.svg" alt=""> Durable';
+        if (badge3) badge3.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_31%20%283%29.svg" alt=""> Built to Last ';
+
+
+        document.querySelectorAll('.grid-item').forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+                // Apply background image style to the grid item
+                item.style.backgroundImage = `url(${img.src})`;
+                item.style.backgroundSize = 'cover';
+                item.style.backgroundPosition = 'center';
+                item.style.backgroundRepeat = 'no-repeat';
+
+                // Remove the img tag
+                img.remove();
+            }
+        });
+
+        inverseContent(".grid-item.item-1")
+
+        // Your existing script for item-2 modifications
+        const gridItem2 = document.querySelector(".grid-item.item-2");
+        if (gridItem2) {
+            // Update background image instead of img src
+            gridItem2.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-116.png?t=1750056672')";
+            gridItem2.classList.add('self-overly-black')
+            // Keep your existing text changes
+            gridItem2.querySelector('.subtitle').textContent = "Long-Term Reliability:";
+            gridItem2.querySelector('.title').textContent = "Power That Doesn't Quit";
+        }
+
+
+        const gridItem3 = document.querySelector(".grid-item.item-3");
+        if (gridItem3) {
+
+            gridItem3.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-104.png?t=1750056660')";
+            gridItem3.classList.add('self-overly-black')
+            gridItem3.querySelector('.subtitle').textContent = "Built to Last, Cycle After Cycle:";
+            gridItem3.querySelector('.title').textContent = "Experience exceptional longevity";
+        }
+
+        const gridItem4 = document.querySelector(".grid-item.item-4");
+        if (gridItem4) {
+
+            gridItem4.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/new-bg-5.png?t=1749710263')";
+            gridItem4.classList.add('self-overly-black')
+            gridItem4.querySelector('.subtitle').textContent = "";
+            gridItem4.querySelector('.title').textContent = "Cutting Edge Technology & Reliability";
+        }
+
+        const generalContent = `
+         <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_18.svg" alt="svg">
+                <span>Lightweight and Long-Lasting</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+
+        <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryhttps://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/fi-493808-1-.png?t=1753963268" alt="svg" height="24px" width="24px">
+                <span>Trusted by Professionals</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+
+        <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi-layout%20%283%29.svg" alt="svg">
+                <span>100% Recycleable</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+
+        <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_12.svg" alt="svg">
+                <span>Built to Last</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+
+        <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi-layout%20%284%29.svg" alt="svg">
+                <span>High Performance</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+
+        <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi-layout%20%285%29.svg" alt="svg">
+                <span>Cutting Edge Technology</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+
+        <tr class="table-row">
+            <td class="feature-cell">
+                <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_12.svg" alt="svg">
+                <span>45 Years of Expertise</span>
+            </td>
+            <td class="proguide-cell">
+                <span class="check-mark">✓</span>
+            </td>
+            <td class="others-cell">
+                <span class="x-mark">✖</span>
+            </td>
+        </tr>
+        `
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const tbody = document.getElementById("comparison-tbody");
+            tbody.innerHTML = generalContent;
+        });
+
+    }
+
+
+    function layout2(){
+        const badge1 = document.querySelector(".feature-badge-1");
+        const badge2 = document.querySelector(".feature-badge-2");
+        const badge3 = document.querySelector(".feature-badge-3");
+
+        if (badge1) badge1.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_21%20%281%29.svg" alt="">Maintenance Free';
+        if (badge2) badge2.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_21%20%282%29.svg" alt=""> 500+ Cycles';
+        if (badge3) badge3.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_21%20%283%29.svg" alt=""> Exceptional Lifespan ';
+
+
+        document.querySelectorAll('.grid-item').forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+                // Apply background image style to the grid item
+                item.style.backgroundImage = `url(${img.src})`;
+                item.style.backgroundSize = 'cover';
+                item.style.backgroundPosition = 'center';
+                item.style.backgroundRepeat = 'no-repeat';
+
+                // Remove the img tag
+                img.remove();
+            }
+        });
+
+        // Your existing script for item-2 modifications
+        const gridItem1 = document.querySelector(".grid-item.item-1");
+        inverseContent('.grid-item.item-1')
+        if (gridItem1) {
+            // Update background image instead of img src
+            gridItem1.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-2-img-1.jpg?t=1750408129')";
+            // Keep your existing text changes
+            gridItem1.querySelector('.subtitle').textContent = "Providing reliable batteries since 1980";
+            gridItem1.querySelector('.title').textContent = "Innovating Power for 45 Years.";
+        }
+
+        const gridItem2 = document.querySelector(".grid-item.item-2");
+        if (gridItem2) {
+            // Update background image instead of img src
+            gridItem2.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-4-img-4.jpg?t=1750407202')";
+
+            // Keep your existing text changes
+            gridItem2.querySelector('.subtitle').textContent = "Maintenance-Free Design:";
+            gridItem2.querySelector('.title').textContent = "Hassle-free operation";
+        }
+
+        const gridItem3 = document.querySelector(".grid-item.item-3");
+        if (gridItem3) {
+
+            gridItem3.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-121.png?t=1750056684')";
+            gridItem3.classList.add('self-overly-black')
+            gridItem3.querySelector('.subtitle').textContent = "Spill-Proof & Leak-Proof:";
+            gridItem3.querySelector('.title').textContent = "Safer handling and flexible mounting";
+        }
+
+        const gridItem4 = document.querySelector(".grid-item.item-4");
+        if (gridItem4) {
+            // Update background image instead of img src
+            gridItem4.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/new-bg-2.png?t=1749710231')";
+            gridItem4.classList.add('self-overly-black')
+            // Keep your existing text changes
+            gridItem4.querySelector('.subtitle').textContent = "Faster Recharging:";
+            gridItem4.querySelector('.title').textContent = "Get back to full power quicker";
+        }
+    }
+    
+    function layout4(){
+         // Update feature badges
+        const badge1 = document.querySelector(".feature-badge-1");
+        const badge2 = document.querySelector(".feature-badge-2");
+        const badge3 = document.querySelector(".feature-badge-3");
+
+        if (badge1) badge1.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_41%20new%20%281%29.svg" alt=""> Timeless & Trustworthy Design';
+        if (badge2) badge2.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_41%20new%20%282%29.svg" alt=""> 100% Recyclable';
+        if (badge3) badge3.classList.add("d-none");
+
+        // Hide cart controls
+        const removeCart = document.querySelector(".custom-increment-box");
+        if (removeCart) removeCart.classList.add("d-none");
+        const removeBtn = document.querySelector(".form-action");
+        if (removeBtn) removeBtn.classList.add("d-none");
+
+        const warrentyDiv = document.querySelector('#self-warrenty-tag')
+        warrentyDiv.innerHTML = '12 Months Free Replacement'
+
+        // Replace warranty section with ONLY WARRANTY ITEM + 2 buttons
+        const warrantySection = document.querySelector(".warranty-with-icon");
+        if (warrantySection) {
+            // Create new container
+            const newContainer = document.createElement("div");
+            newContainer.className = "custom-warranty-buttons-container";
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.className = "custom-buttons-container";
+
+            // === Download Button ===
+            const downloadButton = document.createElement("a");
+            downloadButton.className = "btn-download-spec";
+            // Attempt to find the "__Data Sheet" custom field value
+            const dataSheetField = document.querySelector('[data-custom-field-name="__Data Sheet"] a');
+
+            if (dataSheetField && dataSheetField.href) {
+                downloadButton.href = dataSheetField.href;
+                downloadButton.target = "_blank";
+            } else {
+                // Optional: Hide or disable button if no link found
+                downloadButton.style.display = "none";
+            }
+
+            const downloadImg = document.createElement("img");
+            downloadImg.src = "https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_download%20%281%29.svg";
+            downloadImg.alt = "Download Icon";
+            downloadImg.style.marginRight = "8px";
+
+            downloadButton.addEventListener("mouseenter", function () {
+                downloadImg.src = "https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/white.png?t=1751026342";
+            });
+            downloadButton.addEventListener("mouseleave", function () {
+                downloadImg.src = "https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_download%20%281%29.svg";
+            });
+
+            downloadImg.style.width = '19px';
+            downloadImg.style.height = '19px';
+
+            downloadButton.appendChild(downloadImg);
+            downloadButton.appendChild(document.createTextNode("Download Spec Sheet"));
+
+            // === Contact Button ===
+            const contactButton = document.createElement("a");
+            contactButton.className = "btn-contact-us";
+            contactButton.href = "/contact-us";
+
+            const contactImg = document.createElement("img");
+            contactImg.src = "https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_contact.svg";
+            contactImg.alt = "Contact Icon";
+
+            contactButton.appendChild(contactImg);
+            contactButton.appendChild(document.createTextNode("Contact Us"));
+
+            // Add both buttons to container
+            buttonContainer.append(downloadButton, contactButton);
+
+            // Append to your custom container
+            newContainer.appendChild(buttonContainer);
+
+            const warrantyItem = warrantySection.querySelector(".warranty-item:first-child");
+
+            if (warrantyItem) {
+                const customWrapper = document.createElement("div");
+                customWrapper.className = "custom-warranty-section";
+
+                const clonedItem = warrantyItem.cloneNode(true);
+                clonedItem.classList.add("new-warranty-override");
+                clonedItem.style.position = "";
+
+
+                const textSpan = clonedItem.querySelector("span");
+                if (textSpan) {
+                    textSpan.textContent = "This is your custom warranty message.";
+                }
+
+                const img = clonedItem.querySelector("img");
+                if (img) {
+                    img.removeAttribute("style"); // Remove any existing styles
+                    // Change the image source here
+                    img.src = "https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/4-layout-warranty.png?t=1750407946";
+
+                    img.style.padding = "0";
+
+                    const subtitle = clonedItem.querySelector(".warranty-subtitle");
+                    subtitle.style.textAlign = "start";
+
+                    // (Optional: if you want to move the img before textSpan as you had earlier)
+                    if (textSpan) {
+                        img.remove();
+                        textSpan.parentNode.insertBefore(img, textSpan);
+                    }
+                }
+
+                customWrapper.appendChild(clonedItem);
+                newContainer.appendChild(customWrapper);
+            }
+
+            warrantySection.replaceWith(newContainer);
+        }
+
+        const removeKit = document.querySelector(".build-kit-section")
+        removeKit.classList.add("d-none");
+
+        var Button = document.querySelector(".help-battery-btn")
+        Button.classList.add("d-none")
+
+        //images 
+        document.querySelectorAll('.grid-item').forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+                // Apply background image style to the grid item
+                item.style.backgroundImage = `url(${img.src})`;
+                item.style.backgroundSize = 'cover';
+                item.style.backgroundPosition = 'center';
+                item.style.backgroundRepeat = 'no-repeat';
+
+                // Remove the img tag
+                img.remove();
+            }
+        });
+        const gridItem1 = document.querySelector(".grid-item.item-1");
+        inverseContent('.grid-item.item-1')
+        if (gridItem1) {
+
+            gridItem1.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-115.png?t=1750056650')";
+
+            gridItem1.querySelector('.subtitle').textContent = "Engineered for Extreme Heat & Cold";
+            gridItem1.querySelector('.title').textContent = " Wide Temperature Range";
+        }
+
+        const gridItem2 = document.querySelector(".grid-item.item-2")
+        inverseContent('.grid-item.item-2')
+        if (gridItem2) {
+
+            gridItem2.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-4-img-2.jpg?t=1750407204')";
+            gridItem1.classList.add('self-overly-black')
+            gridItem2.querySelector('.subtitle').textContent = "Low Self Discharge, Ready When You Are "
+            gridItem2.querySelector('.title').textContent = "Exceptional Charge Retention"
+        }
+
+        const gridItem3 = document.querySelector(".grid-item.item-3")
+        inverseContent('.grid-item.item-3')
+        if (gridItem3) {
+
+            gridItem3.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-119.png?t=1750056640')"
+            gridItem3.classList.add('self-overly-black')
+            gridItem3.querySelector('.subtitle').textContent = "Long-Term Reliability:"
+            gridItem3.querySelector('.title').textContent = "Power That Doesn't Quit"
+        }
+
+        const gridItem4 = document.querySelector(".grid-item.item-4")
+        inverseContent('.grid-item.item-4')
+        if (gridItem4) {
+            // Update background image instead of img src
+            gridItem4.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-4-img-4.jpg?t=1750407202')";
+
+            // Keep your existing text changes
+            gridItem4.querySelector('.subtitle').textContent = "Providing reliable batteries since 1980:";
+            gridItem4.querySelector('.title').textContent = "Innovating Power for 45 Years.";
+        }
+
+
+        const padding = document.querySelector(".productView-description")
+        padding.classList.add('p-0')
+    }
+    
+    function layout5(){
+        const warrentyDiv = document.querySelector('#self-warrenty-tag')
+        const helpBtn = document.querySelector('.help-btn-container')
+        if(helpBtn){
+            helpBtn.classList.add('d-none')
+        }
+        const prDetail = document.querySelector('.self-product-detail')
+        if(prDetail){
+            prDetail.classList.add('justify-content-space-btw-mb')
+        }
+        warrentyDiv.innerHTML = 'Best Price Guaranteed'
+        const browseButton =document.querySelector('.browse-specs')
+        if(browseButton){
+            browseButton.classList.add('d-none')
+        }
+         const badge1 = document.querySelector(".feature-badge-1");
+        const badge2 = document.querySelector(".feature-badge-2");
+        const badge3 = document.querySelector(".feature-badge-3");
+
+        if (badge1) badge1.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_31%20%281%29.svg" alt=""> 45 years of Experience';
+        if (badge2) badge2.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_31%20%282%29.svg" alt=""> Durable';
+        if (badge3) badge3.innerHTML = '<img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/fi_31%20%283%29.svg" alt=""> Built to Last ';
+
+        const cycleValue = document.querySelector('.cycle-value');
+        const cycleText = document.querySelector('.cycle-text');
+        if(cycleValue&&cycleText){
+            cycleValue.classList.add('d-none');
+            cycleText.classList.add('d-none');
+        }
+
+         const warrantyItem = document.querySelector(".warranty-item:first-child");
+         const buildKitSection = document.querySelector('.build-kit-section')
+         if(warrantyItem && buildKitSection){
+            warrantyItem.classList.add('d-none');
+            buildKitSection.classList.add('d-none')
+         }
+          
+          document.querySelectorAll('.grid-item').forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+                // Apply background image style to the grid item
+                item.style.backgroundImage = `url(${img.src})`;
+                item.style.backgroundSize = 'cover';
+                item.style.backgroundPosition = 'center';
+                item.style.backgroundRepeat = 'no-repeat';
+
+                // Remove the img tag
+                img.remove();
+            }
+        });
+
+        inverseContent(".grid-item.item-1")
+
+        // Your existing script for item-2 modifications
+        const gridItem2 = document.querySelector(".grid-item.item-2");
+        if (gridItem2) {
+            // Update background image instead of img src
+            gridItem2.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-116.png?t=1750056672')";
+            gridItem2.classList.add('self-overly-black')
+            // Keep your existing text changes
+            gridItem2.querySelector('.subtitle').textContent = "Long-Term Reliability:";
+            gridItem2.querySelector('.title').textContent = "Power That Doesn't Quit";
+        }
+
+
+        const gridItem3 = document.querySelector(".grid-item.item-3");
+        if (gridItem3) {
+
+            gridItem3.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-104.png?t=1750056660')";
+            gridItem3.classList.add('self-overly-black')
+            gridItem3.querySelector('.subtitle').textContent = "Built to Last, Cycle After Cycle:";
+            gridItem3.querySelector('.title').textContent = "Experience exceptional longevity";
+        }
+
+        const gridItem4 = document.querySelector(".grid-item.item-4");
+        if (gridItem4) {
+
+            gridItem4.style.backgroundImage = "url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/new-bg-5.png?t=1749710263')";
+            gridItem4.classList.add('self-overly-black')
+            gridItem4.querySelector('.subtitle').textContent = "";
+            gridItem4.querySelector('.title').textContent = "Cutting Edge Technology & Reliability";
+        }
+    }
+    
+    function layout1(){
+          inverseContent('.grid-item.item-1')
+        const gridItem4 = document.querySelector(".grid-item.item-4");
+        if (gridItem4) {
+            gridItem4.classList.add('self-overly-black')
+        }
+    }
+
+    function cycleValue() {
+        const valuediv = document.querySelector('.cycle-value')
+        valuediv.innerHTML = `$${(productPrice / 3000)?.toFixed(2)}`
+    }
+
+    cycleValue()
+
+    function inverseContent(className) {
+        const gridItem1 = document.querySelector(className);
+        if (gridItem1) {
+            const div = gridItem1.querySelector('div')
+            div.classList.add('self-flex-column-reverse-md')
+        }
+    }
+    for (let i = 0; i < customFields.length; i++) {
+        if (customFields[i].name === 'layout_number') {
+            layoutNumber = customFields[i].value
+        }
+    }
+    if (layoutNumber === "1") {
+      layout1()
+    }
+
+    else if (layoutNumber === '2') {
+        layout2();
+    }
+    else if (layoutNumber === "3") {
+        generalContent();
+    }
+    else if (layoutNumber === "4") {
+       layout4();
+    }
+    else if (layoutNumber === "5") {
+       layout5();
+    }
+
+    else {
+        generalContent()
+
+    }
+</script>

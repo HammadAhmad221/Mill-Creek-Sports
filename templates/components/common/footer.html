@@ -1,0 +1,748 @@
+{{> components/halothemes/banners/halo-topBottom-banner position = "bottom"}}
+
+<footer class="footer{{#if theme_settings.footer_style '==' 'style_2'}} footer--style2{{else}} footer--style1{{/if}}" role="contentinfo">
+    {{> components/halothemes/footer/halo-brands-slider}}
+    <div class="container{{#if theme_settings.halo_homepage_layout_2}} container-custom{{/if}}">
+        <section class="footer-info">
+            {{#if settings.address}}
+            <article class="footer-info-col footer-info-col--small self-info-col" data-section-type="storeInfo">
+                {{#if theme_settings.footer_style '==' 'style_2'}}
+                    <div class="footer-info__logo_txt">
+                        {{settings.store_name}}
+                    </div>
+                {{/if}}
+                {{#unless theme_settings.footer_style '==' 'style_2'}}
+                    {{#if theme_settings.footer_info_logo}}
+                        <div class="footer-info__logo">
+                            <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{theme_settings.footer_info_logo}}" alt="Logo">
+                        </div>
+                    {{/if}}
+                {{/unless}}
+                <div class="self-heading">PRO-GUIDE BATTERIES</div>
+                <address>{{nl2br settings.address}}</address>
+
+                {{#if settings.phone_number}}
+                    <p class="footer-info__phone">
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-phone-2"></use></svg>
+                        <a href="tel:{{strReplace settings.phone_number "-" ""}}">
+                            {{lang 'footer.call_us2' phone_number=settings.phone_number}}
+
+                        </a>
+                    </p>
+                {{/if}}
+
+                {{#if theme_settings.info_email_support}}
+                    <p class="footer-info__mail self-mail-spacing" >
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail"></use></svg>
+                        <a href="mailto:{{theme_settings.info_email_support}}">
+                            {{lang 'footer.email'}} 
+                            <!-- {{theme_settings.info_email_support}} -->
+                             support@proguideBatteries.com
+                        </a>
+                    </p>
+                {{/if}}
+            </article>
+            {{/if}}
+
+            <article class="footer-info-col footer-info-col--small  for_desktop " data-section-type="footer-categories">
+                <h3 class="footer-info-heading footer-info-heading--toggle b-n">Shop</h3>
+                <ul class="footer-info-list" style="display: block;">
+                    {{#each categories}}
+                        {{#if children}}
+                            {{#each children}}
+                                <li>
+                                    <a href="{{url}}">{{name}}</a>
+                                </li>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </article>
+
+            <article class="footer-info-col footer-info-col--small padding-l for_desktop" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading footer-info-heading--toggle b-n ">About</h3>
+                <ul class="footer-info-list" style="display: block;">
+                    {{#if settings.gift_certificates_enabled}}
+                        <li>
+                            <a href="{{urls.gift_certificate.purchase}}"
+                               aria-label="{{lang 'common.gift_cert'}}"
+                            >
+                                {{lang 'common.gift_cert'}}
+                            </a>
+                        </li>
+                    {{/if}}
+                    {{#each pages}}
+                        {{#if name '!=' 'Custom Tab'}}
+                            <li>
+                                <a href="{{url}}" aria-label="{{name}}">{{name}}</a>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </article>
+        <div class="self-footer-info-container for_phone">
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-categories">
+                <h3 class="footer-info-heading footer-info-heading--toggle b-n">Shop</h3>
+                <ul class="footer-info-list" style="display: block;">
+                    {{#each categories}}
+                        {{#if children}}
+                            {{#each children}}
+                                <li>
+                                    <a href="{{url}}">{{name}}</a>
+                                </li>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </article>
+
+            <article class="footer-info-col footer-info-col--small padding-l" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading footer-info-heading--toggle b-n ">About</h3>
+                <ul class="footer-info-list" style="display: block;">
+                    {{#if settings.gift_certificates_enabled}}
+                        <li>
+                            <a href="{{urls.gift_certificate.purchase}}"
+                               aria-label="{{lang 'common.gift_cert'}}"
+                            >
+                                {{lang 'common.gift_cert'}}
+                            </a>
+                        </li>
+                    {{/if}}
+                    {{#each pages}}
+                        {{#if name '!=' 'Custom Tab'}}
+                            <li>
+                                <a href="{{url}}" aria-label="{{name}}">{{name}}</a>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </article>
+        </div>
+            <article class="footer-info-col footer-info-col--small" data-section-type="newsletterSubscription">
+                {{#if settings.show_newsletter_box}}
+                    {{#if theme_settings.halo_subscription_form}}
+                        {{> components/common/subscription-form}}
+                    {{/if}}
+                {{/if}}
+                {{#if theme_settings.footer_style '==' 'style_2'}}
+                    <!-- {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}} -->
+                        {{#if theme_settings.show_social-links}}
+                            <div class="footer-info-col--social">
+                                {{> components/common/social-links}}
+                            </div>
+                        {{/if}}
+                    <!-- {{/if}} -->
+                {{/if}}
+            </article>
+
+            <article class="footer-info-col footer-info-col--small footer-logo-space">
+                <a href="/" class="header-logo__link">
+                    <div class="header-logo-image-containersssss">
+                        <img class="header-logo-image footer-logo" src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/new-proguide-black.png?t=1753700357" alt="Pro-Guide Batteries" title="Pro-Guide Batteries">
+                    </div>
+                </a>
+            </article>
+
+            {{#if theme_settings.footer_style '==' 'style_2'}}
+                <article class="footer-info-col" data-section-type="footer-logoRight">
+                    {{#if theme_settings.footer_info_logo}}
+                        <div class="footer-info__logo">
+                            <img class="lazyload" src="{{cdn 'img/loading.svg'}}" data-src="https://cdn11.bigcommerce.com/s-{{settings.store_hash}}/product_images/uploaded_images/{{theme_settings.footer_info_logo}}" alt="Logo">
+                        </div>
+                    {{/if}}
+                </article>
+            {{/if}}
+        </section>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container footer-bottom__container{{#if theme_settings.halo_homepage_layout_2}} container-custom{{/if}}{{#if theme_settings.show_copyright_footer_2}} has-item-center{{/if}}">
+            <div class="footer-bottom__left">
+                {{#if theme_settings.show_copyright_footer}}
+                    <div class="footer-copyright">
+                        <p class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}}{{lang 'footer.dot'}}</p>
+                    </div>
+                {{/if}}
+                {{#if theme_settings.show_powered_by}}
+                    <div class="footer-copyright">
+                        <!-- <p class="powered-by">{{theme_settings.powered_by-text1}} <a href="{{theme_settings.powered_by-link}}" rel="nofollow">{{theme_settings.powered_by-text2}}{{lang 'footer.dot'}}</a><a href="{{theme_settings.site_info-link}}">{{theme_settings.site_info-text}}</a></p> -->
+                    </div>
+                {{/if}}
+            </div>
+            {{#if theme_settings.show_copyright_footer_2}}
+                <div class="footer-bottom__center">
+                    <div class="footer-copyright">
+                        <p class="powered-by">{{theme_settings.site_info-text-2}} <a href="{{theme_settings.site_info-link-2}}">{{theme_settings.site_info-text-3}}</a></p>
+                    </div>
+                </div>
+            {{/if}}
+            <div class="footer-bottom__right">
+                {{#if settings.paypal_commerce_credit_message}}
+                <div class="footer-copyright">
+                    <p class="paypal-credit">{{nl2br settings.paypal_commerce_credit_message}}</p>
+                </div>
+                {{/if}}
+                {{#if theme_settings.show_payments_footer}}
+                    {{> components/common/payment-icons}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{{region name="ssl_site_seal--global"}}}
+
+</footer>
+{{#unless theme_settings.enable_recently_viewed_products }}
+    {{#if theme_settings.halo-back-to-top}}
+        <div id="haloBackToTop" class="halo-back-to-top">
+            <a href="#">
+                <svg class="icon"><use xlink:href="#icon-keyboard-arrow-down"></use></svg>
+            </a>
+        </div>
+    {{/if }}
+{{/unless}}
+<style>
+    #sideBlock_cart{
+        display: none !important;
+    }
+    .productView-description .tabs .tab + .tab a:before {
+        content: '' !important;
+    }
+    .p-0{
+        padding: 0%;
+    }
+
+    .pe-0{
+        padding-right: 0%;
+    }
+
+    .ps-0{
+        padding-left: 0%;
+    }
+
+    .help-contact {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .help-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+
+        @media (max-width: 1200px) {
+            width: 30px;
+            height: 24px;
+        }
+    }
+
+    .help-phone {
+        color: #EC3B26;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+
+        @media (max-width: 1200px) {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+
+    .self-footer-info-container{
+        display: flex;
+    }
+    
+    
+    .footer-info-heading--toggle::before,
+    .footer-info-heading--toggle::after {
+      content: none !important;
+      display: none !important;
+    
+    }
+
+    .b-n{
+        border: none !important;
+    }
+
+    #sideBlock_cart{
+        display: none;
+    }
+
+    .productView-description .tabs .tab .tab-title {
+        padding: 0 1rem !important;
+        font-size: 20px !important;
+        font-weight: 400;
+        font-family:  Helvetica;
+        color: #231F20;
+    }
+    @media(max-width:426px){
+         .productView-description .tabs .tab .tab-title {
+        padding: 0.8rem 1.2rem !important;
+        font-size: 20px !important;
+        font-weight: 400;
+        font-family:  Helvetica;
+        color: #231F20;
+    }
+    }
+     @media(max-width:375px){
+         .productView-description .tabs .tab .tab-title {
+        padding: 0.8rem 1.2rem !important;
+        
+    }
+}
+
+ @media(max-width:425px){
+        .nav-help-phn{
+            font-size: 10px !important;
+        }
+    }
+
+    .productView-description .tabs{
+        font-size: 1.25rem;
+    }
+
+    .grid-item {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        color: white;
+        overflow: hidden;
+    }
+
+    .grid-item .title,
+    .grid-item .subtitle {
+        position: relative;
+        z-index: 2;
+    }
+
+@media (max-width: 570px) {
+    .productView-nav > .slick-prev{
+        display: none !important;
+    }
+
+    .productView-nav > .slick-next{
+        display: none !important;
+    }
+
+    .navPages-list{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1199px) {
+      .navPages-list{
+        flex-direction: column;
+    }
+
+    .self-replacement{
+            margin-bottom: 0% !important;
+    }
+
+    .self-flex-column-reverse-md{
+        flex-direction: column-reverse !important;
+    }
+    .self-flex-column-reverse-md .subtitle{
+        margin-top: 0% !important;
+    }   
+    .self-flex-column-reverse-md .title{
+        margin-top: 6% !important;
+                margin-bottom: 2%;
+    }
+
+}
+
+/* .productView-thumbnails > .slick-prev{
+    display: none !important;
+} */
+
+/* .productView-thumbnails > .slick-next{
+    display: none !important;
+} */
+
+.cycle-value{
+    margin-left: 5px;
+    font-size: 16px;
+    /* font-family: 'helvatic-regular'; */
+    font-weight: 500;
+    color: #EC3B26;
+    display: none;
+}
+
+.cycle-text{
+    font-size: 16px;
+    /* font-family: 'helvetic-regular'; */
+    font-weight: 500;
+    color: #EC3B26;
+    display: none;
+}
+
+.best-price {
+    display: none;
+}
+
+@media (max-width:391px) {
+    
+.productView-price .price-section .price{
+    font-size: 28px;
+ }
+ .best-price{
+    font-size: 11px;
+    padding: 5px 5px;
+    gap: 3px;
+ }
+}
+
+@media (min-width:1440px) {
+  #form-action-addToCart{
+    width: 115% !important;
+  }
+    
+}
+
+
+/* .productView-img-container img {
+    margin: 2%;
+} */
+
+@media (max-width: 425px) {
+    .productView-image{
+        height: 250px;
+    }
+
+    .productView-img-container img {
+        height: 240.19px !important;
+        width: 360px !important;
+    }
+
+    .productView-thumbnail img {
+        height: 77.77px;
+        width: 70px !important;
+    }
+
+    .productView-thumbnails > .slick-prev{
+    display: block !important;
+}
+
+.productView-thumbnails > .slick-next{
+    display: block !important;
+}
+}
+
+
+
+.self-custom-product .cycle-text {
+    display: block;
+}
+
+.self-custom-product .cycle-value {
+    display: block;
+}
+
+.self-custom-product .best-price{
+    display: block;
+}
+
+.self-heading{
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'helvetic-regular';
+    color: white;
+    padding-bottom: 10%;
+}
+
+.footer-info-heading{
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    padding-bottom: 7%;
+    color: rgba(255, 255, 255, 0.75);
+;
+}
+
+.self-news-letter{
+    margin-bottom: 0% !important;
+    margin-top: 0%;
+}
+
+.self-news-letter-button{
+    margin-left: 0% !important;
+    background-color: white;
+    padding: 17px 20px 16px;
+    border-radius: 0%;
+    border-color: white;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 42'%3E%3Cpath d='M1.45679 1.00746147l21 20.02482143L1.50885 41.0074615' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none' fill-rule='evenodd' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.self-cycle-div{
+    padding-left: 1% ; 
+    padding-top: 1%; 
+    display: ruby;
+}
+
+@media (max-width: 570px) {
+    .self-news-letter-button{
+        margin-top: 0%;
+    }
+
+    .best-price-tooltip {
+        left: 11%;
+    }
+
+      .cycle-value{
+    font-size: 14px;
+}
+    .productView-description .tabs .tab .tab-title {
+        padding: 0.8rem 1.2rem !important;
+        font-size: 20px !important;
+        font-weight: 400;
+        font-family: Helvetica;
+        color: #231F20;
+    }
+
+.nav-help-phn {
+    font-size: 14.26px;
+}
+
+.body{
+    margin-bottom: 0rem;
+}
+
+.productView-description{
+    margin: 0px -12px 10px -12px;
+    padding: 20px 15px 20px 15px;
+    background-color: #F6F6F6;
+}
+
+.cycle-text{
+    font-size: 12px;
+}
+
+ .new-warranty-override {
+        width: 100% !important
+    }
+
+    .self-cycle-div{
+        padding-left: 0%;
+    }
+
+    .productView-image .slick-slide{
+    height: 240.19px;
+}
+
+.productView-title-hasPrevNext{
+    padding-right: 0%;
+}
+}
+
+@media (min-width: 1200px) {
+    .footer-info-col[data-section-type="newsletterSubscription"] {
+        width: 21.77777777777778%;
+    }
+}
+
+@media (max-width: 360px) {
+    .productView-price .price-section .price {
+        font-size: 22px;
+    }
+
+          .cycle-value{
+    font-size: 14px;
+}
+
+.cycle-text{
+    font-size: 10px;
+}
+}
+
+.self-footer-logo{
+    height: 10rem;
+}
+
+.self-display-flex{
+    display: flex;
+}
+
+.self-flex-column{
+    flex-direction: column;
+}
+
+.self-justify-content-normal{
+    justify-content: normal;
+}
+
+/* .productView-img-container img{
+    width: 584px;
+    height: 338.33px;
+} */
+
+.self-nav{
+        display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+.tab{
+    line-height: 100%;
+}
+
+.self-ps-best-price{
+    padding-left: 5%;
+}
+
+@media (max-width: 860px) {
+    .self-ps-best-price{
+        padding-left: 2%;
+    }
+}
+
+@media (max-width: 840px) {
+    .productView-price .price-section .price{
+        font-size: 25px
+    }
+
+    .cycle-value{
+        font-size: 14px;
+    }
+
+    .cycle-text{
+        font-size: 12px;
+    }
+
+    .best-price{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .best-price{
+        font-size: 10px;
+    }    
+}
+
+.reviews-container{
+    padding-top: 2rem !important;
+    padding-block: 0% !important;
+}
+
+.navPages-action{
+    padding: 12px 10px;
+}
+.breadcrumb{
+    margin-right: 1%;
+}
+
+.self-ps-best-price{
+    display: none;
+}
+
+.self-custom-product .self-ps-best-price{
+    display: block;
+}
+
+.sticky-price .self-ps-best-price{
+    display: none;
+}
+
+.self-overly-black::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    pointer-events: none;
+    z-index: 1;
+}
+
+.self-display-flex {
+    position: relative; /* Ensure text stays above overlay */
+    z-index: 2;
+}
+
+
+
+.slick-list{
+    height: 100%;
+}
+
+.slick-track{
+    height: 100%;
+}
+
+.productView-img-container{
+    height: 100%;
+}
+
+/* last seeen widgets  */
+.lst-seen-widget .is-show-widget{
+    display: none;
+}
+
+.header{
+    padding-bottom: 0%;
+}
+
+.jdgm-star{
+    padding: 0 6px 0 0 !important;
+}
+
+.jdgm-widget.jdgm-widget{
+    padding-bottom: 5%;
+}
+.navPages-item>.navPages-action{
+    font-weight: 600;
+}
+
+@media (max-width: 800px) {
+    .cart-item-block.cart-item-title {
+        padding-left: 2%;
+        padding-top: 0;
+    }
+}
+.padding-l{
+    padding-left: 0px;
+}
+
+
+@media (min-width: 768px) {
+
+.for_phone{
+    display: none;
+}
+
+}
+
+@media (max-width: 768px) {
+
+.for_desktop{
+    display: none;
+}
+
+}
+
+
+
+
+    @media (min-width:1280px) {
+        .footer-logo-space{
+            margin: 7% 1% 1% 3%;
+        }
+        /* .self-mail-spacing{
+            width: 115% !important;
+        } */
+        .self-info-col{
+            padding: 0px 2px 0px 1px;
+        }
+    }
+    
+    @media (max-width: 1340px){
+        .permormance-text p{
+            font-size: 12px !important;
+        }
+    }
+    
+
+</style>

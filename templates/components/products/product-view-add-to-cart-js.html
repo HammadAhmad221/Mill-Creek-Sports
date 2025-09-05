@@ -1,0 +1,228 @@
+<script>
+    var context = JSON.parse({{ jsContext }})
+    let cartId = context.cartId;
+    var redirect = true
+    let cart = []
+    let graphqlQuery = {
+        query: `
+            mutation AddToCart($cartId: String!, $lineItems: [CartLineItemInput!]!) {
+                cart {
+                    addCartLineItems(
+                    input: {
+                        cartEntityId: $cartId
+                        data: {
+                            lineItems: $lineItems
+                        }
+                    }
+                    ) {
+                        cart {
+                            entityId
+                        }
+                    }
+                }
+            }`,
+            variables: {
+                cartId: cartId || '',
+                lineItems: []
+            }
+    };
+
+    var activecrum = document.querySelector('.breadcrumb.is-active span');
+    if (activecrum?.innerHTML?.length > 40) {
+        const [first, second, third, ...rest] = activecrum.innerHTML.split(' ')
+        activecrum.innerHTML = `${first} ${second} ${third}`
+    }
+
+    async function getCart() {
+        try {
+            const response = await fetch('/api/storefront/carts/', {
+                credentials: 'include'
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const cart = await response.json();
+            cartId = cart?.[0].id; // Update the cartId with the fetched cart ID
+            return cart
+        } catch (error) {
+            console.error('Error fetching cart:', error);
+            return null; // Return null in case of error
+        }
+    }
+
+
+    async function addItemsToCart(query) {
+        try {
+            const response = await fetch('/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${context.token}`
+                },
+                body: JSON.stringify(query)
+            });
+            const data = await response.json();
+            return data
+        } catch (error) {
+            console.error('Error adding items to cart:', error);
+            throw error;
+        }
+    }
+
+
+    const addToCartButton = document.querySelector('#form-action-addToCart');
+    addToCartButton.addEventListener('click', async (e) => {
+        const quantity = document.querySelector('.custom-increment-input')
+        let qty = parseInt(quantity.value)
+        console.log(cartId, qty, redirect, 'addToCart')
+        if(!cartId && qty > 1 && redirect){
+                graphqlQuery.variables.lineItems = [{productEntityId: context.productId, quantity: qty - 1}]
+                
+                setTimeout(async () => {
+                    if (!cartId) {
+                        cart = await getCart()
+                        graphqlQuery.variables.cartId = cart?.[0]?.id; // update payload
+                    }
+                    await addItemsToCart(graphqlQuery)
+        
+                    window.location.href = '/cart.php';
+                }, 2000)
+        }
+        else if(cartId && redirect){
+            e.stopPropagation()
+            e.preventDefault()
+            console.log(qty, 'else if')
+            graphqlQuery.variables.lineItems = [{productEntityId: context.productId, quantity: qty}]
+
+            await addItemsToCart(graphqlQuery)
+            window.location.href = '/cart.php';
+        }else{
+            setTimeout(()=>{
+                window.location.href = '/cart.php';
+            },1500)
+        }
+    });
+
+    const cartButton = document.querySelector('.navUser-item.navUser-item--cart');
+
+    function putSelectedKitInCart() {
+        const kits = document.querySelectorAll('.kit-item')
+        const checkedProduct = []
+        kits.forEach(kit => {
+            const input = kit.querySelector('input')
+            if (input.checked) {
+                checkedProduct.push({ productEntityId: parseInt(kit.dataset.productId), quantity: 1 })
+            }
+        })
+        return checkedProduct
+    }
+
+    async function kitAddToCart() {
+        const idsArray = putSelectedKitInCart()
+        // graphqlQuery.variables.cartId = cartId
+        graphqlQuery.variables.lineItems = idsArray
+        if (idsArray.length > 0) {
+            redirect = false
+          
+            const addToCart = document.getElementById('form-action-addToCart')
+
+            const cartQuantityElement = document.querySelector('.countPill.cart-quantity');
+            let newCart = false
+            const quantity = document.querySelector('.custom-increment-input')
+            if (!cartId) {
+                console.log("CartId is not present – triggering native add to cart");
+                addToCart?.click();
+                newCart = true
+                if(quantity.value > 1){
+                    graphqlQuery.variables.lineItems.push({ productEntityId: context.productId, quantity: parseInt(quantity.value - 1) })
+                }
+            } else {
+                cart = await getCart()
+                let productInCart = false
+                cart?.[0]?.lineItems?.physicalItems.forEach((item) => {
+                    if (item.productId === context.productId) {
+                        productInCart = true
+                    }
+                })
+
+                if (!productInCart) {
+                    graphqlQuery.variables.lineItems.push({ productEntityId: context.productId, quantity: parseInt(quantity.value) })
+                }
+            }
+
+            setTimeout(async () => {
+                if (newCart) {
+                    cart = await getCart()
+                    graphqlQuery.variables.cartId = cart?.[0]?.id; // update payload
+                }
+                await addItemsToCart(graphqlQuery)
+
+                const kits = document.querySelectorAll('.kit-item')
+                const checkedProduct = []
+                kits.forEach(kit => {
+                    const input = kit.querySelector('input')
+                    input.checked = false
+                })
+                document.querySelector('#self-kit-addtocart').value = 'Products Added To Cart';
+
+                setTimeout(() => {
+                    document.querySelector('#self-kit-addtocart').value = 'Add To Cart';
+                }, 3000);
+
+
+                cartQuantityElement.innerHTML = parseInt(cartQuantityElement.innerHTML) + graphqlQuery.variables.lineItems.length;
+
+                window.location.href = '/cart.php';
+            }, newCart ? 2000 : 0)
+
+        } else {
+            const errorDiv = document.querySelector('#self-kit-error')
+            errorDiv.style.display = 'block'
+            setTimeout(() => {
+                errorDiv.style.display = 'none'
+            }, 5000);
+        }
+    }
+
+    function tabsToggle() {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const isOpen = tab.className.includes('is-active')
+                tab.querySelector('.self-tab-icon').remove()
+                const span = document.createElement('span')
+                const a = tab.querySelector('a')
+                span.className = 'self-tab-icon'
+                if (isOpen) {
+                    tab.classList.remove('is-active')
+                    span.innerHTML = '<img class="plus-icon-img" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon" />'
+                } else {
+                    tab.classList.add('is-active')
+                    span.innerHTML = '<img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/img-1305.png?t=1751108673" alt="minus icon" width="15px" />'
+                }
+                a.append(span)
+            })
+        })
+    }
+    // Add this JavaScript to your page
+    document.addEventListener('DOMContentLoaded', function () {
+        tabsToggle()
+
+        const bestPrice = document.querySelector(".best-price");
+
+        if (bestPrice) {
+            bestPrice.addEventListener("click", function () {
+                // Only run in mobile view
+                if (window.innerWidth <= 480) {
+                    // Add class to show tooltip
+                    bestPrice.classList.add("active");
+
+                    // Remove after 5 seconds
+                    setTimeout(() => {
+                        bestPrice.classList.remove("active");
+                    }, 5000);
+                }
+            });
+        }
+    });
+</script>

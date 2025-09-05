@@ -1,0 +1,288 @@
+<div class="custom-rating-cart-section for-desktop" style="border-bottom:1px solid rgba(197, 197, 197, 1) ;">
+
+    <div class="custom-rating-cart flex-column">
+        <div class="stars">
+            <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/rating-stars.svg" alt="">
+        </div>
+        <span class="custom-rating">Rated 4.88 out of 5</span>
+    </div>
+
+
+    <div class="customer-rating-cart flex-column">
+        <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Frame%2048096879.svg" alt="" width="90px"
+            height="16px" style="text-align: center;">
+        <span class="custom-rating">24k+ happy customers</span>
+    </div>
+
+</div>
+
+
+<div class="cart-details">
+    <h3 class="cart-summary-title">Your Cart Summary</h3>
+</div>
+
+<ul class="cart-totals">
+     <li class="">
+        <div class="cart-total-label cart-price-p">
+            <span class="self-cart-price">Item Total</span>
+        </div>
+        <div class="cart-total-value cart-subtotal-value cart-price-p">
+            {{#or customer (unless settings.hide_price_from_guests)}}
+            <span class="self-cart-price">{{cart.sub_total.formatted}}</span>
+            {{else}}
+            {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+    </li>
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.checkout.subtotal'}}</strong>
+        </div>
+        <div class="cart-total-value cart-subtotal-value">
+            {{#or customer (unless settings.hide_price_from_guests)}}
+            <span>{{cart.sub_total.formatted}}</span>
+            {{else}}
+            {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+    </li>
+    {{#if cart.gift_wrapping_cost.amount}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.checkout.gift_wrapping'}}:</strong>
+        </div>
+        <div class="cart-total-value">
+            <span>{{cart.gift_wrapping_cost.formatted}}</span>
+        </div>
+    </li>
+    {{/if}}
+    {{#if cart.fees}}
+    {{#each cart.fees}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{display_name}}:</strong>
+        </div>
+        <div class="cart-total-value">
+            <span>{{cost.formatted}}</span>
+        </div>
+    </li>
+    {{/each}}
+    {{/if}}
+    {{#if cart.shipping_handling.show_estimator}}
+    <!-- <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.checkout.shipping'}}:</strong>
+        </div>
+        {{> components/cart/shipping-estimator cart.shipping_handling}}
+    </li> -->
+    {{/if}}
+    {{#each cart.taxes}}
+    {{#unless included}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{name}}:</strong>
+        </div>
+        <div class="cart-total-value">
+            <span>{{cost.formatted}}</span>
+        </div>
+    </li>
+    {{/unless}}
+    {{/each}}
+    {{#if cart.discount }}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.discount'}}:</strong>
+        </div>
+        <div class="cart-total-value">
+            {{cart.discount.formatted}}
+        </div>
+    </li>
+    {{/if}}
+    <!-- {{#if cart.coupons}}
+    {{#each cart.coupons}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.coupons.code_label' code=code}}</strong>
+            <div>
+                <a href="{{remove_url}}">{{lang 'cart.coupons.remove'}}</a>
+            </div>
+        </div>
+        <div class="cart-total-value">
+            <span>{{discount.formatted}}</span>
+        </div>
+    </li>
+    {{/each}}
+    {{else}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.coupon_code'}}:</strong>
+        </div>
+        {{> components/cart/coupon-input}}
+    </li>
+    {{/if}} -->
+    {{#if settings.gift_certificates_enabled}}
+    {{#each cart.gift_certificates}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.gift_certificates.code_label' code=code}}</strong>
+            <span>
+                {{remaining.formatted}} | <a href="{{remove_url}}">{{lang 'cart.gift_certificates.remove'}}</a>
+            </span>
+        </div>
+        <div class="cart-total-value">
+            {{used.formatted}}
+        </div>
+    </li>
+    {{/each}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.gift_certificates.gift_certificate'}}:</strong>
+        </div>
+        {{> components/cart/gift-certificate-input}}
+    </li>
+    {{/if}}
+    <li class="cart-total">
+        <div class="cart-total-label cart-price-p2 " style="font-size: 20px;">
+            <span class="cart-price-total cart-price-p2">Total</span>
+        </div>
+        <div class="cart-total-value cart-total-grandTotal cart-price-p2">
+            {{#or customer (unless settings.hide_price_from_guests)}}
+            <span class="cart-price-p2 self-total-price">{{cart.grand_total.formatted}}</span>
+            {{else}}
+            {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+        <span class="cart-total-label price-text cart-price-p1" style="width: 75%;">Taxes are calculated during checkout.</span>
+    </li>
+    {{#if cart.coupons}}
+    {{#each cart.coupons}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{lang 'cart.coupons.code_label' code=code}}</strong>
+            <div>
+                <a href="{{remove_url}}">{{lang 'cart.coupons.remove'}}</a>
+            </div>
+        </div>
+        <div class="cart-total-value">
+            <span>{{discount.formatted}}</span>
+        </div>
+    </li>
+    {{/each}}
+    {{else}}
+    <li class="cart-total" style="border: none;">
+        <div class="cart-total-label">
+            <strong>Have a promo code?</strong>
+        </div>
+        {{> components/cart/coupon-input}}
+    </li>
+    {{/if}}
+    {{#each cart.taxes}}
+    {{#if included}}
+    <li class="cart-total">
+        <div class="cart-total-label">
+            <strong>{{concat name (lang 'cart.included_in_total')}}:</strong>
+        </div>
+        <div class="cart-total-value">
+            <span>{{cost.formatted}}</span>
+        </div>
+    </li>
+    {{/if}}
+    {{/each}}
+</ul>
+
+
+
+
+<style>
+    .custom-rating-cart-section {
+        max-width: 100%;
+        display: flex;
+        justify-content: space-around;
+        height: 60px;
+        margin-top: 6%;
+    }
+     .flex-column{
+        align-items: center !important;
+     }
+
+    .stars {
+        text-align: center;
+        color: #EC3B26;
+        font-size: 22px;
+
+    }
+
+    .custom-rating {
+        font-size: 16px;
+        font-weight: 700;
+        font-family: 'helvetic-regular';
+        color: #000000;
+        line-height: 136%;
+    }
+
+
+    .cart-details {
+        height: 40px;
+        width: 100%;
+    }
+
+    .cart-summary-title {
+        font-family: 'vox';
+        font-size: 20px;
+        font-weight: 400;
+        color: #231F20;
+        line-height: 25px;
+    }
+    .self-cart-price {
+        font-size: 16px;
+        font-family: 'helvetic-regular';
+        font-weight: 400;
+        line-height: 25px;
+        color: #231F20;
+
+    }
+     .cart-price-p{
+        padding: 1rem 0 0 0;
+     }
+     .cart-price-p1{
+        padding: 0 0 1rem 0;
+     }
+     .cart-price-p2{
+        padding: 1rem 0 0.1rem 0;
+     }
+     .cart-price-total{
+        font: 20px ;
+        font-family: 'helvetic-regular';
+        font-weight: 400;
+        line-height: 25px;
+     }
+     .price-text{
+        font-size: 14px;
+        font-family: 'helvetic-regular';
+        font-weight: 400;
+        line-height: 20px;
+        color: #787878;
+     }
+     .self-total-price {
+        font-size: 20px;
+        font-family: 'helvetic-regular';
+        font-weight: 700;
+        line-height: 25px;
+        color: #231F20;
+    }
+
+    @media (max-width:449px) {
+        .for-desktop{
+            display: none;
+        }
+        
+    }
+    @media (max-width:450px) {
+         .custom-rating {
+        font-size: 12px;
+         }
+         .cart-summary-title{
+            margin-top: 1rem;
+         }
+    }
+</style>

@@ -1,0 +1,146 @@
+<div class="haloHeaderMobile">
+	<div class="haloHeaderMobile__item haloHeaderMobile__item--left">
+		<a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
+	        <span class="mobileMenu-toggleIcon">Toggle menu</span>
+	    </a>
+        <div class="haloHeaderMobile__item haloHeaderMobile__item--center">
+            {{#if page_type '===' 'default'}}
+                <h2 class="header-logo header-logo--{{theme_settings.logo-position}}">
+                    {{> components/common/store-logo}}
+                </h2>
+            {{else}}
+                <div class="header-logo header-logo--{{theme_settings.logo-position}}">
+                    {{> components/common/store-logo}}
+                </div>
+            {{/if}}
+        </div>
+	    
+	</div>
+    <div class="navUser-item--account nav-help" style="align-content: center;">
+            <div class="help-contact p-btn " style="color: #EC3B26;">
+            <div class=" nav-avatar">
+                <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/frame-30.jpg?t=1750249694" alt="">
+            </div>
+            <a href="tel:1-800-827-3232" class=" nav-help-phn" >
+                <img 
+                    src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/fi-15762208.png?t=1749822613" 
+                    alt="Phone icon" 
+                    style="width: 0.8rem; vertical-align: middle; margin-right: 0.3em; "
+                />
+                1-800-827-3232
+            </a>
+
+        </div>
+    </div>
+	<div class="haloHeaderMobile__item haloHeaderMobile__item--right">
+        <button class="navUser-action navUser-action--quickSearch quick-search-expand"
+           type="button"
+           id="quick-search-expand-mobile"
+           data-search="quickSearch"
+           aria-controls="quickSearch"
+           aria-label="{{lang 'common.search'}}"
+        >   
+            <svg aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+            <span>{{lang 'common.search'}}</span>
+        </button>
+		{{#if customer}}
+            <a class="navUser-action navUserAction-login"
+               href="{{urls.account.index}}"
+               aria-label="{{lang 'common.account'}}"
+            >
+                <svg aria-hidden="true"><use xlink:href="#icon-user"></use></svg>
+            </a>
+        {{else}}
+            <a class="navUser-action navUserAction-login"
+               href="{{urls.auth.login}}"
+               aria-label="{{lang 'common.login'}}"
+            >
+                <svg aria-hidden="true"><use xlink:href="#icon-user"></use></svg>
+            </a>
+        {{/if}}
+		<a class="navUser-action navUser-actionCart"
+           data-cart-preview
+           data-options="align:right"
+           href="{{urls.cart}}"
+           aria-label="{{lang 'cart.nav_aria_label'}}"
+        > 
+          <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/SVG.svg" alt="cart" />
+            <span class="countPill cart-quantity"></span>
+        </a>
+	</div>
+</div>
+
+
+
+<style>
+.nav-help-phn{
+   font-size: 15.26px;
+    color: #EC3B26;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+  
+
+}
+  .nav-avatar{
+        width: 28px    !important;
+        height: 28px !important; ;
+          padding-bottom: 29px;
+          padding-top: 1%;
+    }
+ .p-btn{
+     padding: 0.1rem 0.4rem 0.1rem 0.3rem !important;
+         
+    }
+
+     @media(max-width:426px){
+        .nav-help-phn{
+            font-size: 10px !important;
+        }
+
+
+         .nav-help{
+        margin-top: 0.7rem !important;
+        margin-bottom: 0.7rem !important;
+        border: 1px solid #EC3B26 !important;
+        font-size: 10px !important;
+        
+
+    }
+    .p-btn{
+        padding: 0.2rem !important;
+        gap: 3px !important;
+    }
+    .nav-avatar{
+        width: 19px !important;
+        height: 20px !important;
+        padding-bottom: 15px !important;
+    }
+
+
+    }
+
+
+        @media(max-width:375px){
+             .nav-help-phn{
+            font-size: 8px !important;
+        }
+         .nav-avatar{
+        width: 18px !important;
+        height: 20px !important;
+        padding: 0 !important;
+    }
+    
+         .nav-help{
+            margin-right: 0.8rem;
+        }
+    }
+
+     @media(max-width:370px){
+    
+         .nav-help{
+            margin-right: 0%;
+        }
+    }
+
+</style>

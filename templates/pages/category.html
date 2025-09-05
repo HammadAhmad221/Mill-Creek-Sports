@@ -1,0 +1,267 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryId" category.id}}
+{{#partial "head"}}
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<div class="categoryHeader__container"> 
+    <div class="categoryHeader{{#if theme_settings.category_header_type '==' 'banner'}} categoryHeader{{else}}{{#if category.image}} categoryHeader{{/if}}{{/if}}">
+        {{#if theme_settings.category_header_type '==' 'banner'}}
+            {{{region name="category_top_banner"}}}
+            {{{region name="category_top_banner--global"}}}
+        {{ else }}
+            {{#if category.image}}
+                <div class="categoryHeader__img">
+                    <!-- {{> components/common/responsive-img
+                        image=category.image
+                        fallback_size=theme_settings.zoom_size
+                        lazyload=theme_settings.lazyload_mode
+                        class="category-header-image"
+                    }} -->
+                </div>
+            {{/if}}
+        {{/if}}
+        <div class="categoryHeader__content self-categoryHeader__content">
+            <div class="self-flex-wrapper">
+        <div class="self-main-text">
+            {{> components/common/self-breadcrumbs breadcrumbs=breadcrumbs}}
+
+            {{#unless theme_settings.hide_category_page_heading }}
+                <h1 class="page-heading self-category-page-heading">{{category.name}}</h1>
+            {{/unless}}
+            <div class="self-performance-container">
+                <span class="permormance-text">
+                   <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/performance-icon%20%283%29.svg" alt="">
+                   <p> Long-lasting Power</p>
+                </span>
+                <span class="permormance-text">
+                   <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/performance-icon%20%282%29.svg" alt="">
+                   <p>Unmatched Performance</p>
+                </span>
+                <span class="permormance-text">
+                   <img src=" https://store-8xryzvxqo4.mybigcommerce.com/product_images/performance-icon%20%281%29.svg" alt="">
+                   <p>Exceptional Reliability</p>
+                </span>
+            </div>
+
+            {{#if category.description}}
+                <div class="categoryHeader__des">
+                    {{{category.description}}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="self-bg-img-container">
+            <img class="self-bg-img" src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-80-1-.png?t=1751881807" alt="">
+        </div>
+    </div>
+        
+    </div>
+    
+
+    {{{region name="category_below_header"}}}
+
+    {{#if theme_settings.show_halo_subcategories}}
+        {{> components/halothemes/category/halo-subcategories}}
+    {{/if}}
+
+
+</div>
+
+
+<div class="container">
+    <div class="page">
+        {{> components/halothemes/category/halo-category-toolbar show_sidebar=theme_settings.haloSidebar_category}}
+        <main class="page-content" id="product-listing-container">
+            {{> components/category/product-listing}}
+            {{{region name="category_below_content"}}}
+        </main>
+    </div>
+</div>
+
+{{{region name="category_bottom_banner"}}}
+{{{region name="category_bottom_banner--global"}}}
+
+{{{region name="category_reviews_banner"}}}
+{{{region name="category_reviews_banner--global"}}}
+
+
+
+{{/partial}}
+{{> layout/base}}
+
+<script>
+    var addBtns = document.querySelectorAll('.self-card-add-btn')
+    addBtns.forEach((btn)=>{
+        btn.addEventListener('click', ()=>{
+            setTimeout(()=>{
+                window.location.href = '/cart.php'
+            }, 1000)
+        })
+    })
+</script>
+<style>
+    @media (min-width : 769px) {
+        .categoryHeader{
+           padding: 0 15px;
+        }  
+    }
+      @media (min-width : 1280px) {
+        .categoryHeader{
+           padding: 0 75px;
+        }  
+    }
+  
+    .self-flex-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .self-main-text{
+       padding: 25px 1px 50px 40px ;
+    
+    }
+
+    .self-main-text {
+        flex: 1 1 45%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .self-bg-img-container {
+        flex: 0 1 52%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 15px;
+    
+    }
+
+    .self-bg-img {
+        width: 100%;
+        height: 270px;
+        object-fit: cover;
+    }
+
+    .self-categoryHeader__content{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        flex-wrap: nowrap !important;
+        background-color: #050505;
+        border-radius: 15px;
+    }
+    .self-category-page-heading{
+        font-size: 40px !important;
+        font-weight: 500 !important;
+        font-family: 'vox' !important;
+        color: #FFFFFF !important;
+        text-transform: none !important;
+        line-height: 45px ;
+        letter-spacing: 0px;
+        margin-top: 20px;
+        display: flex;
+    }
+    .permormance-text{
+        color: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+    }
+     .permormance-text p{
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+   
+    .self-performance-container{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 25px;
+        width: 100%;
+    }
+    @media (max-width:786px) {
+        .self-bg-img-container {
+            flex: 0 1 100%;
+        }
+    }
+    
+    @media(max-width:450px) {
+        .self-categoryHeader__content{
+            border-radius: 0px;
+        }
+        .self-bg-img-container {
+            display: none;
+        }
+        
+        .self-main-text{
+            padding: 15px 1px 25px 5px;
+        }
+        
+        .self-category-page-heading{
+            font-size: 27px !important;
+            justify-content: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .permormance-text p{
+            font-size: 12px;
+            text-align: start;
+        }
+        
+        .self-main-text {
+            gap: 5px;
+        }
+    }
+    
+    @media (max-width:385px) {
+            .self-performance-container{
+            gap: 18px;
+    
+        }
+        .permormance-text p{
+            font-size: 11px;
+        }
+    }
+    
+    .card-best-price{
+        display: none;
+    }
+     /* .justify-center{
+    display: flex ;
+    justify-content: center !important;
+} */
+</style>
+
+

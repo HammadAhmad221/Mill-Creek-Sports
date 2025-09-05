@@ -1,0 +1,62 @@
+<div class="heading-and-description">
+  <h3 class="footer-info-heading self-news-letter">{{lang 'newsletter.subscribe'}}</h3>
+  <p>{{lang 'newsletter.subscribe_intro'}}</p>
+</div>
+
+<form class="form" action="{{urls.subscribe.action}}" method="post">
+    <fieldset class="form-fieldset">
+        <input type="hidden" name="action" value="subscribe">
+        <input type="hidden" name="nl_first_name" value="bc">
+        <input type="hidden" name="check" value="1">
+        <div class="form-field">
+            <label class="form-label is-srOnly" for="nl_email">{{lang 'common.email_address'}}</label>
+            <div class="form-prefixPostfix wrap">
+                <input class="form-input self-custom-input self-col-sm-10"
+                       id="nl_email"
+                       name="nl_email"
+                       type="email"
+                       value="{{customer.email}}"
+                       placeholder="{{lang 'newsletter.email_placeholder'}}"
+                       aria-describedby="alertBox-message-text"
+                       aria-required="true"
+                       autocomplete="email"
+                       required
+                >
+                {{#if theme_settings.halo_homepage_layout_4}}
+                  <button class="button button--primary form-prefixPostfix-button--postfix" type="submit" arial-label="{{lang 'newsletter.subscribe_submit'}}">></button>
+                {{ else }}
+                  <input class="button button--primary form-prefixPostfix-button--postfix self-news-letter-button self-col-sm-2" type="submit" value="">
+                {{/if}}
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+{{#unless theme_settings.footer_style '==' 'style_2'}}
+  {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
+      {{#if theme_settings.show_social-links}}
+          <div class="footer-info-col--social">
+              {{> components/common/social-links}}
+            </div>
+        {{/if}}
+    {{/if}}
+{{/unless}}
+
+<script>
+  var newsLetter = document.querySelector('.self-news-letter')
+  if (newsLetter) {
+      newsLetter.innerHTML = newsLetter.innerHTML.toLocaleUpperCase()
+    }
+</script>
+
+<style>
+  .self-custom-input{
+    background-color: #231F20;
+    border-radius: 0%;
+  }
+
+  .self-custom-input::placeholder{
+    color: white !important;
+  }
+
+</style>

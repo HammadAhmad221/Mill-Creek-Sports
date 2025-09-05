@@ -1,0 +1,11 @@
+{
+  "customLayouts": {
+    "brand": {},
+    "category": {},
+    "page": {},
+    "product": {}
+  },
+  "normalStoreUrl": "https://aseer.mybigcommerce.com/",
+  "port": 3000,
+  "packageManager": "npm"
+}

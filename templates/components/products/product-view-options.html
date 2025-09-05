@@ -1,0 +1,154 @@
+<div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+    <label class="form-label form-label--alternate">
+        {{lang 'products.current_stock'}}
+        <span data-product-stock>{{product.stock_level}}</span>
+    </label>
+</div>
+{{#if product.can_purchase}}
+<form class="form self-add-to-cart" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+    data-cart-item-add>
+    <input type="hidden" name="action" value="add" />
+    <input type="hidden" name="product_id" value="{{product.id}}" />
+    {{#if product.cart_order_source}}
+    <input type="hidden" name="cart_order_source" value="{{product.cart_order_source}}" />
+    {{/if}}
+    <!--<div data-product-option-change style="display:none;">-->
+    <!--    {{>components/halothemes/products/halo-sizeChart}}-->
+
+    <!--    {{~inject 'showSwatchNames' theme_settings.show_product_swatch_names}}-->
+    <!--    {{#each product.options}}-->
+    <!--        {{{dynamicComponent 'components/products/options'}}}-->
+    <!--    {{/each}}-->
+    <!--</div>-->
+
+    {{#if theme_settings.halo_stock_level}}
+    <div class="productView-optionsStock u-hiddenVisually">
+        <span>{{theme_settings.halo_stock_level_text1}}</span>
+        <span data-stock-left></span>
+        <span>{{theme_settings.halo_stock_level_text2}}</span>
+    </div>
+    {{/if}}
+
+    <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+        <label class="form-label form-label--alternate">
+            {{lang 'products.current_stock'}}
+            <span data-product-stock>{{product.stock_level}}</span>
+        </label>
+    </div>
+
+    {{> components/products/add-to-cart}}
+
+    {{#if product.out_of_stock}}
+    {{#if product.out_of_stock_message}}
+    {{> components/common/alert/alert-error product.out_of_stock_message}}
+    {{else}}
+    {{> components/common/alert/alert-error (lang 'products.sold_out')}}
+    {{/if}}
+    {{/if}}
+</form>
+{{/if}}
+<style>
+    .self-add-to-cart {
+        display: flex;
+        gap: 1rem;
+    }
+</style>
+{{#if product.out_of_stock}}
+{{#if product.out_of_stock_message}}
+{{> components/common/alert/alert-error product.out_of_stock_message}}
+{{else}}
+{{> components/common/alert/alert-error (lang 'products.sold_out')}}
+{{/if}}
+{{/if}}
+{{#if product_layout '!=' 'quickview'}}
+{{#if settings.show_wishlist}}
+{{> components/common/wishlist-dropdown}}
+{{/if}}
+{{else}}
+{{#if settings.show_wishlist}}
+{{> components/common/wishlist-dropdown quickview=2}}
+{{/if}}
+{{/if}}
+
+{{#if theme_settings.show_halo_share}}
+
+
+{{/if}}
+
+<!-- style="width: 30% ; margin-left: 58%; margin-top: 2%;" -->
+<section class="productView-details product-options self-flex-row">
+
+    <div class="help-section self-col-9 self-col-sm-12">
+        <div class="help-title">Need a Helping Hand? We are Here for You</div>
+        <div class="help-hours">9AM to 8PM EST / 6AM to 5PM PST M-F<br>9AM to 6PM EST / 6AM to 3PM
+            PST
+            Sat-Sun</div>
+        <div class="help-contact">
+
+            <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/Frame%2031.svg" alt="" height="40px"
+                width="40px" style=" width: 40px; height: 40px; ">
+
+            <a href="tel:1-800-827-3232" class="help-phone" style="font-size: 20px; font-weight: 700;">
+                <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/fi-15762208.png?t=1749822613"
+                    alt="Phone icon" class="phone-icon"
+                    style="width: 22px; height: 22px; vertical-align:middle;  margin-left: 0.3rem;" />
+                1-800-827-3232
+            </a>
+        </div>
+    </div>
+
+    <div class="self-col-3"></div>
+</section>
+
+<div class="help-btn-container">
+    <button class="help-battery-btn" type="button"
+        onclick="window.location.href='https://proguidebatteries.com/calculator/'">
+        <img src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/help.svg" alt="">
+        Help Me Pick a Battery
+    </button>
+</div>
+<!-- Build Your Kit Section -->
+<!-- style="width: 35% ; margin-left: 59%; -->
+<section class="productView-details product-options">
+    <div class="build-kit-section">
+        <h3 class="build-kit-title">Build Your Kit</h3>
+
+        <div class="kit-item" data-product-id="170">
+            <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/snap-top.png?t=1749112167"
+                alt="NOCO Group 24-31 Snap-Top Battery Box" class="kit-image">
+            <div class="kit-details">
+                <div class="kit-name">NOCO Group 24-31 Snap-Top Battery Box</div>
+                <div class="kit-price">+$12.99</div>
+            </div>
+            <input type="checkbox" class="kit-checkbox">
+        </div>
+
+        <div class="kit-item" data-product-id="146">
+            <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amp.png?t=1749112170"
+                alt="NOCO 500 Amp UltraSafe Lithium Jump Starter" class="kit-image">
+            <div class="kit-details">
+                <div class="kit-name">NOCO 500 Amp UltraSafe Lithium Jump Starter</div>
+                <div class="kit-price">+$89.99</div>
+            </div>
+            <input type="checkbox" class="kit-checkbox">
+        </div>
+
+        <div class="kit-item" data-product-id="175">
+            <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/jumper-cables.png?t=1749112168"
+                alt="1GA 20FT 500A Jumper Cables" class="kit-image">
+            <div class="kit-details">
+                <div class="kit-name">1GA 20FT 500A Jumper Cables</div>
+                <div class="kit-price">+$55.99</div>
+            </div>
+            <input type="checkbox" class="kit-checkbox">
+        </div>
+        <div id='self-kit-error' style="color: red; font-size: 10px; display: none;">You Must Have a
+            Product to Your Cart To build a Kit</div>
+        <div>
+            <input onclick="kitAddToCart()" style="border: none;width: 100%;height:100%;margin-top: 10px;"
+                id="self-kit-addtocart" data-wait-message="Adding to cart…" class="button button--tertiary"
+                value="Add to Cart" type="button">
+        </div>
+    </div>
+
+</section>

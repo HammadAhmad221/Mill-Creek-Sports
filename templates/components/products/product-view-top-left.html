@@ -1,0 +1,579 @@
+ <div class="productView__topLeft">
+                <section class="productView-images" data-image-gallery>
+                    {{!--
+                    Note that these image sizes are coupled to image sizes used in
+                    /assets/js/theme/common/product-details.js
+                    for variant/rule image replacement
+                    --}}
+                    {{#if product.images.length '>' 1 }}
+                    {{> components/carousel-content-announcement}}
+                    {{/if}}
+
+
+
+                    <div class="productView-nav-inner">
+                        <div class="productView-nav{{#if product_layout '==' 'quickview'}} quickView-nav{{/if}}"
+                            data-slick='{
+         "fade": true,
+         "arrows": true,
+         "dots": false,
+         "infinite": false,
+         "slidesToShow": 1,
+         "slidesToScroll": 1,
+         "centerMode": false,
+         "adaptiveHeight": false,
+         "asNavFor": "{{#if product_layout '==' ' quickview'}}.quickView-for{{else}}.productView-for{{/if}}" }'
+                            style="height: 100%;">
+
+                            {{#each product.images}}
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}">
+                                <div class="productView-img-container">
+                                    {{!-- Remove the surrounding a-element if there is no main image. --}}
+
+                                    <a href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                        data-fancybox="images">
+                                        {{> components/common/responsive-img
+                                        image=this
+                                        class="productView-image--default"
+                                        fallback_size=theme_settings.product_size
+                                        lazyload=theme_settings.lazyload_mode
+                                        default_image=theme_settings.default_image_product
+                                        otherAttributes="data-main-image"
+                                        }}
+                                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                                    </a>
+                                </div>
+                            </figure>
+                            {{/each}}
+                            {{#if product.videos.list.length}}
+                            {{#each product.videos.list}}
+                            <figure class="productView-image productView-imageVideo"
+                                data-slick-position="{{add ../product.images.length @index}}">
+                                <div class="productView-img-container">
+                                    <a href="//www.youtube.com/embed/{{id}}">
+                                        <img class="lazyload" src="{{cdn 'img/loading.svg'}}"
+                                            data-src="//i.ytimg.com/vi/{{id}}/hqdefault.jpg" data-sizes="auto"
+                                            alt="{{../product.title}}" title="{{../product.title}}">
+                                    </a>
+                                    <div class="productView-video">
+                                        <div data-youtube="{{id}}"></div>
+                                    </div>
+                                </div>
+                            </figure>
+                            {{/each}}
+                            {{/if}}
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            {{#each product.custom_fields}}
+                            {{#contains name "layout_number"}}
+                            {{#contains value "1"}}
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+                            {{/contains}}
+                            {{#contains value "2"}}
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+
+                            <figure class="productView-image" data-image-gallery-main
+                                data-zoom-image="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828">
+                                <div class="productView-img-container">
+                                    <a href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                        data-fancybox="images">
+                                        <img class="lazyload"
+                                            src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                            data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                            data-sizes="auto" alt="common-all-1" title="common-all-1">
+                                    </a>
+                                </div>
+                            </figure>
+                            {{/contains}}
+                            {{/contains}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{#if product_layout '!=' 'quickview'}}
+                    <div class="productView-thumbnails-wrap">
+                        <div class="productView-thumbnails productView-for{{#if product.images.length '<' 4}} productView-thumbnails-noArrow{{/if}}"
+                            data-slick='{
+                                    "accessibility": false,
+                                    "infinite": false,
+                                    "slidesToShow": 2,
+                                    "slidesToScroll": 1,
+                                    "arrows": true,
+                                    "dots": false,
+                                    "mobileFirst": true,
+                                    "focusOnSelect": true,
+                                    "asNavFor": ".productView-nav",
+                                    "responsive": [
+                                        {
+                                            "breakpoint": 1339,
+                                            "settings": {
+                                                "vertical": true,
+                                                "verticalSwiping": true,
+                                                "slidesToShow": 5,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 1199,
+                                            "settings": {
+                                                "vertical": true,
+                                                "verticalSwiping": true,
+                                                "slidesToShow": 4,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 991,
+                                            "settings": {
+                                                
+                                                "slidesToShow": 4,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 767,
+                                            "settings": {
+                                                "slidesToShow": 3,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 600,
+                                            "settings": {
+                                                "slidesToShow": 5,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 480,
+                                            "settings": {
+                                                "slidesToShow": 4,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 360,
+                                            "settings": {
+                                                "slidesToShow": 3,
+                                                "slidesToScroll": 1
+                                            }
+                                        }
+                                    ]
+                                }'>
+                            {{#each product.images}}
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                                    data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                                    data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}">
+                                    {{> components/common/responsive-img
+                                    image=this
+                                    fallback_size=../theme_settings.productview_thumb_size
+                                    lazyload=../theme_settings.lazyload_mode
+                                    }}
+                                </a>
+                            </div>
+                            {{/each}}
+                            {{#if product.videos.list.length}}
+                            {{#each product.videos.list}}
+                            <div class="productView-thumbnail productView-thumbnail-video">
+                                <a class="productView-thumbnail-link productView-thumbnail-linkVideo"
+                                    href="//www.youtube.com/embed/{{id}}" data-image-gallery-item aria-label="Video">
+                                    <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}"
+                                        data-src="//i.ytimg.com/vi/{{id}}/default.jpg" alt="Video" />
+                                    <span class="videoText">
+                                        <svg class="icon">
+                                            <use xlink:href="#icon-video-product"></use>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                            {{/each}}
+                            {{/if}}
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium.jpg?t=1750155887"
+                                        alt="Video" />
+                                </a>
+                            </div>
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-1-.jpg?t=1750155889"
+                                        alt="Video" />
+                                </a>
+                            </div>
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-common-for-all.jpg?t=1750746457"
+                                        alt="Video" />
+                                </a>
+                            </div>
+                            {{#each product.custom_fields}}
+                            {{#contains name "layout_number"}}
+                            {{#contains value "1"}}
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-4-.jpg?t=1750156145"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-6-.jpg?t=1750156139"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-3-.jpg?t=1750156147"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-7-.jpg?t=1750156136"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/lithium-5-.jpg?t=1750156141"
+                                        alt="Video" />
+                                </a>
+                            </div>
+                            {{/contains}}
+                            {{#contains value "2"}}
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-new.jpg?t=1750154830"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm-1-new.jpg?t=1750154832"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/agm.jpg?t=1750002798"
+                                        alt="Video" />
+                                </a>
+                            </div>
+
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                    data-image-gallery-new-image-srcset="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                    data-image-gallery-zoom-image-url="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828">
+                                    <img class="lazyload" data-sizes="auto"
+                                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                        data-src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/amg-2-new.jpg?t=1750154828"
+                                        alt="Video" />
+                                </a>
+                            </div>
+                            {{/contains}}
+                            {{/contains}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="productView-thumbnails-wrap">
+                        <div class="productView-thumbnails productView-for quickView-for" {{#gt product.images.length
+                            2}} data-slick='{
+                                    "accessibility": false,
+                                    "infinite": false,
+                                    "slidesToShow": 2,
+                                    "slidesToScroll": 1,
+                                    "arrows": true,
+                                    "dots": false,
+                                    "mobileFirst": true,
+                                    "focusOnSelect": true,
+                                    "asNavFor": ".quickView-nav",
+                                    "responsive": [
+                                        {
+                                            "breakpoint": 992,
+                                            "settings": {
+                                                "slidesToShow": 4,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 768,
+                                            "settings": {
+                                                "slidesToShow": 3,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 551,
+                                            "settings": {
+                                                "slidesToShow": 5,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 480,
+                                            "settings": {
+                                                "slidesToShow": 4,
+                                                "slidesToScroll": 1
+                                            }
+                                        },
+                                        {
+                                            "breakpoint": 360,
+                                            "settings": {
+                                                "slidesToShow": 3,
+                                                "slidesToScroll": 1
+                                            }
+                                        }
+                                    ]
+                                }' {{/gt}}>
+                            {{#each product.images}}
+                            <div class="productView-thumbnail">
+                                <a class="productView-thumbnail-link"
+                                    href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                                    data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                                    data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}">
+                                    {{> components/common/responsive-img
+                                    image=this
+                                    fallback_size=../theme_settings.productview_thumb_size
+                                    lazyload=../theme_settings.lazyload_mode
+                                    }}
+                                </a>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </section>
+                {{#if product_layout '!=' 'quickview'}}
+                {{> components/halothemes/products/halo-compare-colors}}
+                {{/if}}
+            </div>

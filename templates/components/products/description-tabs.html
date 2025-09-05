@@ -1,0 +1,211 @@
+{{assignVar "hasDownloads" 0}}
+{{assignVar "hasSpecifications" 0}}
+
+{{#each product.custom_fields}}
+    {{#if name '===' '__Data Sheet'}}
+        {{assignVar "hasDownloads" 1}}
+    {{/if}}
+
+    {{#startsWith '##' name}}
+        {{assignVar "hasSpecifications" 1}}
+    {{/startsWith}}
+{{/each}}
+
+<ul class="tabs" style="display: block; background-color:#F6F6F6 !important ; width: 35rem;">
+    {{#if product.description}}
+    <li class="tab self-flex-row" style="border-bottom: 2px solid #CCCCCC ; border-top: 2px solid #CCCCCC ; ">
+        <a class="tab-title self-col-sm-12">
+            <span>Product Description</span> 
+            <span class="self-tab-icon">
+            <img class="plus-icon-img" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon" >
+            </span>
+            </a>
+        <div class="self-tabContent">
+            {{{product.description}}}
+        </div>
+    </li>
+    {{/if}}
+    {{#all product.warranty theme_settings.show_warranty_tabs}}
+    <li class="tab self-flex-row" style="border-bottom: 2px solid #CCCCCC ; ">
+        <a class="tab-title self-col-sm-12">
+            <span>{{lang 'products.warranty'}}</span>
+            <span class="self-tab-icon">
+    
+            <img class="plus-icon-img " src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon">
+
+            </span></a>
+        <div class="self-tabContent">
+            <p>{{{product.warranty}}}</p>
+            <p>For more information about the included warranty, please click <a href="/warranty-information/">here</a>.
+            </p>
+        </div>
+    </li>
+    {{/all}}
+
+    {{#all (getVar "hasSpecifications") theme_settings.show_custom_fields_tabs}}
+    <li class="tab self-flex-row" style="border-bottom: 2px solid #CCCCCC ;">
+        <a class="tab-title self-col-sm-12">
+            <span>Specifications</span>
+            <span class="self-tab-icon">
+            <img class="plus-icon-img" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon">
+
+            </span>
+        </a>
+        <div class="self-tabContent">
+            <div class="customFieldsSection">
+
+                <div style="width: 100%;">
+                    <table class="customeFieldsTable">
+                        <tr>
+                            <th colspan="2">
+                                Unit Specifications
+                            </th>
+                        </tr>
+                        <tbody>
+                            {{#each product.custom_fields}}
+                            {{#startsWith '##' name}}
+                            <tr>
+                                <td>{{strReplace name "##" ""}}</td>
+                                <td>{{{sanitize value}}}</td>
+                            </tr>
+                            {{/startsWith}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </li>
+    {{/all}}
+
+    {{#all (getVar 'hasDownloads') theme_settings.show_custom_fields_tabs}}
+    <li class="tab self-flex-row" style="border-bottom: 2px solid #CCCCCC ;">
+        <a class="tab-title self-col-sm-12">
+            <span>Downloads</span>
+            <span class="self-tab-icon">
+                <img class="plus-icon-img" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon">
+            </span>
+        </a>
+        <div class="self-tabContent">
+            <div class="customFieldsSection">
+                {{#each product.custom_fields}}
+                {{#startsWith '__' name}}
+                <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: row; margin-right: 1rem; flex-wrap: wrap;">
+                        <div class="productView-info-name" data-custom-field-name="{{name}}">{{strReplace name "__"
+                            ""}}: </div>
+                        <div class="productView-info-value" data-custom-field-name="{{name}}">
+                            <a class="button" target="__blank" href="{{{sanitize value}}}">
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{/startsWith}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    </li>
+{{/all}}
+
+    {{#if theme_settings.show_shipping_tabs}}
+<ul class="tabs" style="display: block; background-color:#F6F6F6 !important ;">
+    <li class="tab self-flex-row ss" style="border-bottom: 2px solid #CCCCCC ; ">
+        <a class="tab-title self-col-sm-12" href="#tab-shipping" data-tab-load="{{theme_settings.show_shipping_tab_link}}"
+            data-tab-check="true">
+            <span>{{lang 'products.shipping_returns'}}</span>
+            <span class="self-tab-icon">
+            <img class="plus-icon-img" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon">
+
+            </span>
+        </a>
+            <div class="self-tabContent" id="tab-shipping">
+                <!-- <a class="tab-titleMobile" data-tab-load="{{theme_settings.show_shipping_tab_link}}"
+                    data-tab-check="true"><span>{{lang 'products.shipping_returns'}}</span></a> -->
+                <div class="tabContent">
+                    <img class="icon-loading" src="{{cdn 'img/loading.svg'}}" alt="Icon Loading">
+                </div>
+            </div>
+        </a>
+    </li>
+    </ul>
+    {{/if}}
+
+    {{#all settings.show_product_reviews theme_settings.show_product_reviews product.reviews.total}}
+    <li class="tab self-flex-row">
+        <a class="tab-title self-col-sm-12 productView-reviewTabLink"><span>{{lang 'products.reviews.header_2'
+                total=product.reviews.total}}</span> <span class="self-tab-icon">
+            <img class="plus-icon-img" src="https://store-8xryzvxqo4.mybigcommerce.com/product_images/plus-icon.svg" alt="plus icon">
+
+                </span></a>
+        <div class="self-tabContent">
+            {{#all settings.show_product_reviews theme_settings.show_product_reviews product.reviews.total}}
+            <a class="tab-titleMobile productView-reviewTabLink"><span>{{lang 'products.reviews.header_2'
+                    total=product.reviews.total}}</span></a>
+            {{/all}}
+        </div>
+    </li>
+    {{/all}}
+</ul>
+
+<style>
+    .tabs-content {
+        padding-top: 200% !important;
+        background-color: #F6F6F6 !important;
+    }
+
+    .tab-title {
+        display: flex !important;
+        justify-content: space-between !important;
+        font-weight: 400 !important;
+    }
+
+    .tab-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        margin-left: 8px;
+        font-weight: bold;
+    }
+
+    .tab.is-active .tab-icon {
+        transform: rotate(0deg);
+    }
+
+    .self-container {
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+
+    .tab.is-active>.self-tabContent {
+        margin-top: 2%;
+        display: block;
+        text-align: left;
+        padding: 0 1rem;
+        font-family: 'helvetic-regular';
+        font-size: 20px !important;
+        font-weight: 400 !important;
+        padding-bottom: .25rem !important;
+        color: #787878 !important;
+        line-height: 135%;
+        overflow: auto;
+    }
+
+    .tab.is-active>.self-tab-icon {
+        content: "-";
+    }
+
+    .tab>.self-tab-icon {
+        content: "+";
+    }
+
+    .tab>.self-tabContent {
+        display: none;
+    }
+
+    .plus-icon-img{
+        height: 15px;
+        width: 15px;
+    }
+
+</style>

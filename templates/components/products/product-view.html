@@ -1,0 +1,156 @@
+<div class="productView" data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}"
+    data-product-category="
+    {{#each product.category}}
+        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
+    {{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if product.price.with_tax}}
+            {{product.price.with_tax.value}}
+        {{else}}
+            {{product.price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}" data-product-variant="single-product-option">
+    {{#each product.reviews.messages}}
+    {{#if error}}
+    {{> components/common/alert/alert-error error}}
+    {{/if}}
+    {{#if success}}
+    {{> components/common/alert/alert-success success}}
+    {{/if}}
+    {{/each}}
+
+    {{~inject 'product' product}}
+
+    <div class="productView__top">
+        <div class="container productView-container">
+           {{> components/products/product-view-top-left }}
+            <div class="productView__topRight self-custom-product">
+                <section class="productView-details product-data">
+                   {{> components/products/product-view-top-right }}
+                </section>
+                <section class="productView-details product-options custom-page">
+                    {{>components/products/product-view-options }}
+                    {{#if product_layout '!=' 'quickview'}}
+                    {{#if theme_settings.halo_bundle_products_enable}}
+                    {{> components/halothemes/products/halo-bundle-products}}
+                    {{/if}}
+                    <article class="productView-description">
+                        <div class="container ps-0 pe-0 self-container ">
+                            {{#if theme_settings.show_product_details_tabs}}
+                            {{> components/products/description-tabs}}
+                            {{else}}
+                            {{> components/products/description}}
+                            {{/if}}
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<article class="productView-descriptionsssss">
+    <div class="grid-container">
+        <!-- Top Left - Marine/Boat Scene -->
+        <div class="grid-item item-1"
+            style="background-image: url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-1-img-1.jpg?t=1750408280'); ">
+            <div class="self-display-flex self-flex-column">
+                <div class="subtitle">Providing reliable batteries since 1980</div>
+                <div class="title">Innovating Power for 45 Years.</div>
+            </div>
+        </div>
+
+        <!-- Top Right - Battery Product -->
+        <div class="grid-item item-2"
+            style="background-image: url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-1-img-2.jpg?t=1750408285'); ">
+            <div class="self-display-flex self-flex-column">
+                <div class="subtitle">Long-Term Reliability:</div>
+                <div class="title">Power That Doesn't Quit</div>
+            </div>
+        </div>
+
+        <!-- Bottom Left - Red Battery -->
+        <div class="grid-item item-3"
+            style="background-image: url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/layout-1-img-3.jpg?t=1750408282'); ">
+            <div class="self-display-flex self-flex-column">
+                <div class="subtitle">Built to Last, Cycle After Cycle:</div>
+                <div class="title">Experience exceptional longevity</div>
+            </div>
+        </div>
+
+        <!-- Bottom Right - Person Working -->
+        <div class="grid-item item-4"
+            style="background-image: url('https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/image-113.png?t=1750056691'); ">
+            <div class="self-display-flex self-flex-column">
+                <div class="subtitle">Fast Charging:</div>
+                <div class="title">Get back to full power quicker</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+{{> components/products/product-view-tables }}
+
+<article class="container reviews-container">
+    <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{product.title}}'
+        data-id='{{product.id}}'></div>
+</article>
+
+{{#if theme_settings.halo_sticky_add_to_cart}}
+{{> components/halothemes/products/halo-sticky-add-to-cart}}
+{{/if}}
+{{/if}}
+
+<div id="previewModal" class="modal modal--large" data-reveal>
+    {{> components/common/modal/modal-close-btn }}
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const stickyEl = document.querySelector('.productView__topLeft');
+        if (stickyEl) {
+            stickyEl.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    const forceScroll = () => {
+        const sticky = document.querySelector('.productView__topLeft');
+        const rect = sticky.getBoundingClientRect();
+        const topOffset = rect.top + window.scrollY;
+        window.scrollTo({ top: topOffset + 800, behavior: 'smooth' });
+    };
+</script>
+
+{{> components/products/product-view-add-to-cart-js}}
+
+{{> components/products/product-view-css-2 }}
+
+{{> components/products/product-view-template-js }}
+
+{{> components/products/product-view-css }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const browseButton = document.querySelector('.browse-specs');
+        const descriptionSection = document.querySelector('article.productView-description');
+        if (browseButton && descriptionSection) {
+            browseButton.addEventListener('click', function () {
+                const li = Array.from(document.querySelectorAll('.tab-title span'))
+                    .find(span => span.textContent.trim() === 'Specifications')?.closest('li');
+                li.classList.add('is-active')
+                descriptionSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('lazyloaded', function () {
+        $('.productView-nav').slick('setPosition');
+    });
+</script>

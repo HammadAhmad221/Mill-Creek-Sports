@@ -1,0 +1,101 @@
+    <div class="custom-increment-box" data-quantity-change>
+        <button class="custom-increment-button" data-action="dec">
+            &minus;
+            <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
+        </button>
+        <input class="custom-increment-input" id="qty[]" name="qty[]" type="tel"
+            value="{{#if product.min_purchase_quantity}}{{product.min_purchase_quantity}}{{else}}1{{/if}}"
+            data-quantity-min="{{product.min_purchase_quantity}}" data-quantity-max="{{product.max_purchase_quantity}}"
+            min="1" pattern="[0-9]*" aria-live="polite">
+        <button class="custom-increment-button" data-action="inc">
+            &#43;
+            <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
+        </button>
+    </div>
+    
+    
+    <div class="alertBox productAttributes-message" style="display:none">
+        <div class="alertBox-column alertBox-icon">
+            <icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z">
+                    </path>
+                </svg>
+            </icon>
+        </div>
+        <p class="alertBox-column alertBox-message"></p>
+    </div>
+    {{#or customer (unless settings.hide_price_from_guests)}}
+    <div class="form-action responsive-flex">
+        <input style="border: none; width: 100%; height:100%;" id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}"
+            class="button button--tertiary" type="submit"
+            value="{{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{#if quick_shop '==' 'quick-shop'}}{{lang 'common.form_submit'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}{{/if}}">
+        <span class="product-status-message aria-description--hidden">
+            {{lang 'products.adding_to_cart'}} {{lang 'category.add_cart_announcement'}}
+        </span>
+    </div>
+    {{#if this.with_wallet_buttons}}
+    <div class="add-to-cart-wallet-buttons" data-add-to-cart-wallet-buttons>
+        {{> components/common/wallet-buttons}}
+    </div>
+    {{/if}}
+    {{/or}}
+<style>
+    .custom-increment-box {
+        display: inline-flex;
+        align-items: center;
+        justify-content:space-between;
+        background-color: rgba(33, 37, 41, 0.1);
+        border-radius: 6px;
+        padding: 6px 10px;
+        gap: 30px;
+
+        @media (max-width: 1200px) {
+            flex: 0.72;
+        }
+    }
+
+    .custom-increment-button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .custom-increment-input {
+        font-family: 'helvetic-regular';
+        background-color: #F2F2F2;
+        width: 20px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 32px;
+        background: transparent;
+        border: none;
+        outline: none;
+        appearance: none;
+        -moz-appearance: textfield;
+    }
+
+    .custom-increment-input::-webkit-outer-spin-button,
+    .custom-increment-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .responsive-flex {
+        width: fit-content;
+
+        @media (max-width: 1200px) {
+            flex: 1.35;
+        }
+    }
+</style>

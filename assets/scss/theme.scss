@@ -1,0 +1,647 @@
+// =============================================================================
+// STENCIL
+// =============================================================================
+
+
+// Tools
+// -----------------------------------------------------------------------------
+//
+// 1. Import Citadel's toolkit for use.
+//
+// -----------------------------------------------------------------------------
+
+@import "../../node_modules/@bigcommerce/citadel/dist/tools/toolkit"; // 1
+@import "tools/tools";
+
+// Settings
+// -----------------------------------------------------------------------------
+//
+// 1. Stencil global settings get imported first.
+// 2. Import all Citadel and Foundation settings.
+// 3. Common aria helpers.
+// 4. Import Stencil's component settings overrides.
+// 5. Import tools which set/reset Citadel's global settings, to be consumed by
+//    the rest of Stencil.
+// 6. Import Citadel's version of foundation.
+//      - This enables the ability to "null" variables in the Stencil settings.
+//
+// -----------------------------------------------------------------------------
+
+@import "settings/global/global"; // 1
+
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/global/global"; // 2
+
+@import "settings/global/tools"; // 5
+
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/normalize/normalize"; // 2
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/foundation/foundation"; // 2
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/bigcommerce/bigcommerce"; // 2
+
+@import "../../node_modules/@bigcommerce/citadel/dist/vendor/foundation/foundation"; // 6
+
+@import "settings/normalize/normalize"; // 4
+@import "settings/vendor/vendor"; // 4
+@import "settings/foundation/foundation"; // 4
+@import "settings/citadel/citadel"; // 4
+@import "settings/stencil/stencil"; // 4
+@import "settings/layouts/layouts"; // 4
+@import "vendor/animate";
+
+
+// Utilities
+// -----------------------------------------------------------------------------
+
+@import "utilities/utilities";
+@import "../../node_modules/@bigcommerce/citadel/dist/utilities/utilities";
+
+
+// Fonts
+// -----------------------------------------------------------------------------
+
+@import "fonts/fonts";
+
+
+// Components
+// -----------------------------------------------------------------------------
+//
+// 1. Import Citadel's normalize dependency.
+// 2. Import Citadel's components.
+// 2. Import Stencil's component additions and custom components.
+//
+// -----------------------------------------------------------------------------
+
+@import "../../node_modules/@bigcommerce/citadel/dist/vendor/normalize/normalize"; // 1
+@import "../../node_modules/@bigcommerce/citadel/dist/components/components"; // 2
+@import "common/index"; // 3
+@import "components/components"; // 6
+
+
+// Layouts
+// -----------------------------------------------------------------------------
+//
+// 1. Stencil design layout files (example: Header or Footer).
+//
+// -----------------------------------------------------------------------------
+
+@import "layouts/layouts"; // 1
+
+@import "vendor/jstree/style";
+
+@import "custom";
+
+
+
+
+@font-face {
+  font-family: 'vox';
+  src: url('../fonts/vox/vox_regular15.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+@font-face {
+  font-family: 'helvetic-regular';
+  src: url('../fonts/helvatic-now-display/HelveticaNowDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* Grid row */
+.self-flex-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+
+
+@media (max-width:2560px) {
+  .self-flex-row-md{
+     display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: start;
+  }
+}
+@media (max-width:1025px) {
+  .self-flex-row-md{
+     display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: start;
+    width: 90%;
+  }
+}
+
+
+@media (max-width:769px) {
+  .self-flex-row-md{
+     display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: start;
+    width: 108%;
+  }
+}
+
+@media (max-width: 570px) {
+  .self-flex-row-sm{
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width:426px) {
+  .self-flex-row-md{
+     display: flex !important;
+    flex-wrap: wrap !important;
+     width: 100%;
+     padding-left: 0% !important;
+  }
+}
+
+
+
+/* Base Full Width (default for extra-small screens) */
+.self-col-1 {
+  flex: 0 0 8.33%;
+  max-width: 8.33%;
+}
+
+.self-col-2 {
+  flex: 0 0 16.66%;
+  max-width: 16.66%;
+}
+
+.self-col-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.self-col-4 {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+}
+
+
+
+.self-col-5 {
+  flex: 0 0 41.66%;
+  max-width: 41.66%;
+}
+
+.self-col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.self-col-7 {
+  flex: 0 0 58.33%;
+  max-width: 58.33%;
+}
+
+.self-col-8 {
+  flex: 0 0 66.66%;
+  max-width: 66.66%;
+}
+
+.self-col-9 {
+  flex: 0 0 75%;
+  max-width: 98%;
+}
+
+.self-col-10 {
+  flex: 0 0 83.33%;
+  max-width: 83.33%;
+}
+
+.self-col-11 {
+  flex: 0 0 91.66%;
+  max-width: 91.66%;
+}
+
+.self-col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+
+/* Extra large screens (≥1200px) */
+@media (min-width: 1200px) {
+  .self-col-xl-1 {
+    flex: 0 0 8.33%;
+    max-width: 8.33%;
+  }
+
+  .self-col-xl-2 {
+    flex: 0 0 16.66%;
+    max-width: 16.66%;
+  }
+
+  .self-col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .self-col-xl-4 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+
+  .self-col-xl-5 {
+    flex: 0 0 41.66%;
+    max-width: 41.66%;
+  }
+
+  .self-col-xl-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .self-col-xl-7 {
+    flex: 0 0 58.33%;
+    max-width: 58.33%;
+  }
+
+  .self-col-xl-8 {
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
+  }
+
+  .self-col-xl-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .self-col-xl-10 {
+    flex: 0 0 83.33%;
+    max-width: 83.33%;
+  }
+
+  .self-col-xl-11 {
+    flex: 0 0 91.66%;
+    max-width: 91.66%;
+  }
+
+  .self-col-xl-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Large screens (≥992px) */
+@media (min-width: 992px) {
+  .self-col-lg-1 {
+    flex: 0 0 8.33%;
+    max-width: 8.33%;
+  }
+
+  .self-col-lg-2 {
+    flex: 0 0 16.66%;
+    max-width: 16.66%;
+  }
+
+  .self-col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .self-col-lg-4 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+
+  .self-col-lg-5 {
+    flex: 0 0 41.66%;
+    max-width: 41.66%;
+  }
+
+  .self-col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .self-col-lg-7 {
+    flex: 0 0 58.33%;
+    max-width: 58.33%;
+  }
+
+  .self-col-lg-8 {
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
+  }
+
+  .self-col-lg-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .self-col-lg-10 {
+    flex: 0 0 83.33%;
+    max-width: 83.33%;
+  }
+
+  .self-col-lg-11 {
+    flex: 0 0 91.66%;
+    max-width: 91.66%;
+  }
+
+  .self-col-lg-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Medium screens (≥768px) */
+@media (min-width: 768px) {
+  .self-col-md-1 {
+    flex: 0 0 8.33%;
+    max-width: 8.33%;
+  }
+
+  .self-col-md-2 {
+    flex: 0 0 16.66%;
+    max-width: 16.66%;
+  }
+
+  .self-col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .self-col-md-4 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+
+  .self-col-md-5 {
+    flex: 0 0 41.66%;
+    max-width: 41.66%;
+  }
+
+  .self-col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .self-col-md-7 {
+    flex: 0 0 58.33%;
+    max-width: 58.33%;
+  }
+
+  .self-col-md-8 {
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
+  }
+
+  .self-col-md-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .self-col-md-10 {
+    flex: 0 0 83.33%;
+    max-width: 83.33%;
+  }
+
+  .self-col-md-11 {
+    flex: 0 0 91.66%;
+    max-width: 91.66%;
+  }
+
+  .self-col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Small screens (≥576px) */
+@media (max-width: 576px) {
+  .self-col-sm-1 {
+    flex: 0 0 8.33%;
+    max-width: 8.33%;
+  }
+
+  .self-col-sm-2 {
+    flex: 0 0 16.66%;
+    max-width: 16.66%;
+  }
+
+  .self-col-sm-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .self-col-sm-4 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+
+  .self-col-sm-5 {
+    flex: 0 0 41.66%;
+    max-width: 41.66%;
+  }
+
+  .self-col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .self-col-sm-7 {
+    flex: 0 0 58.33%;
+    max-width: 58.33%;
+  }
+
+  .self-col-sm-8 {
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
+  }
+
+  .self-col-sm-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .self-col-sm-10 {
+    flex: 0 0 83.33%;
+    max-width: 83.33%;
+  }
+
+  .self-col-sm-11 {
+    flex: 0 0 91.66%;
+    max-width: 91.66%;
+  }
+
+  .self-col-sm-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Margin and padding utilities */
+.m-0 {
+  margin: 0 !important;
+}
+
+.m-1 {
+  margin: 4px !important;
+}
+
+.m-2 {
+  margin: 8px !important;
+}
+
+.m-3 {
+  margin: 16px !important;
+}
+
+.m-4 {
+  margin: 24px !important;
+}
+
+.m-5 {
+  margin: 32px !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.p-1 {
+  padding: 4px !important;
+}
+
+.p-2 {
+  padding: 8px !important;
+}
+
+.p-3 {
+  padding: 16px !important;
+}
+
+.p-4 {
+  padding: 24px !important;
+}
+
+.p-5 {
+  padding: 32px !important;
+}
+
+/* Individual sides */
+.mt-1 {
+  margin-top: 4px !important;
+}
+
+.mb-1 {
+  margin-bottom: 4px !important;
+}
+
+.ml-1 {
+  margin-left: 4px !important;
+}
+
+.mr-1 {
+  margin-right: 4px !important;
+}
+
+.pt-1 {
+  padding-top: 4px !important;
+}
+
+.pb-1 {
+  padding-bottom: 4px !important;
+}
+
+.pl-1 {
+  padding-left: 4px !important;
+}
+
+.pr-1 {
+  padding-right: 4px !important;
+}
+
+/* Flex display */
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+
+/* Flex direction */
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+
+/* Justify content */
+.justify-start { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+
+/* Align items */
+.align-start { align-items: flex-start !important; }
+.align-center { align-items: center !important; }
+.align-end { align-items: flex-end !important; }
+
+/* Align self */
+.align-self-start { align-self: flex-start !important; }
+.align-self-center { align-self: center !important; }
+.align-self-end { align-self: flex-end !important; }
+
+/* Wrap */
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
+
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+	/* Hide on medium and large screens, show on small screens */
+
+	@media (min-width: 768px) {
+
+		/* Medium screens (tablets, 768px and up) */
+		.d-none-md {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: 992px) {
+
+		/* Large screens (desktops, 992px and up) */
+		.d-none-lg {
+			display: none !important;
+		}
+	}
+
+	@media (max-width: 767.98px) {
+
+		/* Small screens (phones, less than 768px) */
+		.d-none-sm {
+			display: none !important;
+		}
+
+		.d-show-sm {
+			display: block !important;
+		}
+	}
+
+  .browse-specs{
+    font-family: 'helvetic-regular';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+  }
+
+  .warranty-stle{
+    font-family: 'vox';
+    font-weight: 400;
+  }
+
+
+  
+  .flex-column{
+    display: flex;
+    flex-direction: column;
+
+  }
+  
