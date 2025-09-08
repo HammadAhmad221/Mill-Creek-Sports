@@ -1,0 +1,417 @@
+{{!-- Home Products Section with Filter and Carousel --}}
+<section class="home-products-section">
+    <div class="container">
+        {{!-- Section Header --}}
+        <div class="home-products-header">
+            <h2 class="home-products-title">Shop Top Products</h2>
+            <div class="home-products-filters">
+                <button class="filter-btn active" data-filter="new" data-products="{{json products.new}}">
+                    <span class="filter-text">New</span>
+                </button>
+                <button class="filter-btn" data-filter="featured" data-products="{{json products.featured}}">
+                    <span class="filter-text">Featured</span>
+                </button>
+                <button class="filter-btn" data-filter="top_sellers" data-products="{{json products.top_sellers}}">
+                    <span class="filter-text">Best Sellers</span>
+                </button>
+            </div>
+        </div>
+
+        {{!-- Products Carousel Container --}}
+        <div class="home-products-carousel-container">
+            {{!-- New Products Carousel --}}
+            <div class="products-carousel active" id="new-products-carousel" data-filter="new">
+                {{#if products.new}}
+                    <section class="productCarousel" 
+                        data-slick='{
+                            "dots": true,
+                            "arrows": true,
+                            "infinite": false,
+                            "mobileFirst": true,
+                            "slidesToShow": 2,
+                            "slidesToScroll": 2,
+                            "slide": ".js-product-slide",
+                            "responsive": [
+                                {
+                                    "breakpoint": 1261,
+                                    "settings": {
+                                        "slidesToShow": 5,
+                                        "slidesToScroll": 5
+                                    }
+                                },
+                                {
+                                    "breakpoint": 768,
+                                    "settings": {
+                                        "slidesToShow": 3,
+                                        "slidesToScroll": 3
+                                    }
+                                }
+                            ]
+                        }'
+                    >
+                        {{#each products.new}}
+                        <div data-product-slide class="productCarousel-slide js-product-slide">
+                            {{> components/products/card 
+                                settings=../settings 
+                                theme_settings=../theme_settings 
+                                customer=../customer 
+                                show_rating=../settings.show_product_rating 
+                                event="list" 
+                                position=(add @index 1) 
+                                productsnew=../products.new
+                            }}
+                        </div>
+                        {{/each}}
+                    </section>
+                {{else}}
+                    <div class="no-products-message">
+                        <p>No new products available at the moment.</p>
+                    </div>
+                {{/if}}
+            </div>
+
+            {{!-- Featured Products Carousel --}}
+            <div class="products-carousel" id="featured-products-carousel" data-filter="featured">
+                {{#if products.featured}}
+                    <section class="productCarousel" 
+                        data-slick='{
+                            "dots": true,
+                            "arrows": true,
+                            "infinite": false,
+                            "mobileFirst": true,
+                            "slidesToShow": 2,
+                            "slidesToScroll": 2,
+                            "slide": ".js-product-slide",
+                            "responsive": [
+                                {
+                                    "breakpoint": 1261,
+                                    "settings": {
+                                        "slidesToShow": 5,
+                                        "slidesToScroll": 5
+                                    }
+                                },
+                                {
+                                    "breakpoint": 768,
+                                    "settings": {
+                                        "slidesToShow": 3,
+                                        "slidesToScroll": 3
+                                    }
+                                }
+                            ]
+                        }'
+                    >
+                        {{#each products.featured}}
+                        <div data-product-slide class="productCarousel-slide js-product-slide">
+                            {{> components/products/card 
+                                settings=../settings 
+                                theme_settings=../theme_settings 
+                                customer=../customer 
+                                show_rating=../settings.show_product_rating 
+                                event="list" 
+                                position=(add @index 1) 
+                                productsnew=../products.new
+                            }}
+                        </div>
+                        {{/each}}
+                    </section>
+                {{else}}
+                    <div class="no-products-message">
+                        <p>No featured products available at the moment.</p>
+                    </div>
+                {{/if}}
+            </div>
+
+            {{!-- Best Sellers Products Carousel --}}
+            <div class="products-carousel" id="top-sellers-products-carousel" data-filter="top_sellers">
+                {{#if products.top_sellers}}
+                    <section class="productCarousel" 
+                        data-slick='{
+                            "dots": true,
+                            "arrows": true,
+                            "infinite": false,
+                            "mobileFirst": true,
+                            "slidesToShow": 2,
+                            "slidesToScroll": 2,
+                            "slide": ".js-product-slide",
+                            "responsive": [
+                                {
+                                    "breakpoint": 1261,
+                                    "settings": {
+                                        "slidesToShow": 5,
+                                        "slidesToScroll": 5
+                                    }
+                                },
+                                {
+                                    "breakpoint": 768,
+                                    "settings": {
+                                        "slidesToShow": 3,
+                                        "slidesToScroll": 3
+                                    }
+                                }
+                            ]
+                        }'
+                    >
+                        {{#each products.top_sellers}}
+                        <div data-product-slide class="productCarousel-slide js-product-slide">
+                            {{> components/products/card 
+                                settings=../settings 
+                                theme_settings=../theme_settings 
+                                customer=../customer 
+                                show_rating=../settings.show_product_rating 
+                                event="list" 
+                                position=(add @index 1) 
+                                productsnew=../products.new
+                            }}
+                        </div>
+                        {{/each}}
+                    </section>
+                {{else}}
+                    <div class="no-products-message">
+                        <p>No best sellers available at the moment.</p>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- JavaScript for Filter Functionality --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCarousels = document.querySelectorAll('.products-carousel');
+    
+    // Initialize first carousel
+    if (productCarousels.length > 0) {
+        initializeCarousel(productCarousels[0]);
+    }
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterType = this.getAttribute('data-filter');
+            
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Hide all carousels
+            productCarousels.forEach(carousel => {
+                carousel.classList.remove('active');
+            });
+            
+            // Show selected carousel
+            const targetCarousel = document.getElementById(filterType + '-products-carousel');
+            if (targetCarousel) {
+                targetCarousel.classList.add('active');
+                
+                // Initialize carousel if not already initialized
+                if (!targetCarousel.querySelector('.slick-initialized')) {
+                    initializeCarousel(targetCarousel);
+                } else {
+                    // Refresh existing carousel
+                    targetCarousel.querySelector('.productCarousel').slick('refresh');
+                }
+            }
+        });
+    });
+    
+    function initializeCarousel(container) {
+        const carousel = container.querySelector('.productCarousel');
+        if (carousel && !carousel.classList.contains('slick-initialized')) {
+            // Initialize Slick carousel
+            $(carousel).slick();
+        }
+    }
+});
+</script>
+
+{{!-- CSS Styling --}}
+<style>
+.home-products-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.home-products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.home-products-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.home-products-filters {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 2px solid #e0e0e0;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    position: relative;
+    overflow: hidden;
+}
+
+.filter-btn:hover {
+    border-color: #007bff;
+    color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-color: #007bff;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.filter-btn.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.filter-btn.active:hover::before {
+    left: 100%;
+}
+
+.home-products-carousel-container {
+    position: relative;
+    min-height: 400px;
+}
+
+.products-carousel {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.products-carousel.active {
+    display: block;
+    opacity: 1;
+}
+
+.no-products-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+    font-size: 18px;
+}
+
+/* Carousel Customization */
+.home-products-section .productCarousel {
+    margin: 0;
+}
+
+.home-products-section .slick-arrow {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.home-products-section .slick-arrow:hover {
+    background: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.home-products-section .slick-arrow:before {
+    font-size: 18px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.home-products-section .slick-arrow:hover:before {
+    color: white;
+}
+
+.home-products-section .slick-dots {
+    bottom: -50px;
+}
+
+.home-products-section .slick-dots li button:before {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.home-products-section .slick-dots li.slick-active button:before {
+    color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-products-section {
+        padding: 40px 0;
+    }
+    
+    .home-products-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .home-products-title {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+    
+    .home-products-filters {
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .home-products-section .slick-arrow {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .home-products-section .slick-arrow:before {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-products-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .filter-btn {
+        width: 200px;
+    }
+}
+</style>
