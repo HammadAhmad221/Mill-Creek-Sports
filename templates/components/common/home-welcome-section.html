@@ -28,21 +28,29 @@
         object-fit: cover;
     }
 
-    @media (max-width: 992px) {
-        .sports-section {
-            flex-direction: column;
-            height: auto;
-        }
-        
-        .image-half {
-            width: 100%;
-            /* height: 250px; */
-        }
-        
-        .image-half:last-child {
-            display: none;
-        }
-    }
+     /* Tablet and medium screens - fixed width */
+     @media (min-width: 650px) and (max-width: 992px) {
+         .image-half {
+             /* width: 600px; */
+             height: 400px;
+         }
+     }
+
+     @media (max-width: 992px) {
+         .sports-section {
+             flex-direction: column;
+             height: auto;
+         }
+         
+         .image-half {
+             width: 100%;
+             /* height: 250px; */
+         }
+         
+         .image-half:last-child {
+             display: none;
+         }
+     }
 
     /* Mobile styles - show only one image at full width */
     @media (max-width: 768px) {
@@ -73,7 +81,7 @@
 
     }
 
-    .container {
+    .welcome-container {
         max-width: 880px;
         margin: 0 auto;
         text-align: center;
@@ -196,7 +204,7 @@
 </style>
 
 <div class="home-welcome-section">
-<div class="container">        
+<div class="welcome-container">        
     <div class="rating-section">
         <span class="rating-badge">4.9 Stars</span>
         <span class="stars">★★★★★</span>
