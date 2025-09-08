@@ -1,0 +1,232 @@
+<div class="sports-section">
+    <div class="image-half">
+        <img src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/group-209.png?t=1757310339" alt="Athlete Signing Event">
+    </div>
+    <div class="image-half">
+        <img src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/group-210.png?t=1757310342" alt="Mill Creek Sports Storefront">
+    </div>
+</div>
+
+<style>
+    .sports-section {
+        width: 95%;
+        height: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .image-half {
+        width: 50%;
+        height: 100%;
+    }
+
+    .image-half img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    @media (max-width: 992px) {
+        .sports-section {
+            flex-direction: column;
+            height: auto;
+        }
+        
+        .image-half {
+            width: 100%;
+            /* height: 250px; */
+        }
+        
+        .image-half:last-child {
+            display: none;
+        }
+    }
+
+    /* Mobile styles - show only one image at full width */
+    @media (max-width: 768px) {
+        
+        /* Mobile font size adjustments */
+        h1 {
+            font-size: 26px !important;
+        }
+        
+        .subtitle {
+            font-size: 20px !important;
+            line-height: 105% !important;
+        }
+        
+        .description {
+            font-size: 16px !important;
+        }
+    }
+</style>
+
+
+<style>
+    .home-welcome-section {
+        width: 95%;
+        margin: 20px auto;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #F2F0EC 36.34%, rgba(242, 240, 236, 0.00) 74.24%);
+
+    }
+
+    .container {
+        max-width: 880px;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 8px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .rating-section {
+        margin-bottom: 20px;
+    }
+
+    .rating-badge {
+        display: inline-block;
+        margin-right: 10px;
+        color: var(--Dark-Overlay, #0A0A1E);
+        font-family: "Noto Sans";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .stars {
+        color: #ffa500;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .review-text {
+        color: var(--Dark-Overlay, #0A0A1E);
+        font-family: "Noto Sans";
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .review-text a {
+        color: #4a90e2;
+        text-decoration: none;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        margin-top: 0px;
+        color: var(--Mill-Creek-Blue, #21205F);
+        text-align: center;
+        font-family: "Noto Sans";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 90%;
+        letter-spacing: -0.72px;
+        text-transform: capitalize;
+    }
+
+    .subtitle {
+        margin-bottom: 25px;
+        color: var(--Dark-Overlay, #0A0A1E);
+        text-align: center;
+        font-family: "Noto Sans";
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 90%;
+        letter-spacing: -0.44px;
+        text-transform: capitalize;
+    }
+
+    .description {
+        margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        color: var(--Dark-Overlay, #0A0A1E);
+        text-align: center;
+        font-family: "Noto Sans";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        letter-spacing: -0.32px;
+    }
+
+    .learn-more-btn {
+        background-color: transparent;
+        border: 2px solid #21205F;
+        color: #21205F;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        font-family: "Noto Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.28px;
+        text-transform: uppercase;
+    }
+
+    .learn-more-btn:hover {
+        border-color: #4a90e2;
+        color: #4a90e2;
+    }
+    @media (max-width: 500px) {
+    h1 {
+        width: 250px !important;
+        margin: 10px auto;
+    }
+    
+    /* .subtitle {
+        width: 300px !important;
+        margin: 10px auto;
+        position: relative;
+        right: 12px;
+    } */
+}
+</style>
+
+<div class="home-welcome-section">
+<div class="container">        
+    <div class="rating-section">
+        <span class="rating-badge">4.9 Stars</span>
+        <span class="stars">★★★★★</span>
+        <span class="review-text"><span style="text-decoration: underline; font-weight: bold;">152</span> reviews on <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <g clip-path="url(#clip0_1_170)">
+                  <path d="M5.57374 0.526126C3.97509 1.08071 2.59642 2.13333 1.64023 3.52938C0.684041 4.92542 0.200732 6.59131 0.261296 8.28233C0.32186 9.97336 0.923104 11.6004 1.97671 12.9245C3.03032 14.2485 4.48077 15.1998 6.11499 15.6386C7.4399 15.9805 8.828 15.9955 10.16 15.6824C11.3666 15.4113 12.4822 14.8316 13.3975 13.9999C14.3501 13.1078 15.0415 11.973 15.3975 10.7174C15.7844 9.35196 15.8532 7.91604 15.5987 6.51988H8.15874V9.60613H12.4675C12.3814 10.0984 12.1968 10.5682 11.9249 10.9874C11.653 11.4067 11.2993 11.7668 10.885 12.0461C10.3588 12.3942 9.76574 12.6283 9.14374 12.7336C8.51992 12.8496 7.88006 12.8496 7.25624 12.7336C6.62398 12.6029 6.02587 12.3419 5.49999 11.9674C4.65518 11.3694 4.02084 10.5198 3.68749 9.53988C3.34851 8.54162 3.34851 7.45938 3.68749 6.46113C3.92478 5.7614 4.31703 5.12429 4.83499 4.59738C5.42773 3.98331 6.17816 3.54437 7.00394 3.32872C7.82972 3.11307 8.69894 3.12904 9.51624 3.37488C10.1547 3.57086 10.7386 3.9133 11.2212 4.37488C11.7071 3.89154 12.1921 3.40696 12.6762 2.92113C12.9262 2.65988 13.1987 2.41113 13.445 2.14363C12.7082 1.45797 11.8433 0.924447 10.9 0.573626C9.18212 -0.0501371 7.30246 -0.0669002 5.57374 0.526126Z" fill="#0A0A1E"/>
+                  <path d="M5.57372 0.526245C7.3023 -0.067184 9.18196 -0.0508623 10.9 0.572495C11.8435 0.925699 12.708 1.46179 13.4437 2.14999C13.1937 2.41749 12.93 2.66749 12.675 2.92749C12.19 3.41166 11.7054 3.89416 11.2212 4.37499C10.7385 3.91342 10.1547 3.57098 9.51622 3.37499C8.69919 3.1283 7.82999 3.1114 7.00399 3.32617C6.178 3.54094 5.42711 3.97907 4.83372 4.59249C4.31576 5.11941 3.9235 5.75652 3.68622 6.45624L1.09497 4.44999C2.02248 2.6107 3.62841 1.20377 5.57372 0.526245Z" fill="#E33629"/>
+                  <path d="M0.407499 6.4377C0.546775 5.74744 0.778003 5.07898 1.095 4.4502L3.68625 6.46145C3.34727 7.4597 3.34727 8.54194 3.68625 9.5402C2.82292 10.2069 1.95917 10.8769 1.095 11.5502C0.301437 9.97059 0.0594147 8.17082 0.407499 6.4377Z" fill="#F8BD00"/>
+                  <path d="M8.15876 6.51855H15.5988C15.8533 7.91472 15.7844 9.35064 15.3975 10.7161C15.0416 11.9717 14.3501 13.1065 13.3975 13.9986C12.5613 13.3461 11.7213 12.6986 10.885 12.0461C11.2996 11.7664 11.6535 11.4059 11.9254 10.9862C12.1973 10.5665 12.3817 10.0962 12.4675 9.60356H8.15876C8.15751 8.57606 8.15876 7.5473 8.15876 6.51855Z" fill="#587DBD"/>
+                  <path d="M1.09375 11.55C1.95792 10.8834 2.82167 10.2134 3.685 9.54004C4.01901 10.5203 4.65426 11.3699 5.5 11.9675C6.02751 12.3404 6.62691 12.5992 7.26 12.7275C7.88382 12.8435 8.52368 12.8435 9.1475 12.7275C9.76949 12.6223 10.3626 12.3881 10.8888 12.04C11.725 12.6925 12.565 13.34 13.4012 13.9925C12.4861 14.8247 11.3705 15.4049 10.1637 15.6763C8.83176 15.9894 7.44365 15.9744 6.11875 15.6325C5.07088 15.3528 4.09209 14.8595 3.24375 14.1838C2.34583 13.4709 1.61244 12.5725 1.09375 11.55Z" fill="#319F43"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_1_170">
+                    <rect width="16" height="16" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+        </a></span>
+    </div>
+
+    <h1>Welcome To Mill Creek Sports</h1>
+    <p class="subtitle">Your Home For Authentic Sports Memorabilia & Trading Cards</p>
+    
+    <p class="description">
+        Located in the heart of the Pacific Northwest, Mill Creek Sports has proudly served sports fans and collectors since 1991. 
+        Based in Mill Creek, Washington, we are the largest sports memorabilia and trading card store in the Seattle area, offering 
+        a wide range of authentic autographed items, trading cards, and collectibles for fans of all major sports.
+    </p>
+
+    <button class="learn-more-btn">LEARN MORE</button>
+</div>
+</div>
