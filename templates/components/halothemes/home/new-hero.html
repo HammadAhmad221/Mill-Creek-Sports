@@ -1,88 +1,67 @@
 <section class="hero-section container">
-  <div class="left-container">
-    <div class="hs-lc-img-wrapper">
-      <div class="img">
-        {{> components/common/responsive-img image=carousel.slides.[0].stencil_image
-        class="heroCarousel-image" fallback_size='1280w' lazyload='disabled' }}
-        <!-- <img
-          src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home-3x.png?t=1756962655"
-          alt=""
-          class="hero-section-img"
-        /> -->
-      </div>
-    </div>
-
-    <div class="text-below-home-hero-mobile">
-      <span class="title">Congratulations Ichiro Suzuki </span>
-      <span class="description"
-        >National Baseball Hall of Fame Class of 2025. Purchase "HOF '25"
-        Memorabilia Today!</span
-      >
-      <a href="" class="shop-now-btn">
-        <span class="shop-now-btn--text">Shop Now</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="right-container">
-    <div class="upper">
-      <div class="img">
-        <img
-          src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home3-3x.png?t=1756967690"
-          alt=""
-          class="hero-section-img"
-        />
-      </div>
-      <div class="content">
-        <div class="heading">
-          <span>Father’s Day Gifting</span>
+  <div class="left-container hero-carousel-slides">
+    {{#each carousel.slides}}
+    <div class="hero-carousel-slide">
+      <div class="hs-lc-img-wrapper">
+        <div class="img">
+          {{> components/common/responsive-img 
+            image=stencil_image
+            class="heroCarousel-image" 
+            fallback_size='1280w' 
+            lazyload='disabled' 
+          }}
+          <!-- <img
+            src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home-3x.png?t=1756962655"
+            alt=""
+            class="hero-section-img"
+          /> -->
         </div>
+      </div>
+      <div class="text-below-home-hero-mobile">
+        <span class="title">Congratulations Ichiro Suzuki </span>
+        <span class="description"
+          >National Baseball Hall of Fame Class of 2025. Purchase "HOF '25"
+          Memorabilia Today!</span
+        >
         <a href="" class="shop-now-btn">
           <span class="shop-now-btn--text">Shop Now</span>
         </a>
       </div>
     </div>
-
-    <div class="lower">
-      <div class="img">
-        <img
-          src="https://cdn11.bigcommerce.com/s-edruxktyvk/images/stencil/original/image-manager/home2-3x.png?t=1756967686"
-          alt=""
-          class="hero-section-img"
-        />
-      </div>
-      <div class="content">
-        <div class="heading">
-          <span
-            >Mill Creek Sports at The 45th National Sports Collectors
-            Convention!</span
-          >
-        </div>
-        <a href="" class="shop-now-btn">
-          <span class="shop-now-btn--text">Shop Now</span>
-        </a>
-      </div>
-    </div>
+    {{/each}}
   </div>
+
+  {{region name='home-hero-right_container'}}
 </section>
-<div class="enddddd">a {{log carousel.slides}}</div>
-{{~inject 'cs' carousel.slides}}
+
 <script>
-  let context = JSON.parse(jsContext);
-  console.log('carousel.slides ===>', context);
-
-  const cs = context.cs;
-
-  console.log('carousel.slides ===>', cs);
+  $(document).ready(function () {
+    $('.hero-carousel-slides').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: false,
+      fade: true,
+      cssEase: 'linear',
+    })
+  })
 </script>
+
 <style>
   /* ------------------------ LEFT SIDE ------------------------ */
+  .hero-section .left-container .slick-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   .hero-section .left-container .text-below-home-hero-mobile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     margin-top: 20px;
+
     gap: 10px;
   }
   .hero-section .left-container .text-below-home-hero-mobile .title {
@@ -246,9 +225,6 @@
 </style>
 
 <style>
-  .enddddd {
-    margin: 60px;
-  }
   @media (min-width: 992px) {
     .hero-section {
       display: flex;
@@ -256,6 +232,10 @@
       align-items: flex-start;
     }
     /* ------------------------ LEFT SIDE ------------------------ */
+
+    .hero-section .left-container.slick-slider {
+      min-width: unset;
+    }
 
     .hero-section .left-container {
       flex: 0 0 64%;
