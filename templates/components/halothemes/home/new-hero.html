@@ -17,15 +17,61 @@
           /> -->
         </div>
       </div>
-      <div class="text-below-home-hero-mobile">
-        <span class="title">Congratulations Ichiro Suzuki </span>
-        <span class="description"
-          >National Baseball Hall of Fame Class of 2025. Purchase "HOF '25"
-          Memorabilia Today!</span
-        >
-        <a href="" class="shop-now-btn">
-          <span class="shop-now-btn--text">Shop Now</span>
-        </a>
+      <div>
+        <div class="text-below-home-hero-mobile">
+          <span class="title">Congratulations Ichiro Suzuki </span>
+          <span class="description"
+            >National Baseball Hall of Fame Class of 2025. Purchase "HOF '25"
+            Memorabilia Today!</span
+          >
+          <a href="" class="shop-now-btn">
+            <span class="shop-now-btn--text">Shop Now</span>
+          </a>
+        </div>
+        {{log carousel.slides}}
+        {{#if carousel.slides.length '>' 1}}
+          <div class="carousel-arrows-and-dots">
+            <span class="icon carousel-arrow prev-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="15" viewBox="0 0 10 15" fill="none">
+                <g clip-path="url(#clip0_10_1100)">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M1.08555 8.24063L6.97826 14.1333L8.45117 12.6604L3.29492 7.50417L8.45117 2.34792L6.97826 0.875L1.08555 6.76771C0.890265 6.96305 0.780562 7.22795 0.780562 7.50417C0.780562 7.78038 0.890265 8.04528 1.08555 8.24063Z"
+                    fill="#BDBDBD" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_10_1100">
+                    <rect width="10" height="15" fill="white" transform="matrix(-1 4.37114e-08 4.37114e-08 1 10 0)" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <div class="carousel-dots">
+              {{#each carousel.slides}}
+                <span class="carousel-dot">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="47" height="7" viewBox="0 0 47 7" fill="none">
+                    <!-- <circle cx="3.5" cy="3.5" r="3.5" fill="white"/> -->
+                    <circle cx="23.5" cy="3.5" r="3" stroke="white"/>
+                    <!-- <circle cx="43.5" cy="3.5" r="3" stroke="white"/> -->
+                  </svg>
+                </span>
+              {{/each}}
+            </div>
+            <span class="icon carousel-arrow next-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="15" viewBox="0 0 10 15" fill="none">
+                <g clip-path="url(#clip0_10_1100)">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M1.08555 8.24063L6.97826 14.1333L8.45117 12.6604L3.29492 7.50417L8.45117 2.34792L6.97826 0.875L1.08555 6.76771C0.890265 6.96305 0.780562 7.22795 0.780562 7.50417C0.780562 7.78038 0.890265 8.04528 1.08555 8.24063Z"
+                    fill="#BDBDBD" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_10_1100">
+                    <rect width="10" height="15" fill="white" transform="matrix(-1 4.37114e-08 4.37114e-08 1 10 0)" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+          </div>
+        {{/if}}
       </div>
     </div>
     {{/each}}
@@ -52,6 +98,13 @@
     display: block;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
+    min-height: 190px;
+    object-fit: cover;
+  }
+
+  .slick-arrow {
+    display: none !important;
   }
 
   .hero-section .left-container .text-below-home-hero-mobile {
@@ -66,6 +119,7 @@
   }
   .hero-section .left-container .text-below-home-hero-mobile .title {
     width: 100%;
+    max-width: 230px;
     height: auto;
     flex-shrink: 0;
     color: var(--Dark-Overlay, #0a0a1e);
@@ -79,10 +133,9 @@
   }
   .hero-section .left-container .text-below-home-hero-mobile .description {
     width: 100%;
+    max-width: 322px;
     height: auto;
     flex-shrink: 0;
-    padding: 0 20px;
-
     color: var(--Dark-Overlay, #0a0a1e);
     text-align: center;
     font-family: "Noto Sans";
@@ -91,6 +144,7 @@
     font-weight: 400;
     line-height: 150%; /* 24px */
     letter-spacing: -0.32px;
+    margin: 0;
   }
   .hero-section .left-container .text-below-home-hero-mobile .shop-now-btn {
     display: flex;
@@ -123,6 +177,11 @@
   /*------------------------ RIGHT SIDE ------------------------ */
 
   /* hero section right side 2 boxes top margin*/
+
+  .hero-section [data-sub-layout="9272c60a-b858-4a62-a578-aac30ac0713c"] {
+    padding: 0;
+  }
+
   .hero-section .right-container .upper,
   .hero-section .right-container .lower {
     margin-top: 20px;
@@ -133,15 +192,7 @@
   .hero-section .right-container .lower .img .hero-section-img,
   .hero-section .left-container .img .hero-section-img {
     border-radius: 10px;
-  }
-
-  .hero-section .left-container .img::before {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
-
-    content: " ";
-    position: absolute;
-    inset: 0; /* top:0; right:0; bottom:0; left:0 */
-    border-radius: 10px;
+    width: 100%;
   }
 
   /* right side pics  */
@@ -166,14 +217,12 @@
   .hero-section .right-container .lower .content {
     display: flex;
     flex-direction: row;
-
     position: absolute;
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
-
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
     justify-content: space-between;
-    gap: 20px;
+    gap: 26px;
     align-items: center;
   }
   .right-container .lower .content {
@@ -202,10 +251,11 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     border-radius: 10px;
     background: var(--Tan-Page-Bkg, #fbfbfb);
     text-decoration: none;
+    min-width: fit-content;
+    align-self: flex-end;
   }
 
   /* hero section right side 2 boxes btn-text*/
@@ -225,7 +275,58 @@
 </style>
 
 <style>
-  @media (min-width: 992px) {
+
+  @media (min-width: 320px) and (max-width: 370px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 370px) and (max-width: 420px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 420px) and (max-width: 500px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 500px) and (max-width: 570px) {
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 22px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 992px) {
+    .hero-section .left-container {
+      position: relative;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile {
+      z-index: 999;
+    }
+  }
+
+  @media (min-width: 571px) {
+    .hero-section .left-container .slick-slide img {
+      max-height: 420px;
+    }
+    .hero-section .right-container .upper .img .hero-section-img, .hero-section .right-container .lower .img .hero-section-img, .hero-section .left-container .img .hero-section-img {
+      max-height: 340px;
+    }
+    .right-container .upper .heading,
+    .right-container .lower .heading {
+      font-size: 24px;
+    }
+  }
+
+  @media (min-width: 769px) {
     .hero-section {
       display: flex;
       gap: 10px;
@@ -235,6 +336,10 @@
 
     .hero-section .left-container.slick-slider {
       min-width: unset;
+    }
+
+    .hero-section .left-container .slick-slide img {
+      max-height: unset !important;
     }
 
     .hero-section .left-container {
@@ -247,14 +352,19 @@
       flex: 0 0 36%;
       gap: 11px;
     }
+    .hero-section .left-container .img::before {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+      content: " ";
+      position: absolute;
+      inset: 0; /* top:0; right:0; bottom:0; left:0 */
+      border-radius: 10px;
+    }
     .hero-section .left-container .text-below-home-hero-mobile {
       position: absolute;
       bottom: 5%;
-      /* left: 38px; */
       left: 26px;
       align-items: flex-start;
-
-      max-width: 40%;
+      max-width: 45%;
     }
     .hero-section .left-container .text-below-home-hero-mobile .title {
       color: var(--White, #fff);
@@ -264,9 +374,9 @@
       font-weight: 700;
       line-height: 100%; /* 46px */
       letter-spacing: -0.92px;
-
       text-align: unset;
       padding: 0;
+      max-width: unset;
     }
     .hero-section .left-container .text-below-home-hero-mobile .description {
       color: var(--White, #fff);
@@ -322,48 +432,110 @@
     }
   }
 
-  @media (min-width: 320px) and (max-width: 992px) {
-    .hero-section .left-container {
-      position: relative;
+  @media (min-width: 769px) and (max-width: 840px) {
+    .hero-section .right-container .upper .heading, .hero-section .right-container .lower .heading {
+      font-size: 14px;
     }
-    .hero-section .left-container .text-below-home-hero-mobile {
-      z-index: 999;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    .hero-section .left-container .slick-slide img {
+      min-height: 320px;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .title {
+      font-size: 26px;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .shop-now-btn {
+      padding: 12px 26px;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .shop-now-btn--text {
+      font-size: 12px;
+    }
+    .hero-section .right-container .upper .img .hero-section-img, .hero-section .right-container .lower .img .hero-section-img, .hero-section .left-container .img .hero-section-img {
+      min-height: 150px;
+    }
+    .hero-section .right-container .upper .content, .hero-section .right-container .lower .content {
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    }
+    .hero-section .right-container .upper .heading, .hero-section .right-container .lower .heading {
+      font-size: 16px;
+    }
+    .hero-section .right-container .upper .shop-now-btn, .hero-section .right-container .lower .shop-now-btn {
+      padding: 12px 26px;
+    }
+    .hero-section .right-container .upper .shop-now-btn--text, .hero-section .right-container .lower .shop-now-btn--text {
+      font-size: 12px;
+    }
+  }
+
+  @media (min-width: 993px) {
+    .hero-section .left-container .text-below-home-hero-mobile .description {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 993px) and (max-width: 1100px) {
+    .hero-section .right-container .upper .heading, .hero-section .right-container .lower .heading {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero-section .left-container .text-below-home-hero-mobile .title {
+      font-size: 46px;
+    }
+    .hero-section .right-container .upper .heading, .hero-section .right-container .lower .heading {
+      font-size: 24px;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .description {
+      font-size: 16px;
     }
   }
   /* ------------------------ RIGHT SIDE UPPER/LOWER HEADING SIZE------------------------ */
 
-  @media (min-width: 570px) {
-    .right-container .upper .heading,
-    .right-container .lower .heading {
+  @media (max-width: 420px) {
+    .hero-section .left-container .text-below-home-hero-mobile .title {
+      font-size: 26px;
+    }
+    .hero-section .left-container .text-below-home-hero-mobile .description {
+      font-size: 15px !important;
+    }
+    .hero-section .right-container .upper .content, .hero-section .right-container .lower .content {
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    }
+    .hero-section .right-container .upper .heading, .hero-section .right-container .lower .heading {
+      font-size: 18px;
+    }
+    .hero-section .right-container .upper .shop-now-btn, .hero-section .right-container .lower .shop-now-btn {
+      padding: 13px 26px;
+    }
+    .hero-section .right-container .upper .shop-now-btn--text, .hero-section .right-container .lower .shop-now-btn--text {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .hero-section .left-container .text-below-home-hero-mobile .title {
       font-size: 24px;
     }
-  }
-
-  @media (min-width: 500px) and (max-width: 570px) {
-    .right-container .upper .heading,
-    .right-container .lower .heading {
-      font-size: 22px;
+    .hero-section .left-container .text-below-home-hero-mobile .description {
+      font-size: 14px !important;
     }
-  }
-
-  @media (min-width: 420px) and (max-width: 500px) {
-    .right-container .upper .heading,
-    .right-container .lower .heading {
-      font-size: 20px;
+    .hero-section .left-container .text-below-home-hero-mobile .shop-now-btn--text {
+      font-size: 12px;
     }
-  }
-
-  @media (min-width: 370px) and (max-width: 420px) {
-    .right-container .upper .heading,
-    .right-container .lower .heading {
-      font-size: 16px;
-    }
-  }
-
-  @media (min-width: 320px) and (max-width: 370px) {
-    .right-container .upper .heading,
-    .right-container .lower .heading {
+    .hero-section .right-container .upper .heading, .hero-section .right-container .lower .heading {
       font-size: 14px;
+    }
+    .hero-section .right-container .upper .shop-now-btn, .hero-section .right-container .lower .shop-now-btn {
+      padding: 10px 20px;
+    }
+    .hero-section .right-container .upper .shop-now-btn--text, .hero-section .right-container .lower .shop-now-btn--text {
+      font-size: 12px;
     }
   }
 </style>
