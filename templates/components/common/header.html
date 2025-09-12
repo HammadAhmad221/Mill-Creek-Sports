@@ -7,8 +7,9 @@
   class="header header-logo--{{theme_settings.halo_position_logo}}"
   role="banner"
 >
-  {{#if theme_settings.enable_tabs}} {{>
-  components/halothemes/header/header-tabs}} {{/if}}
+  {{#if theme_settings.enable_tabs}} 
+    {{> components/halothemes/header/header-tabs}} 
+  {{/if}}
   <div class="header-center header__desktop">
     {{#if theme_settings.halo_position_logo '==' 'center'}}
     <div class="header__desktop--left">
@@ -50,8 +51,11 @@
     {{> components/common/quick-search name='nav-quick-search'}}
   </div>
 </header>
-{{{region name="header_bottom--global"}}} {{{region name="header_bottom"}}} {{>
-components/halothemes/banners/halo-topBottom-banner position = "top"}}
+
+{{{region name="header_bottom--global"}}} 
+{{{region name="header_bottom"}}}
+
+{{> components/halothemes/banners/halo-topBottom-banner position = "top"}}
 
 <style>
   .body {

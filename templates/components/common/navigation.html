@@ -23,7 +23,7 @@
       {{> components/common/currency-selector}}
     {{/unless}}
 
-    <ul class="navUser-section navUser-section--alt">
+    <ul class="navUser-section navUser-section--alt self-navUser-section">
         {{#if customer.store_credit.value '>' 0}}
             <li class="navUser-item">
                 <a class="navUser-action navUser-action--storeCredit"
@@ -53,25 +53,29 @@
         </li>
         {{#or theme_settings.halo_homepage_layout_1 theme_settings.halo_homepage_layout_2 }}
 
-        <li class="navUser-item navUser-item--account nav-help">
-
-             <div class="help-contact p-btn " style="color: #EC3B26;">
-                <div class="help-avatar nav-avatar">
-                    <img src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/frame-30.jpg?t=1750249694" alt="">
-                </div>
-                <a href="tel:1-800-827-3232" class=" nav-help-phn">
-                    <img class="nav-phn-icon"
-                        src="https://cdn11.bigcommerce.com/s-8xryzvxqo4/images/stencil/original/image-manager/fi-15762208.png?t=1749822613" 
-                        alt="Phone icon" 
-                       
-                    />
-                    1-800-827-3232
-                </a>
-
+        <li class="navUser-item navUser-item--account">
+            <form class="form self-header-form" onsubmit="return false" data-url="{{urls.search}}" data-quick-search-form>
+        <fieldset class="form-fieldset">
+            <div class="form-field self-header-form-field">
+                <label class="is-srOnly" for="{{name}}">{{lang "search.quick_search.input_label"}}</label>
+                <input class="form-input self-header-form-input"
+                       data-search-quick
+                       name="{{name}}"
+                       id="{{name}}"
+                       data-error-message="{{lang 'search.error.empty_field'}}"
+                       placeholder="What can we help you find?"
+                       autocomplete="off"
+                       style="border-width: 4px; border-color: #000; border-style: solid;"
+                       >
+                <button class="quickSearch-btn"  type="submit" aria-label="Submit Quick Search">
+                  <svg style="height: 20px; width: 20px;" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+                </button>
             </div>
+        </fieldset>
+    </form>
         </li>
 
-            <li class="navUser-item">
+            <li class="navUser-item" >
             <button class="navUser-action navUser-action--quickSearch quick-search-expand"
                type="button"
                id="quick-search-expand"
